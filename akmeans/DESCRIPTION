@@ -1,0 +1,17 @@
+Package: akmeans
+Type: Package
+Title: Anchored kmeans for Longitudinal Data
+Version: 0.1.0
+Author: Monsuru Adepeju [cre, aut], Samuel Langton [ctb], Jon Bannister [ctb]
+Maintainer: Monsuru Adepeju <m.adepeju@mmu.ac.uk> 
+Description: An implementation kmeans designed to cluster longitudinal data based on 
+    a set of pre-determined 1-order polynomial functions. It provides a stability-based quality criterion
+    for determining the 'best' number of clusters.
+License: GPL-2
+Encoding: UTF-8
+LazyData: false
+Imports: 
+   devtools, kml, Hmisc, ggplot2, rgdal, base, utils
+Suggests:
+   knitr
+RoxygenNote: 6.1.1
