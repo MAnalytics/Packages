@@ -1,0 +1,11 @@
+* installing *source* package 'akmeans' ...
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+*** arch - i386
+*** arch - x64
+* DONE (akmeans)
+In R CMD INSTALL
