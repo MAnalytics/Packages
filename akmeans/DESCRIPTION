@@ -3,6 +3,7 @@ Type: Package
 Title: Anchored kmeans for Longitudinal Data
 Version: 0.1.0
 Author: Monsuru Adepeju [cre, aut], Samuel Langton [ctb], Jon Bannister [ctb]
+Depends: R (>=3.5.2)
 Maintainer: Monsuru Adepeju <m.adepeju@mmu.ac.uk> 
 Description: An implementation kmeans designed to cluster longitudinal data based on 
     a set of pre-determined 1-order polynomial functions. It provides a stability-based quality criterion
