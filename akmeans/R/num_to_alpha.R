@@ -1,5 +1,6 @@
 
 #Function to assign alphabetic labels to numeric cluster IDs
+#' @title Function to assign alphabetic labels to numeric cluster IDs
 #' @param x A vector of numeric cluster ids
 #' @return clust_num
 #' @export
@@ -16,7 +17,7 @@ num_to_alpha <- function(x){
     return(clust_num)
   }
   if(length(x)>350){
-    print("Labels exhasted! specify a vector with fewer elements")
+    print("Labels exhausted! specify a vector with fewer elements")
   }
 }
 

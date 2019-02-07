@@ -1,6 +1,7 @@
 
 ##Function to remove whitespace in data entries
-#' @param dat A vector, matrix or data.frame
+#' @title Function to remove whitespace in data entries
+#' @param dat A matrix or data.frame
 #' @param head If column names exist
 #' @return dat_Cleaned
 #' @export

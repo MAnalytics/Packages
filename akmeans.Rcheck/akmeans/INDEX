@@ -1,0 +1,8 @@
+GM_crime_data           Greater Manchester crime data aggregated at the
+                        LSOA geographical level
+na_null_inf_Filler      Data Imputing
+num_to_alpha            Transform numeric ids to alphabetical ids
+rates_to_props          Convert count or rates to proportion
+remove_all_whiteSpaces
+                        Remove any whitespaces in a matrix or
+                        data.frame
