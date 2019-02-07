@@ -1,4 +1,0 @@
-exportPattern("^[[:alpha:]]+")
-importFrom("utils", "combn")
-export(num_to_alpha)
-export(remove_all_whiteSpaces)

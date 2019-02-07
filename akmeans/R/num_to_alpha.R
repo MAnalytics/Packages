@@ -18,35 +18,5 @@ num_to_alpha <- function(x){
   if(length(x)>350){
     print("Labels exhasted! specify a vector with fewer elements")
   }
-
 }
 
-
-#Function to assign alphabetic labels to numeric cluster IDs
-#' @param x A vector of numeric cluster ids
-#' @return clust_num
-#' @export
-#-----------------------------------------------------
-#Function to remove whitespace in data entries  #data<-Neighb_ids  #head(data)
-remove_all_whiteSpaces <- function(dat){
-  coln_ <- colnames(dat)
-  if(is.null(coln_)){
-    i_ = "Y"
-    coln_ <- "col"
-    dat <- as.data.frame(matrix(dat,,1))
-  }
-  for(q in 1:ncol(dat)){#q<-1
-    vec_Name <- trimws(as.vector(dat[,q]), which="right") #trailing whitespace
-    vec_Name <- trimws(vec_Name, which="left") #leading whitespace
-    vec_Name <- matrix(vec_Name,,1)
-    colnames(vec_Name) <- paste(coln_[q], q, sep="")  #head(data)
-    dat[,q] <- vec_Name
-  }
-  if(i_=="Y"){
-    data <- as.vector(t(dat)) #data[1]
-  }
-  i_ <- "N"
-  #colnames(data) <- coln_
-  return(dat)
-}
-#-----------------------------------------------------
