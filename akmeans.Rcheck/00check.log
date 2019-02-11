@@ -41,10 +41,10 @@ Non-standard file/directory found at top level:
 * checking foreign function calls ... OK
 * checking R code for possible problems ... OK
 * checking Rd files ... NOTE
-prepare_Rd: na_null_inf_Filler.Rd:28-30: Dropping empty section \details
-prepare_Rd: na_null_inf_Filler.Rd:40-42: Dropping empty section \note
-prepare_Rd: na_null_inf_Filler.Rd:34-36: Dropping empty section \references
-prepare_Rd: na_null_inf_Filler.Rd:46-48: Dropping empty section \seealso
+prepare_Rd: na_null_inf_Filler.Rd:25-27: Dropping empty section \details
+prepare_Rd: na_null_inf_Filler.Rd:37-39: Dropping empty section \note
+prepare_Rd: na_null_inf_Filler.Rd:31-33: Dropping empty section \references
+prepare_Rd: na_null_inf_Filler.Rd:43-45: Dropping empty section \seealso
 prepare_Rd: num_to_alpha.Rd:19-21: Dropping empty section \details
 prepare_Rd: num_to_alpha.Rd:31-33: Dropping empty section \note
 prepare_Rd: num_to_alpha.Rd:25-27: Dropping empty section \references
@@ -70,9 +70,6 @@ rates_to_props
     id_field
 
 * checking Rd \usage sections ... WARNING
-Duplicated \argument entries in documentation object 'na_null_inf_Filler':
-  'dat'
-
 Documented arguments not in \usage in documentation object 'rates_to_props':
   'id_field'
 

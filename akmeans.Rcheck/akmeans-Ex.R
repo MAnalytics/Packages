@@ -32,7 +32,7 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-na_null_inf_Filler(GM_crime_data, id_field = FALSE, fill_with = "Mean")
+na_null_inf_Filler(GM_crime_data, id_field = FALSE, fill_with = "Mean_col")
 
 
 

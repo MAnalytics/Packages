@@ -51,7 +51,7 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> na_null_inf_Filler(GM_crime_data, id_field = FALSE, fill_with = "Mean")
+> na_null_inf_Filler(GM_crime_data, id_field = FALSE, fill_with = "Mean_col")
 [1] "1694 entries were filled!"
         uni_LSOA  V2  V3  V4  V5  V6  V7  V8  V9 V10 V11 V12 V13
    [1,]      NaN   3   0   1   2   1   0   1   4   0   1   2   1
@@ -8601,7 +8601,7 @@ Type 'q()' to quit R.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.3 0.36 0.66 NA NA 
+Time elapsed:  0.24 0.31 0.56 NA NA 
 > grDevices::dev.off()
 null device 
           1 

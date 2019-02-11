@@ -5,16 +5,13 @@
 Data Imputing
 }
 \description{
-Function to replace 'NA', 'null','Null', 'Inf' entries in a matrix or data.frame by the 'Mean', 'Minimum' or 'Maximum' value of the respective field.
+This function replaces any cells of the values 'NA', 'na', 'null','Null' or 'Inf' in a matrix or data.frame with the 'Mean', 'Minimum' or 'Maximum' value of either the column or row in which the cell is located.
 }
 \usage{
 na_null_inf_Filler(dat, id_field, fill_with)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dat}{
-A matrix or data.frame
-}
  \item{dat}{
 A matrix or data.frame
 }
@@ -22,7 +19,7 @@ A matrix or data.frame
 [TRUE or FALSE] Whether or not the first field of the matrix (or data.frame) is the unique (id) field The default is FALSE.
 }
   \item{fill_with}{
-["Mean", "Min" or "Max"] Value to fill to replace the entry with. The default is "Mean" of the respective field.
+["Mean_col", "Min_col", "Max_col, "Mean_row", "Min_row" or "Max_row"] Value to replace ['NA', 'na', 'null','Null', 'Inf'] with. The default is "Mean_col", meaning to imput the average values of the field in which the cell is located.
 }
 }
 \details{
@@ -35,7 +32,7 @@ A matrix or data.frame
 %% ~put references to the literature/web site here ~
 }
 \author{
-Monsuru Adepeju
+Monsuru Adepeju; Samuel Langton
 }
 \note{
 %%  ~~further notes~~
@@ -47,7 +44,7 @@ Monsuru Adepeju
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-na_null_inf_Filler(GM_crime_data, id_field = FALSE, fill_with = "Mean")
+na_null_inf_Filler(GM_crime_data, id_field = FALSE, fill_with = "Mean_col")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
