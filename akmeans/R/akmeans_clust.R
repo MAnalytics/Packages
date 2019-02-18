@@ -37,8 +37,8 @@ akmeans_clust <- function(dat, id_field = FALSE, init_centroids = "lpm", n_clust
   }
 
   #combine the data and clusters
-  clusters <- matrix(alphaLabel(clusters),,1)
-  colnames(clusters) <- "clusters"
+  #clusters <- matrix(alphaLabel(clusters),,1)
+  #colnames(clusters) <- "clusters"
   data_clusters_list <- cbind(dat, clusters)
 
   return(data_clusters_list)
