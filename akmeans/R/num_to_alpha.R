@@ -1,8 +1,9 @@
 
 #Function to assign alphabetic labels to numeric cluster IDs
 #' @title Function to assign alphabetic labels to numeric cluster IDs
+#' @description GGGGGGGGGGG
 #' @param x A vector of numeric cluster ids
-#' @return clust_num
+#' @rawNamespace import(utils)
 #' @export
 num_to_alpha <- function(x){
   combind_A <- LETTERS

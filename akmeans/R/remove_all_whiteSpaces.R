@@ -3,6 +3,7 @@
 #' @title Function to remove whitespace in data entries
 #' @param dat A matrix or data.frame
 #' @param head If column names exist
+#' @rawNamespace import(utils)
 #' @return dat_Cleaned
 #' @export
 remove_all_whiteSpaces <- function(dat, head=TRUE){  #head(dat)
