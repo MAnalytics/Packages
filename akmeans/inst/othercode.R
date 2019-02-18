@@ -29,8 +29,8 @@ head(final_data)
 
 getwd()
 
-GM_crime_data <- final_data
+gm_crime_data <- final_data
 
-save(GM_crime_data, file="data/GM_crime_data.rda")
+save(gm_crime_data, file="data/gm_crime_data.rda")
 
 

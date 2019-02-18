@@ -31,12 +31,17 @@ akmeans_clust <- function(dat, id_field = FALSE, init_centroids = "lpm", n_clust
   clusters <- affectIndivC(dat,  lpm_centroid)  #head(crime_Prop)
 
   if(id_field==TRUE){
-    dat <- as.data.frame(n_CL=col_names, dat)
+    col_names <- matrix(col_names,,1)
+    colnames(col_names) <- n_CL
+    dat <- as.data.frame(cbind(col_names, dat))
   }
 
   #combine the data and clusters
-  data_clusters_list <- cbind(dat, alphaLabel(clusters))
+  clusters <- matrix(alphaLabel(clusters),,1)
+  colnames(clusters) <- "clusters"
+  data_clusters_list <- cbind(dat, clusters)
 
   return(data_clusters_list)
 }
 
+#akmeans_clust(dat, id_field = TRUE, init_centroids = "lpm", n_clusters = 3)
