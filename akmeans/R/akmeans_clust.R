@@ -1,7 +1,7 @@
 
 #Function to cluster trajectories given a list of initial centroids
 #' @title akmeans_clust
-#' @description GGGGGGG
+#' @description GGGGGGGGG
 #' @param dat A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
 #' @param id_field Whether the first column is a unique (id) field. [default: FALSE]
 #' @param init_centroids initialisation method [default: "lpm" - linear partitioning medoids @seealso \code{\link{lpm_centroids}}]
