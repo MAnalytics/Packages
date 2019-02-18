@@ -7,11 +7,11 @@
 #' @return datF
 #' @export
 
-Null_Filler <- function(dat, id_field = FALSE, replace_with = "Mean_col"){  #id_field = TRUE; replace_with = "Mean_row"
+null_filler <- function(dat, id_field = FALSE, replace_with = "Mean_col"){  #id_field = TRUE; replace_with = "Mean_row"
 
 
   #dat <- read.table(file="samp.csv", sep=",", head=FALSE)
-  #dat <- Null_Filler(dat, id_field=TRUE, replace_with="Mean_col")
+  #dat <- null_filler(dat, id_field=TRUE, replace_with="Mean_col")
 
   coln_ <- colnames(dat)
 

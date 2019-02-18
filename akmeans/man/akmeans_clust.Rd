@@ -20,5 +20,5 @@ akmeans_clust(dat, id_field = FALSE, init_centroids = "lpm",
 data_clusters_list
 }
 \description{
-GGGGGGG
+GGGGGGGGG
 }
