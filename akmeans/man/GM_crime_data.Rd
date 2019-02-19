@@ -3,12 +3,12 @@
 \docType{data}
 \name{gm_crime_data}
 \alias{gm_crime_data}
-\title{Greater Manchester crime data aggregated at the LSOA geographical level data (Source: data.police.uk)}
+\title{Sample crime dataset}
 \format{A matrix}
 \usage{
 gm_crime_data
 }
 \description{
-#GGGGGGGGG
+Crime dataset of greater Manchester crime data aggregated at the LSOA geographical level data (Source: data.police.uk)
 }
 \keyword{datasets}

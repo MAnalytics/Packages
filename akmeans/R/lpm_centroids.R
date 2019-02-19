@@ -4,17 +4,17 @@
 #' @title Linear Partition Medoids (LPM) Centroids
 #' @param dat A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
 #' @param n_centroids Number of initial (linear) centroids to generate based on lpm technique (Adepeju et al. 2019, under review)
-#' @param id_field Whether the first column is a unique (id) field. [default: FALSE]
+#' @param id_field2 Whether the first column is a unique (id) field. [default: FALSE]
 #' @return l_centroids
 #' @rawNamespace import(reshape2, Hmisc, stats, utils)
 #' @export
 
-lpm_centroids <- function(dat, id_field = FALSE, n_centroids=3){
+lpm_centroids <- function(dat, id_field2 = FALSE, n_centroids=3){
 
   #library(reshape2)
   #n_centroids <- n_centroids
 
-  if(id_field ==  TRUE){
+  if(id_field2 ==  TRUE){
     dat  <- dat[,2:ncol(dat)]
   }
 
@@ -94,7 +94,7 @@ colnames(sl_List) <- c("sn", "intersect","slope")
 
 }   #
 #visualise result with trajectory...
-#result_ <- lpm_centroids(dat, n_centroids=41, id_field = TRUE, plot = TRUE)
+#result_ <- lpm_centroids(dat, n_centroids=41, id_field = TRUE)
 
 
 

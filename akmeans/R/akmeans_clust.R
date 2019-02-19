@@ -7,10 +7,10 @@
 #' @param init_centroids initialisation method [default: "lpm" - linear partitioning medoids @seealso \code{\link{lpm_centroids}}]
 #' @param n_clusters number of clusters to generate [default (minimum value): 3]
 #' @return data_clusters_list
-#' @rawNamespace import(kml)
+#' @rawNamespace importFrom(kml, affectIndivC)
 #' @export
 
-akmeans_clust <- function(dat, id_field = FALSE, init_centroids = "lpm", n_clusters = 3){
+akmeans_clust <- function(dat=gm_crime_data, id_field = FALSE, init_centroids = "lpm", n_clusters = 3){
 
   #check if there is id_field
   #check if there is unique(id) field
@@ -25,10 +25,11 @@ akmeans_clust <- function(dat, id_field = FALSE, init_centroids = "lpm", n_clust
   }
 
   #create centroids based on "lpm" initialisation method
-  lpm_centroid <- lpm_centroids(dat, id_field = FALSE, n_centroids=n_clusters)
+  centroids <- lpm_centroids(dat, id_field2 = FALSE, n_centroids=n_clusters)
 
   #generate clusters and append to data
-  clusters <- affectIndivC(dat,  lpm_centroid)  #head(crime_Prop)
+  clusters <- affectIndivC(dat,  centroids)  #head(crime_Prop)
+  #clusters <- 1
 
   if(id_field==TRUE){
     col_names <- matrix(col_names,,1)
@@ -37,11 +38,11 @@ akmeans_clust <- function(dat, id_field = FALSE, init_centroids = "lpm", n_clust
   }
 
   #combine the data and clusters
-  #clusters <- matrix(alphaLabel(clusters),,1)
+  clusters <- alphaLabel(clusters)
   #colnames(clusters) <- "clusters"
   data_clusters_list <- cbind(dat, clusters)
 
   return(data_clusters_list)
 }
 
-#akmeans_clust(dat, id_field = TRUE, init_centroids = "lpm", n_clusters = 3)
+#akmeans_clust(dat, id_field = TRUE, init_centroids = "lpm", n_clusters = 4)

@@ -4,12 +4,12 @@
 \alias{lpm_centroids}
 \title{Linear Partition Medoids (LPM) Centroids}
 \usage{
-lpm_centroids(dat, id_field = FALSE, n_centroids = 3)
+lpm_centroids(dat, id_field2 = FALSE, n_centroids = 3)
 }
 \arguments{
 \item{dat}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.}
 
-\item{id_field}{Whether the first column is a unique (id) field. [default: FALSE]}
+\item{id_field2}{Whether the first column is a unique (id) field. [default: FALSE]}
 
 \item{n_centroids}{Number of initial (linear) centroids to generate based on lpm technique (Adepeju et al. 2019, under review)}
 }

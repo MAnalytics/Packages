@@ -4,12 +4,12 @@
 \alias{plot_clust}
 \title{To plot the clusters}
 \usage{
-plot_clust(data_clusters_list, id_field = FALSE)
+plot_clust(data_clusters_list, id_field = TRUE)
 }
 \arguments{
-\item{data_clusters_list}{A data.frame of clusters from \code{\link{akmeans_clust}}. The last column should represent numeric cluster ids (labels)}
+\item{data_clusters_list}{A data.frame of clusters from \code{\link{akmeans_clust}}, in which the last column represents alphabetical cluster ids (labels)}
 
-\item{id_field}{Whether the first column is a unique (id) field. [default: FALSE]}
+\item{id_field}{Whether the first column is a unique (id) field. [default: TRUE]}
 }
 \value{
 data_clusters_list

@@ -6,7 +6,7 @@
 #' @rawNamespace import(utils)
 #' @export
 
-alphaLabel <- function(x){
+alphaLabel <- function(x=clusters){
   combind_A <- LETTERS
   combind <-  combn(LETTERS, m=2, sep="")# combind[1:2,]
   list_Letters <- NULL
@@ -14,12 +14,11 @@ alphaLabel <- function(x){
     list_Letters <-c(list_Letters,  paste(combind[1,cc],   combind[2,cc], sep=""))
   }
   list_Letters <- c(combind_A, list_Letters) #combine
-  if(length(x)<=350){
+  if(length(unique(x))<=350){
     clust_num <- list_Letters[x]
     return(clust_num)
   }
-  if(length(x)>350){
+  if(length(unique(x))>350){
     print("Labels exhausted! specify a vector with fewer elements")
   }
 }
-

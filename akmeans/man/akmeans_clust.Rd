@@ -4,8 +4,8 @@
 \alias{akmeans_clust}
 \title{akmeans_clust}
 \usage{
-akmeans_clust(dat, id_field = FALSE, init_centroids = "lpm",
-  n_clusters = 3)
+akmeans_clust(dat = gm_crime_data, id_field = FALSE,
+  init_centroids = "lpm", n_clusters = 3)
 }
 \arguments{
 \item{dat}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.}
