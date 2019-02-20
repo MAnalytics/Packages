@@ -4,7 +4,7 @@
 \alias{alphaLabel}
 \title{Function to assign alphabetic labels to numeric cluster IDs}
 \usage{
-alphaLabel(x = clusters)
+alphaLabel(x)
 }
 \arguments{
 \item{x}{A vector of numeric cluster ids}

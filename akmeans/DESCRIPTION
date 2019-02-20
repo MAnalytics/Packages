@@ -1,6 +1,6 @@
 Package: akmeans
 Type: Package
-Title: akmeans package: Anchored kmeans for Longitudinal Data
+Title: akmeans: 'Anchored' kmeans for Longitudinal Data
 Version: 0.1.0
 Date: 2019-02-06
 Author: Monsuru Adepeju [cre, aut], Samuel Langton [aut], Jon Bannister [aut]

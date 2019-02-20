@@ -6,7 +6,7 @@
 #' @rawNamespace import(utils)
 #' @export
 
-alphaLabel <- function(x=clusters){
+alphaLabel <- function(x){
   combind_A <- LETTERS
   combind <-  combn(LETTERS, m=2, sep="")# combind[1:2,]
   list_Letters <- NULL

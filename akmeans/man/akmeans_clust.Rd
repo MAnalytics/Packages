@@ -4,21 +4,27 @@
 \alias{akmeans_clust}
 \title{akmeans_clust}
 \usage{
-akmeans_clust(dat = gm_crime_data, id_field = FALSE,
-  init_centroids = "lpm", n_clusters = 3)
+akmeans_clust(traj, id_field = FALSE, init_method = "lpm", n_clusters = 3)
 }
 \arguments{
-\item{dat}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.}
+\item{traj}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observations at consecutive time steps.}
 
-\item{id_field}{Whether the first column is a unique (id) field. [default: FALSE]}
+\item{id_field}{Whether the first column is a unique (\code{id}) field. Default: \code{FALSE}}
 
-\item{init_centroids}{initialisation method [default: "lpm" - linear partitioning medoids @seealso \code{\link{lpm_centroids}}]}
+\item{init_method}{initialisation method. Specifying a method to determine the initial centroids for clustering. Default: \code{"lpm"} - linear partitioning medoids @seealso \code{\link{lpm_centroids}}]}
 
-\item{n_clusters}{number of clusters to generate [default (minimum value): 3]}
+\item{n_clusters}{number of clusters to generate. Default: \code{3}: (minimum value)}
 }
 \value{
-data_clusters_list
+The original (\code{traj}) data with cluster label appended
 }
 \description{
-GGGGGGGGG
+This function group trajectories based on a given list of initial centroids
+}
+\details{
+Given a list of trajectories represented in a matrix or data.frame, and a method for choosing initial cluster centroids (e.g. \code{\link{lpm_centroids}}), a list of clusters is generated after a limited number of iterations.
+traj <- assault_data
+print(traj)
+result <- akmeans_clust(traj, id_field = TRUE, init_centroids = "lpm", n_clusters = 3)
+plot_clust(result)
 }

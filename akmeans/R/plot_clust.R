@@ -37,8 +37,9 @@ plot_clust <- function(data_clusters_list, id_field=TRUE){
   #append cluster list
   data_subset.melted <- cbind(data_subset.melted, rep(clusters, ncol(data_subset)-1))#nrow(data.long.melted)
 
-  colnames(data_subset.melted) <- c("id","Year","value", "clusters")
+  ggplot <- aes <- Year <- value <- id <- geom_line <- facet_wrap <- geom_smooth <- theme_minimal <- NULL
 
+  colnames(data_subset.melted) <- c("id","Year","value", "clusters")
   #plot
    ggplot(data_subset.melted, aes(x=Year, y=value,
                                      group=id, color="grey")) +

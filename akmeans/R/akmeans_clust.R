@@ -1,17 +1,23 @@
 
-#Function to cluster trajectories given a list of initial centroids
 #' @title akmeans_clust
-#' @description GGGGGGGGG
-#' @param dat A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
-#' @param id_field Whether the first column is a unique (id) field. [default: FALSE]
-#' @param init_centroids initialisation method [default: "lpm" - linear partitioning medoids @seealso \code{\link{lpm_centroids}}]
-#' @param n_clusters number of clusters to generate [default (minimum value): 3]
-#' @return data_clusters_list
+#' @description This function group trajectories based on a given list of initial centroids
+#' @param traj A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observations at consecutive time steps.
+#' @param id_field Whether the first column is a unique (\code{id}) field. Default: \code{FALSE}
+#' @param init_method initialisation method. Specifying a method to determine the initial centroids for clustering. Default: \code{"lpm"} - linear partitioning medoids @seealso \code{\link{lpm_centroids}}]
+#' @param n_clusters number of clusters to generate. Default: \code{3}: (minimum value)
+#' @usage akmeans_clust(traj, id_field = FALSE, init_method = "lpm", n_clusters = 3)
+#' @details Given a list of trajectories represented in a matrix or data.frame, and a method for choosing initial cluster centroids (e.g. \code{\link{lpm_centroids}}), a list of clusters is generated after a limited number of iterations.
+#' traj <- assault_data
+#' print(traj)
+#' result <- akmeans_clust(traj, id_field = TRUE, init_centroids = "lpm", n_clusters = 3)
+#' plot_clust(result)
+#' @return The original (\code{traj}) data with cluster label appended
 #' @rawNamespace importFrom(kml, affectIndivC)
 #' @export
 
-akmeans_clust <- function(dat=gm_crime_data, id_field = FALSE, init_centroids = "lpm", n_clusters = 3){
+akmeans_clust <- function(traj, id_field = FALSE, init_method = "lpm", n_clusters = 3){
 
+  dat <- traj
   #check if there is id_field
   #check if there is unique(id) field
   if(id_field==TRUE){
@@ -24,8 +30,11 @@ akmeans_clust <- function(dat=gm_crime_data, id_field = FALSE, init_centroids = 
     }
   }
 
+  #specify initialisation method
+  if(init_method=="lpm"){
   #create centroids based on "lpm" initialisation method
-  centroids <- lpm_centroids(dat, id_field2 = FALSE, n_centroids=n_clusters)
+    centroids <- lpm_centroids(dat, id_field2 = FALSE, n_centroids=n_clusters)
+  }
 
   #generate clusters and append to data
   clusters <- affectIndivC(dat,  centroids)  #head(crime_Prop)
