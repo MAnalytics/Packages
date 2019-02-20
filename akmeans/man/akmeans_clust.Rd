@@ -25,6 +25,6 @@ This function group trajectories based on a given list of initial centroids
 Given a list of trajectories represented in a matrix or data.frame, and a method for choosing initial cluster centroids (e.g. \code{\link{lpm_centroids}}), a list of clusters is generated after a limited number of iterations.
 traj <- assault_data
 print(traj)
-result <- akmeans_clust(traj, id_field = TRUE, init_centroids = "lpm", n_clusters = 3)
+result <- akmeans_clust(traj, id_field = TRUE, init_method = "lpm", n_clusters = 3)
 plot_clust(result)
 }

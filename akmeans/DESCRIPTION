@@ -11,7 +11,7 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: TRUE
 Imports: 
-   devtools, Hmisc, ggplot2, rgdal, base, utils, reshape2, later, kml
+   kml, devtools, Hmisc, ggplot2, rgdal, base, utils, reshape2, later
 Suggests:
     knitr,
     rmarkdown
