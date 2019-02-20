@@ -1,11 +1,11 @@
 
-
-#Function to create the initial centroids based on based on linear partitioning medoids
 #' @title Linear Partition Medoids (LPM) Centroids
+#' @description This function to create the initial centroids based on linear partitioning medoids (lpm) initialisation \code{(Adepeju et al. 2019, submitted)}
 #' @param dat A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
-#' @param n_centroids Number of initial (linear) centroids to generate based on lpm technique (Adepeju et al. 2019, under review)
-#' @param id_field2 Whether the first column is a unique (id) field. [default: FALSE]
+#' @param n_centroids Number of initial (linear) centroids to generate based on lpm technique
+#' @param id_field2 Whether the first column is a unique (id) field. default: \code{FALSE}
 #' @return l_centroids
+#' @references Adepeju M, Langton S, Bannister J. (2019). akmeans: Anchored k-means: A longitudinal clustering technique for measuring long-term inequality in the exposure to crime at the micro-area levels (submitted).
 #' @rawNamespace import(reshape2, Hmisc, stats, utils)
 #' @export
 

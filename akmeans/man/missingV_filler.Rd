@@ -15,7 +15,7 @@ missingV_filler(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros
 
 \item{replace_with}{How to calculate the missing value. For \code{arithmetic} method: \code{replace_with} options are: \code{1}: Mean value of column, \code{2}: Minimum value of column, \code{3}: Maximum value of column, \code{4}: Mean value of row, \code{5}: Minimum value of row, or \code{6}: Maximum value of row. For \code{regression} method: the only available option for \code{replace_with} is: \code{1}: linear. That is, use a linear regression to interpolate or extrapolate the missing data values. Note: only the missing data points derive their new values from the regression line while the rest of the data points retain their original values. Trajectories with only one observation will be removed.}
 
-\item{fill_zeros}{Whether to consider zeros (\code{0}) as missing values. default: \code{FALSE}. Only available for \code{2}: \code{regression} method.}
+\item{fill_zeros}{Whether to consider zeros (\code{0}) as missing values. Default: \code{FALSE}. Only available for \code{2}: \code{regression} method.}
 }
 \value{
 A data.frame with missing values \code{(NA, Inf, 0)} filled up

@@ -2,13 +2,13 @@
 % Please edit documentation in R/alphaLabel.R
 \name{alphaLabel}
 \alias{alphaLabel}
-\title{Function to assign alphabetic labels to numeric cluster IDs}
+\title{Numerics ids to alphabetical ids}
 \usage{
 alphaLabel(x)
 }
 \arguments{
-\item{x}{A vector of numeric cluster ids}
+\item{x}{A vector of numeric ids}
 }
 \description{
-GGGGGGGGGGG
+Function to transform a list of numeric ids to alphabetic ids
 }
