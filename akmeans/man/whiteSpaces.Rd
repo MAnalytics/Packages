@@ -2,18 +2,21 @@
 % Please edit documentation in R/whiteSpaces.R
 \name{whiteSpaces}
 \alias{whiteSpaces}
-\title{Function to remove whitespaces in data entries}
+\title{Removing whitespaces}
 \usage{
-whiteSpaces(dat, head = TRUE)
+whiteSpaces(traj, head = TRUE)
 }
 \arguments{
-\item{dat}{A matrix or data.frame}
+\item{traj}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.}
 
-\item{head}{If column names exist}
+\item{head}{Whether the field (column) names of the data.frame should be retained.Default: \code{TRUE}.}
 }
 \value{
-dat_Cleaned
+A cleaned data.frame with whitespaces (if any) removed.
 }
 \description{
-Function to remove whitespaces in data entries
+This function removes all leading and trailing whitespaces in longitudinal data
+}
+\references{
+\url{https://en.wikipedia.org/wiki/Whitespace_character}
 }

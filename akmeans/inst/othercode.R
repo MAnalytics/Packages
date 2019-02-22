@@ -1,7 +1,7 @@
 #code to create matrix of crime dataset from GM_police_crime_uk data
 alt_data <- read.table(file="C:/Users/monsu/Documents/MMU DOCUMENTS/wm_bm_LSOA_PC_01_12.csv", sep=",", head=TRUE)
 
-imp <- read.csv(file="GM_police_crime_uk.csv", sep=",", head=TRUE)
+imp <- read.csv(file="C:/Users/monsu/Documents/GitHub/Packages/akmeans/inst/GM_police_crime_uk.csv", sep=",", head=TRUE)
 
 head(imp)
 
@@ -29,8 +29,22 @@ head(final_data)
 
 getwd()
 
-gm_crime_data <- final_data
+gm.crime.sample2 <- final_data
 
-save(gm_crime_data, file="data/gm_crime_data.rda")
+save(gm.crime.sample2, file="data/gm.crime.sample2.rda")
+
+
+
+
+#To prepare the 'assault.data.rda'other dataset
+
+gm.crime.sample1 <- read.table(file="C:/Users/monsu/Documents/GitHub/Packages/samp.csv", sep=",", head=FALSE)
+
+save(gm.crime.sample1, file="data/gm.crime.sample1.rda")
+
+
+
+
+
 
 

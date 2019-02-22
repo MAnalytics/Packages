@@ -1,16 +1,18 @@
 
-##Function to remove whitespace in data entries
-#' @title Function to remove whitespaces in data entries
-#' @param dat A matrix or data.frame
-#' @param head If column names exist
+#' @title Removing whitespaces
+#' @description This function removes all leading and trailing whitespaces in longitudinal data
+#' @param traj A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
+#' @param head Whether the field (column) names of the data.frame should be retained.Default: \code{TRUE}.
 #' @rawNamespace import(utils)
-#' @return dat_Cleaned
+#' @return A cleaned data.frame with whitespaces (if any) removed.
+#' @references \url{https://en.wikipedia.org/wiki/Whitespace_character}
 #' @export
-whiteSpaces <- function(dat, head=TRUE){  #head(dat)
+whiteSpaces <- function(traj, head=TRUE){  #head(dat)
+  dat <- traj
   dat_Cleaned <- dat
   if(head==TRUE){
-  coln_ <- colnames(dat_Cleaned)
-  }
+    coln_ <- colnames(dat_Cleaned)
+    }
   count_ <- 0 #keep the count of whitespace removed.
   for(q in 1:ncol(dat_Cleaned)){#q<-1
     vec_Name1 <- trimws(as.vector(dat_Cleaned[,q]), which="right") #trailing whitespace

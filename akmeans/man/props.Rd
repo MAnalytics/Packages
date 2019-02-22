@@ -2,18 +2,27 @@
 % Please edit documentation in R/props.R
 \name{props}
 \alias{props}
-\title{Function to convert counts or rates to proportion}
+\title{Convert counts or rates to proportion}
 \usage{
-props(rates, id_field = FALSE)
+props(traj, id_field = FALSE)
 }
 \arguments{
-\item{rates}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.}
+\item{traj}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.}
 
-\item{id_field}{Whether the first column is a unique (id) field. [default: FALSE]}
+\item{id_field}{Whether the first column is a unique (id) field. Default: \code{FALSE}}
 }
 \value{
-props
+A matrix of proportion measures
 }
 \description{
-Function to convert counts or rates to proportion
+This function converts counts or rates data to proportion.
+}
+\details{
+Given a matrix of observations (counts or rates), this function convert each observation to a proportion measure. A matrix or data.frame count or rate is converted by dividing each cell entry by the sum of the corresponding column, i.e. \code{prop = [a cell value] / sum[column]}
+}
+\examples{
+traj <- gm.crime.sample2
+head(traj) #
+traj <- props(traj, id_field = TRUE)
+print(traj)
 }

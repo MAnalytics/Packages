@@ -1,23 +1,30 @@
 
-#Function to convert counts or rates to proportion
-#' @title Function to convert counts or rates to proportion
-#' @param rates A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
-#' @param id_field Whether the first column is a unique (id) field. [default: FALSE]
-#' @return props
+#' @title Convert counts or rates to proportion
+#' @description This function converts counts or rates data to proportion.
+#' @param traj A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
+#' @param id_field Whether the first column is a unique (id) field. Default: \code{FALSE}
+#' @examples
+#' traj <- gm.crime.sample2
+#' head(traj) #
+#' traj <- props(traj, id_field = TRUE)
+#' print(traj)
+#' @details Given a matrix of observations (counts or rates), this function convert each observation to a proportion measure. A matrix or data.frame count or rate is converted by dividing each cell entry by the sum of the corresponding column, i.e. \code{prop = [a cell value] / sum[column]}
+#' @return A matrix of proportion measures
 #' @export
 
-props <- function(rates, id_field = FALSE){
-  props <- rates
+props <- function(traj, id_field = FALSE){
+  dat <- traj
+  props <- dat
   if(id_field==FALSE){
-    for(h in 1:ncol(rates)){ #h<-6
-      prop <- (as.numeric(rates[,h])/sum(as.numeric(as.character(rates[,h]))))
+    for(h in 1:ncol(dat)){ #h<-6
+      prop <- (as.numeric(dat[,h])/sum(as.numeric(as.character(dat[,h]))))
       props[,h] <- prop
     }
   }
 
   if(id_field==TRUE){
-    for(h in 2:ncol(rates)){ #h<-2
-      prop <- (as.numeric(rates[,h])/sum(as.numeric(as.character(rates[,h]))))
+    for(h in 2:ncol(dat)){ #h<-2
+      prop <- (as.numeric(dat[,h])/sum(as.numeric(as.character(dat[,h]))))
       props[,h] <- prop
     }
   }
