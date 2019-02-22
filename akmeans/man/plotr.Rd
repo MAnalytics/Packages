@@ -7,7 +7,7 @@
 plotr(clustr, id_field = TRUE, y.scaling = "fixed")
 }
 \arguments{
-\item{clustr}{A data.frame of clusters from \code{\link{akmeans.clust}}, in which the last column represents alphabetical cluster ids (labels)}
+\item{clustr}{A data.frame of cluster trajectories (e.g. an output of \code{\link{akmeans.clust}}), in which the last column represents alphabetical cluster ids (labels)}
 
 \item{id_field}{Whether the first column is a unique (id) field. Default: \code{TRUE}.}
 
