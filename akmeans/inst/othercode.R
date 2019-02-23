@@ -42,9 +42,11 @@ gm.crime.sample1 <- read.table(file="C:/Users/monsu/Documents/GitHub/Packages/sa
 
 save(gm.crime.sample1, file="data/gm.crime.sample1.rda")
 
+Calinski and Harabatz criterion code
+References
+[1] C. Genolini and B. Falissard "KmL: k-means for longitudinal data" Computational Statistics, vol 25(2), pp 317-328, 2010
 
-
-
+[2] C. Genolini and B. Falissard "KmL: A package to cluster longitudinal data" Computer Methods and Programs in Biomedicine, 104, pp e112-121, 2011
 
 
 
