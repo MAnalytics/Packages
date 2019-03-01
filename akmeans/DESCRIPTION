@@ -5,8 +5,10 @@ Version: 0.1.0
 Date: 2019-02-06
 Author: Monsuru Adepeju [cre, aut], Samuel Langton [aut], Jon Bannister [aut]
 Maintainer: Monsuru Adepeju <monsuurg2010@gmail.com> 
-Description: Advances an akmeans clustering technque and a stability-based quality criterion (SQC) for longitudinal data. The package also include 
-    a list of useful functions for exploring and manipulating longitudinal data.
+Description: Advances a longitudinal clustering technique, 'akmeans' which identify groups of trajectories of similar 
+             long-term linear trendline and use the Calinski and Harabatz criterion to determine the optimal separation between the trendlines.
+             The package also include a list of other useful functions for exploring and manipulating longitudinal data/repeated dataset. 
+ 
 License: GPL-2
 Encoding: UTF-8
 LazyData: TRUE
