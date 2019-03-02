@@ -3,12 +3,12 @@
 \docType{data}
 \name{gm.crime.sample1}
 \alias{gm.crime.sample1}
-\title{Sample crime dataset}
+\title{Longitudinal dataset}
 \format{A matrix}
 \usage{
 gm.crime.sample1
 }
 \description{
-Simulated crime dataset with missing values.
+Simulated longitudinal datasets with missing values ('NA', 'Inf' and 'Null')
 }
 \keyword{datasets}

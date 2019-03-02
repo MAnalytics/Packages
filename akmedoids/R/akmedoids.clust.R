@@ -1,12 +1,12 @@
 
-#' @title Clustering of longitudinal data
-#' @description This function group trajectories based on a functional definition of their long-term trends.
-#' @param traj A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observations at consecutive time steps.
-#' @param id_field Whether the first column is a unique (\code{id}) field. Default: \code{FALSE}
-#' @param method Initialisation strategy. Available method: \code{linear}
-#' @param k either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined. The default is \code{c(3,6)}. When k is a range, the actual number of clusters is determined by Calinski-Harabatz criterion.
+#' @title Anchored k-medoids clustering
+#' @description Given a list of trajectories and a functional method, this function clusters the trajectories into a k number of groups. If a vector of two numbers is given, the function determines the best solution based on the Calinski-Harabatz criterion.
+#' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
+#' @param id_field [numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.
+#' @param method [character] The parametric Initialisation strategy. Currently available method is \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regresion lines.
+#' @param k either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}. The best solution is determined using the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J 1974)}.
 #' @usage akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
-#' @details Given a list of trajectories and a functional method, this function clusters the trajectories into a k number of groups. If a vector of two numbers is given, the function determines the best solution based on the Calinski-Harabatz criterion.
+#' @details This function works by first approximating the trajectories based on the chosen parametric forms (e.g. linear, quadratic etc.), and then partition the original trajectories based on the form groupings, in similar fashion k-means clustering approach \code{(Genolini et al. 2015)}. The key distintion of the \code{akmedoids} as compared with the existing longitudinal approaches is that both the initial centroids as well as the subsequent cluster means (during the iteration) are based the selection of medoids observations.
 #' @examples
 #' traj <- gm.crime.sample1
 #' print(traj)
@@ -16,26 +16,30 @@
 #' print(traj)
 #' output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 #' print(output)
-#' @return A list containing cluster solutions for all value of k, including the solution at the optimal value of \code{k}, based on the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J, 1974)}
+#' @return The key output is a vector of cluster labels of length equal to the number of trajectories. Each label indicate the group membership of the corresponding trajectory of the \code{traj}. In addition, a plot of the Calinski-Harabatz scores is shown is shown if a vector of \code{k} is provided.
 #' @references \code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}
 #' @references \code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}
+#' @references \code{Genolini, C., Falissard, B., Fang, D., Tierney, L. and Genolini, M.C., 2016. Package ‘longitudinalData’}
 #' @rawNamespace importFrom(kml, affectIndivC)
+#' @rawNamespace importFrom("grDevices", "dev.new")
 #' @rawNamespace import(reshape2, Hmisc, stats, utils, ggplot2, longitudinalData)
 #' @export
 
-#akmeans.clust <- function(traj, id_field = FALSE, init_method = "lpm", k = 3){
+
 akmedoids.clust <- function(traj, id_field = FALSE, method = "linear", k = c(3,6)){
+
 
 CaliHara <- 0
 
+#create a vector if an interger of k if provided.
   if(length(k)==1){
     k <- rep(k, 2)
   }
 
-
+#linear medoid method
 if(method=="linear"){
 
-  #k list
+  #check if unaccepted value of k in inputted
   k_ <- k[1]:k[2]
   #checks
   if(k[1] < 3 | k[1] > nrow(traj) | k[2] > nrow(traj) |
@@ -108,8 +112,7 @@ if(method=="linear"){
 
       all_cluster_center_List[[i_counter]] <- centers_List
 
-    }#n_clusters
-
+    }#
 
     #Generate the linear trendlines for all trajectories (dropping all intersects)
     dat_slopp<- NULL
@@ -117,27 +120,34 @@ if(method=="linear"){
       dat_slopp <- rbind(dat_slopp, (0 + (sl_List[n,3]*(1:ncol(dat)))))  #head(dat_slopp)
     }
 
-    #looping through list of k and calculate the Calinski and Harabatz criterion
-final_result <- list()
-    #quality
-    calinski <- NULL
+  #looping through list of k and calculate the Calinski and Harabatz criterion
+  final_result <- list()
 
-    result_ <- list()
-    #solution_ <- list()
+
+    #initialise holders
+    calinski <- NULL  #holder for the quality scores
+    result_ <- list() #holder for the results
+
+    #loop through k
     for(r_ in 1:length(k_)){ #r_<-1
-      #1st iteration
-      part2 <- affectIndivC(dat_slopp, all_cluster_center_List[[r_]])  #------------------------------
-      #part2
 
-      distF <- list()
+      #1st iteration
+      part2 <- affectIndivC(dat_slopp, all_cluster_center_List[[r_]])
+
+      #temporary holder for a preceeding solution
       distF_backup <- list()
 
+      #get a list of unique cluster labels
       c_count <- unique(part2)[order(unique(part2))]
 
+      #a vector of time steps
       time_1 <- 1:ncol(traj)
+
+      #variable to store the similarity scores
       simil_ <- matrix(0, 100, length(c_count))
 
-      for(z in 1:15){  #z<-2 #number of iterations
+      #number of iterations #fixed as 20
+      for(z in 1:20){  #z<-2
 
         #recalculate the cluster centrure and do the affection
         if(z > 1){
@@ -146,34 +156,34 @@ final_result <- list()
           #sort the median of the slopes of all the groups
           centers <- NULL
           for(h_ in 1:length(c_count)){#h_<-3
-            #dat_slopp_ <- (dat_slopp*100)[which(part2==c_count[h_]),]
-            dat_slopp_ <- as.data.frame(dat_slopp)[which(part2==c_count[h_]),] #------------------------------
-
-            #sort the last column to and determine the median trajectory
+            dat_slopp_ <- as.data.frame(dat_slopp)[which(part2==c_count[h_]),]
+            #sort the last column to determine the medoid trajectory
             indexSort_ <- order(dat_slopp_[,ncol(dat_slopp_)])
             le_ <- indexSort_[ceiling(length(indexSort_)/2)]
-
-            #now pull out the median trajectory
+            #pull out the medoid trajectory
             centers <- rbind(centers, dat_slopp_[le_, ])
           }
-
           linear_centers <- as.data.frame(centers)
+          #determine the affection of each trajectory to the medoids
           part2 <- affectIndivC((dat_slopp), linear_centers)
         }
 
+        #detetermine the similarity of consecutive solutions
         if(z > 1){
           for(y in 1:length(c_count)){  #y<-1
             #compare
             simil_[z,y] <- (length(distF_backup[[y]]%in%which(part2==c_count[y]))/length(which(part2==c_count[y])))*100
           }
         }
-        #initial back of cluster solution
+
+        #executed only in the 1st iteration
         if(z==1){
           for(y in 1:length(c_count)){
             distF_backup[[y]] <- which(part2==c_count[y])
           }
         }
-        #subsequent backing up of cluster solution
+
+        #back up the current solution
         if(z > 1){
           for(y in 1:length(c_count)){  #
             distF_backup[[y]] <- which(part2==c_count[y]) ##---yes, using x and y here is okay.
@@ -185,27 +195,24 @@ final_result <- list()
       sol_k <- alphaLabel(part2)
       attr(sol_k,"k") <- k_[r_]
 
-      result_[[r_]] <- sol_k  #convert numberic labels to alphabetical labels r_<-1
-      #attr(result_,"title") <- paste("k =",k_[r_], sep=" ")
+      result_[[r_]] <- sol_k
 
-      #get the linear trends...
-      ld <- longData((dat_slopp)) #convert to longitudinal datga
+      #get the longitudinal trends
+      ld <- longData((dat_slopp)) #convert to longitudinal data
       part3 <- partition(part2)
-      #plotTrajMeans(ld, part1)#, colour="red"
-      cr1 <- qualityCriterion(ld,part3)
+      cr1 <- qualityCriterion(ld,part3) #calculate the quality
       calinski <- c(calinski, round(cr1$criters[1], digits=4))
-      #-----
-
       flush.console()
-      print(paste("solution when k =", k_[r_], "determined!"))
+      print(paste("solution of k =", k_[r_], "determined!"))
 
     }#end of k loop
 
-    #if a single value of k is provided
+    #return the solution if a single value of k is provided
     if(k[1]==k[2]){
       solution_ <- list()
       solution_[[1]] <- result_[[1]]
-      return(solution_[[1]])
+      final_result <- list(solution=solution_[[1]])   #
+      return(final_result)
     }
 
     #if a range of value is provided
@@ -218,10 +225,6 @@ final_result <- list()
         ggtitle(paste("Optimal solution based on the Calinski-Harabatz criterion: k = ", id_opt, sep=" ")) +
         geom_vline(xintercept = (which(qualit[,2]==max(qualit))[1] +(k[1]-1)), linetype="dashed", color = "red", size=0.5)
 
-      #all solutions
-      #all_solutions <- result_
-      #attr(all_solutions, "title") <- "all solution"   #names(all_solutions)
-
       qualiCriterion=c("Quality criterion: Calinski-Harabatz criterion")
       #determine optimal solution
       optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]] #all_solutions[[4]]
@@ -231,16 +234,11 @@ final_result <- list()
       print(plt)
 
       #combining the results
-      #final_result <- list(solutions = result_,
-                     #qualitycriterion =  qualiCriterion, optimSolution=optimal_solution)   #final_result$solutions[[1]]
-
-      #combining the results
       final_result <- list(plt,
-                           qualitycriterion =  qualiCriterion, optimSolution=optimal_solution)   #final_result$solutions[[1]]
+                           qualitycriterion =  qualiCriterion, optimSolution=optimal_solution)
 
       return(final_result)
 
-      #, plt
     }
 
 

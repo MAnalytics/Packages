@@ -2,27 +2,27 @@
 % Please edit documentation in R/akmedoids.clust.R
 \name{akmedoids.clust}
 \alias{akmedoids.clust}
-\title{Clustering of longitudinal data}
+\title{Anchored k-medoids clustering}
 \usage{
 akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
 }
 \arguments{
-\item{traj}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observations at consecutive time steps.}
+\item{traj}{[matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.}
 
-\item{id_field}{Whether the first column is a unique (\code{id}) field. Default: \code{FALSE}}
+\item{id_field}{[numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.}
 
-\item{method}{Initialisation strategy. Available method: \code{linear}}
+\item{method}{[character] The parametric Initialisation strategy. Currently available method is \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regresion lines.}
 
-\item{k}{either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined. The default is \code{c(3,6)}. When k is a range, the actual number of clusters is determined by Calinski-Harabatz criterion.}
+\item{k}{either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}. The best solution is determined using the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J 1974)}.}
 }
 \value{
-A list containing cluster solutions for all value of k, including the solution at the optimal value of \code{k}, based on the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J, 1974)}
+The key output is a vector of cluster labels of length equal to the number of trajectories. Each label indicate the group membership of the corresponding trajectory of the \code{traj}. In addition, a plot of the Calinski-Harabatz scores is shown is shown if a vector of \code{k} is provided.
 }
 \description{
-This function group trajectories based on a functional definition of their long-term trends.
+Given a list of trajectories and a functional method, this function clusters the trajectories into a k number of groups. If a vector of two numbers is given, the function determines the best solution based on the Calinski-Harabatz criterion.
 }
 \details{
-Given a list of trajectories and a functional method, this function clusters the trajectories into a k number of groups. If a vector of two numbers is given, the function determines the best solution based on the Calinski-Harabatz criterion.
+This function works by first approximating the trajectories based on the chosen parametric forms (e.g. linear, quadratic etc.), and then partition the original trajectories based on the form groupings, in similar fashion k-means clustering approach \code{(Genolini et al. 2015)}. The key distintion of the \code{akmedoids} as compared with the existing longitudinal approaches is that both the initial centroids as well as the subsequent cluster means (during the iteration) are based the selection of medoids observations.
 }
 \examples{
 traj <- gm.crime.sample1
@@ -38,4 +38,6 @@ print(output)
 \code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}
 
 \code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}
+
+\code{Genolini, C., Falissard, B., Fang, D., Tierney, L. and Genolini, M.C., 2016. Package ‘longitudinalData’}
 }
