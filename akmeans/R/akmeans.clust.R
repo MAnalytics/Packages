@@ -23,7 +23,7 @@
 #dat <- read.table(file="C:/Users/monsu/Documents/GitHub/Packages/samp.csv", sep=",", head=FALSE)
 #dat <- missingValue(traj=dat, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
 #convert crime rates to proportion
-#dat <- props(dat)
+#dat <- props(dat, id_field=TRUE)
 
 
 #akmeans.clust <- function(traj, id_field = FALSE, init_method = "lpm", k = 3){

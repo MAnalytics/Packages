@@ -3,7 +3,6 @@
 #' @description This function removes all leading and trailing whitespaces in longitudinal data
 #' @param traj A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.
 #' @param head Whether the field (column) names of the data.frame should be retained.Default: \code{TRUE}.
-#' @rawNamespace import(utils)
 #' @return A cleaned data.frame with whitespaces (if any) removed.
 #' @references \url{https://en.wikipedia.org/wiki/Whitespace_character}
 #' @export
