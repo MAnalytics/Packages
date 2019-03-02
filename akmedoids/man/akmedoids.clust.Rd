@@ -25,8 +25,8 @@ print(traj)
 traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1,
 fill_zeros = FALSE) #filling the missing values
 print(traj)
-clusters <- akmedoids.clust(traj, id_field = FALSE, k = c(3,6))
-print(clusters)
+output <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))
+print(output)
 }
 \references{
 \code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}

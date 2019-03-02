@@ -11,19 +11,20 @@
 #' traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1,
 #' fill_zeros = FALSE) #filling the missing values
 #' print(traj)
-#' clusters <- akmedoids.clust(traj, id_field = FALSE, k = c(3,6))
-#' print(clusters)
+#' output <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))
+#' print(output)
 #' @return The original (\code{traj}) data with cluster label appended
 #' @references \code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}
 #' @rawNamespace importFrom(kml, affectIndivC)
 #' @rawNamespace import(reshape2, Hmisc, stats, utils, ggplot2, longitudinalData)
 #' @export
 
-#dat <- read.table(file="C:/Users/monsu/Documents/GitHub/Packages/samp.csv", sep=",", head=FALSE)
-#dat <- missingValue(traj=dat, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
+#traj <- gm.crime.sample1
+#print(dat)
+#traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
+#print(traj)
 #convert crime rates to proportion
-#dat <- props(dat, id_field=TRUE)
-
+#traj <- props(traj, id_field=TRUE)
 
 #akmeans.clust <- function(traj, id_field = FALSE, init_method = "lpm", k = 3){
 akmedoids.clust <- function(traj, id_field = FALSE, k = c(3,6)){
@@ -83,7 +84,7 @@ CaliHara <- 0
     colnames(sl_List) <- c("sn", "intersect","slope")  #head(sl_List)
 
     #-----------------------------------------------------------
-    #split the slopes into 'k' partitions to determine the medioids
+    #split the slopes into 'k' partitions to determine the medioids for different value of k
     all_cluster_center_List <- list()
     i_counter <- 0
     for(s_ in k[1]:k[2]){   #s_<-3
@@ -123,9 +124,9 @@ CaliHara <- 0
 
     result_ <- list()
     #solution_ <- list()
-    for(r_ in k[1]:k[2]){ #r_<-5
+    for(r_ in 1:length(k_)){ #r_<-1
       #1st iteration
-      part2 <- affectIndivC(dat_slopp, all_cluster_center_List[[r_-2]])  #------------------------------
+      part2 <- affectIndivC(dat_slopp, all_cluster_center_List[[r_]])  #------------------------------
       #part2
 
       distF <- list()
@@ -136,7 +137,7 @@ CaliHara <- 0
       time_1 <- 1:ncol(traj)
       simil_ <- matrix(0, 100, length(c_count))
 
-      for(z in 1:15){  #z<-2
+      for(z in 1:15){  #z<-2 #number of iterations
 
         #recalculate the cluster centrure and do the affection
         if(z > 1){
@@ -181,7 +182,7 @@ CaliHara <- 0
       }
 
       #solution
-      result_[[r_-2]] <- alphaLabel(part2) #convert numberic labels to alphabetical labels
+      result_[[r_]] <- alphaLabel(part2) #convert numberic labels to alphabetical labels
 
       ld <- longData((dat_slopp)) #convert to longitudinal datga
       part3 <- partition(part2)
@@ -191,7 +192,7 @@ CaliHara <- 0
       #-----
 
       flush.console()
-      print(paste("solution when k =", k_[r_-2], "determined!"))
+      print(paste("solution when k =", k_[r_], "determined!"))
 
     }#end of k loop
 
