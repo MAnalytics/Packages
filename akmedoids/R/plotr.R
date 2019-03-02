@@ -63,7 +63,7 @@ plotr <- function(clustr, traj, id_field=TRUE, y.scaling="fixed"){
             geom_line() +
             stat_summary(fun.y=mean, geom="line", aes(group=clusters), color="black", size=1) +
             facet_wrap(~clusters, scales = "fixed") +
-            geom_smooth(method="lm", aes(group=clusters), color="black", size=1) +
+            #geom_smooth(method="lm", aes(group=clusters), color="black", size=1) +
             theme_minimal()) #clusters
   }
 
@@ -74,7 +74,7 @@ plotr <- function(clustr, traj, id_field=TRUE, y.scaling="fixed"){
             geom_line() +
             stat_summary(fun.y=mean, geom="line", aes(group=clusters), color="black", size=1) +
             facet_wrap(~clusters, scales = "free") +
-            geom_smooth(method="lm", aes(group=clusters), color="black", size=1) +
+            #geom_smooth(method="lm", aes(group=clusters), color="black", size=1) +
             theme_minimal()) #clusters
   }
 
