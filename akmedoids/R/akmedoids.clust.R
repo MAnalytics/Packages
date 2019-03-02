@@ -225,10 +225,13 @@ final_result <- list()
       #determine optimal solution
       optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]] #all_solutions[[4]]
 
+      flush.console()
+      dev.new()
+      print(plt)
+
       #combining the results
       final_result <- list(solutions = result_,
                      qualitycriterion =  qualiCriterion, optimSolution=optimal_solution)   #final_result$solutions[[1]]
-      #names(final_result)
 
       return(final_result)
 
