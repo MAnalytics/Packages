@@ -224,8 +224,12 @@ final_result <- list()
       print(plt)
 
       #combining the results
-      final_result <- list(solutions = result_,
-                     qualitycriterion =  qualiCriterion, optimSolution=optimal_solution)   #final_result$solutions[[1]]
+      #final_result <- list(solutions = result_,
+                     #qualitycriterion =  qualiCriterion, optimSolution=optimal_solution)   #final_result$solutions[[1]]
+
+      #combining the results
+      final_result <- list(plt,
+                           qualitycriterion =  qualiCriterion, optimSolution=optimal_solution)   #final_result$solutions[[1]]
 
       return(final_result)
 
