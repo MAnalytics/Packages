@@ -6,6 +6,8 @@
 #' @examples
 #' traj <- gm.crime.sample1
 #' head(traj) #
+#' traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1,
+#' fill_zeros = FALSE) #filling the missing values
 #' traj <- props(traj, id_field = TRUE)
 #' print(traj)
 #' @details Given a matrix of observations (counts or rates), this function convert each observation to a proportion measure. A matrix or data.frame count or rate is converted by dividing each cell entry by the sum of the corresponding column, i.e. \code{prop = [a cell value] / sum[column]}

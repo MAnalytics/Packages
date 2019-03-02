@@ -14,7 +14,7 @@ akmedoids.clust(traj, id_field = FALSE, k = c(3,6)) ##' #details Given a list of
 \item{k}{either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined. The default is \code{c(3,15)}. When k is a range, the actual number of clusters is determined by Calinski-Harabatz criterion. number of clusters to generate. Default: \code{3}: (minimum value)}
 }
 \value{
-The original (\code{traj}) data with cluster label appended
+A list containing cluster solutions for all value of k, including the solution at the optimal value of \code{k}, based on the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J, 1974)}
 }
 \description{
 This function group trajectories based on a given list of initial centroids
@@ -29,5 +29,5 @@ output <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))
 print(output)
 }
 \references{
-\code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}
+\code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}
 }

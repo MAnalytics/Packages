@@ -13,19 +13,11 @@
 #' print(traj)
 #' output <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))
 #' print(output)
-#' @return The original (\code{traj}) data with cluster label appended
-#' @references \code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}
+#' @return A list containing cluster solutions for all value of k, including the solution at the optimal value of \code{k}, based on the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J, 1974)}
+#' @references \code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}
 #' @rawNamespace importFrom(kml, affectIndivC)
 #' @rawNamespace import(reshape2, Hmisc, stats, utils, ggplot2, longitudinalData)
 #' @export
-
-#traj <- gm.crime.sample1
-#print(traj)
-#traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
-#print(traj)
-#convert crime rates to proportion
-#traj <- props(traj, id_field=TRUE)
-#output <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))  #names(output)
 
 #akmeans.clust <- function(traj, id_field = FALSE, init_method = "lpm", k = 3){
 akmedoids.clust <- function(traj, id_field = FALSE, k = c(3,6)){
@@ -212,9 +204,11 @@ final_result <- list()
     #if a range of value is provided
     if(k[1]!=k[2]){
       qualit<- data.frame(k=k[1]:k[2], CaliHara=calinski)
+      id_opt <- (which(qualit[,2]==max(qualit))[1] +(k[1]-1))
       #plot
       plt <- ggplot(qualit, aes(x = k, y = CaliHara)) +
         geom_line(linetype = "dotdash") + geom_point(shape=0)+
+        ggtitle(paste("Optimal solution based on the Calinski-Harabatz criterion: k = ", id_opt, sep=" ")) +
         geom_vline(xintercept = (which(qualit[,2]==max(qualit))[1] +(k[1]-1)), linetype="dashed", color = "red", size=0.5)
 
       #all solutions
@@ -226,7 +220,7 @@ final_result <- list()
       optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]] #all_solutions[[4]]
 
       flush.console()
-      dev.new()
+      dev.new(width=3, height=3)
       print(plt)
 
       #combining the results

@@ -23,6 +23,8 @@ Given a matrix of observations (counts or rates), this function convert each obs
 \examples{
 traj <- gm.crime.sample1
 head(traj) #
+traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1,
+fill_zeros = FALSE) #filling the missing values
 traj <- props(traj, id_field = TRUE)
 print(traj)
 }
