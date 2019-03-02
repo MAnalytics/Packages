@@ -12,7 +12,7 @@
 #' fill_zeros = FALSE) #filling the missing values
 #' print(traj)
 #' traj <- props(traj, id_field = TRUE)
-#' clustr <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))
+#' clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 #' print(plotr(clustr, traj, id_field=TRUE, y.scaling="fixed"))
 #' @details Given a matrix or data.frame with some suspected outlier observations, this function identified those observations based on the method chosen and replace all the observations accordingly.
 #' @return A plot showing clusters of trajectories, including the mean trajectory of each group.

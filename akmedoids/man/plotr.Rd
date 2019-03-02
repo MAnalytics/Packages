@@ -31,7 +31,7 @@ traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1,
 fill_zeros = FALSE) #filling the missing values
 print(traj)
 traj <- props(traj, id_field = TRUE)
-clustr <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))
+clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 print(plotr(clustr, traj, id_field=TRUE, y.scaling="fixed"))
 }
 \references{

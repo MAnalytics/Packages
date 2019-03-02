@@ -4,12 +4,14 @@
 \alias{akmedoids.clust}
 \title{Clustering of longitudinal data}
 \usage{
-akmedoids.clust(traj, id_field = FALSE, k = c(3,6)) ##' #details Given a list of trajectories represented in a matrix or data.frame, and a method for choosing initial cluster centroids (e.g. \code{\link{lpm.centroids}}), a list of clusters is generated after a limited number of iterations.
+akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6)) ##' #details Given a list of trajectories represented in a matrix or data.frame, and a method for choosing initial cluster centroids (e.g. \code{\link{lpm.centroids}}), a list of clusters is generated after a limited number of iterations.
 }
 \arguments{
 \item{traj}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observations at consecutive time steps.}
 
 \item{id_field}{Whether the first column is a unique (\code{id}) field. Default: \code{FALSE}}
+
+\item{method}{Initialisation strategy. Available method: \code{linear}}
 
 \item{k}{either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined. The default is \code{c(3,15)}. When k is a range, the actual number of clusters is determined by Calinski-Harabatz criterion. number of clusters to generate. Default: \code{3}: (minimum value)}
 }
@@ -17,15 +19,16 @@ akmedoids.clust(traj, id_field = FALSE, k = c(3,6)) ##' #details Given a list of
 A list containing cluster solutions for all value of k, including the solution at the optimal value of \code{k}, based on the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J, 1974)}
 }
 \description{
-This function group trajectories based on a given list of initial centroids
+This function group trajectories based on a functional definition of their long-term trends.
 }
 \examples{
 traj <- gm.crime.sample1
 print(traj)
 traj <- missingVal(traj, id_field = TRUE, method = 2, replace_with = 1,
 fill_zeros = FALSE) #filling the missing values
+traj <- props(traj, id_field = TRUE)
 print(traj)
-output <- akmedoids.clust(traj, id_field = TRUE, k = c(3,6))
+output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 print(output)
 }
 \references{
