@@ -223,7 +223,7 @@ final_result <- list()
 
       qualiCriterion=c("Quality criterion: Calinski-Harabatz criterion")
       #determine optimal solution
-      optimal_solution <- all_solutions[[(which(qualit[,2]==max(qualit))[1])]] #all_solutions[[4]]
+      optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]] #all_solutions[[4]]
 
       #combining the results
       final_result <- list(solutions = result_,

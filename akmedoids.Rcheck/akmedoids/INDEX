@@ -1,7 +1,0 @@
-akmedoids.clust         Clustering of longitudinal data
-alphaLabel              Numerics ids to alphabetical ids
-gm.crime.sample1        Sample crime dataset
-missingVal              Data imputing for longitudinal data
-outlierDetect           Outlier detection and replacements
-props                   Convert counts or rates to proportion
-wSpaces                 Removing whitespaces
