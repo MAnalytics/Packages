@@ -13,9 +13,9 @@ dataImputation(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros 
 
 \item{method}{[an integer] indicating a method for calculating the missing values. Options are: \code{1: arithmetic} method, and \code{2: regression} method. The default is \code{1: arithmetic} method}
 
-\item{fill_zeros}{[TRUE or FALSE] whether to consider zeros \code{0} as missing values when \code{2: regression} method is used. The default is \code{FALSE}.}
-
 \item{replace_with}{representing the technique,}
+
+\item{fill_zeros}{[TRUE or FALSE] whether to consider zeros \code{0} as missing values when \code{2: regression} method is used. The default is \code{FALSE}.}
 }
 \value{
 A data.frame with missing values \code{(NA, Inf, null)} imputed according to the a specified technique.

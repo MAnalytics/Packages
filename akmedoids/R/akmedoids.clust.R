@@ -10,10 +10,10 @@
 #' @examples
 #' traj <- gm.crime.sample1
 #' print(traj)
-#' traj2 <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE) #filling the missing values
-#' traj2 <- props(traj2, id_field = TRUE)
-#' print(traj2)
-#' output <- akmedoids.clust(traj2, id_field = TRUE, method = "linear", k = c(3,6))
+#' traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE) #filling the missing values
+#' traj <- props(traj, id_field = TRUE)
+#' print(traj)
+#' output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 #' print(output)
 #' @return The key output is a vector of cluster labels of length equal to the number of trajectories. Each label indicate the group membership of the corresponding trajectory of the \code{traj}. In addition, a plot of the Calinski-Harabatz scores is shown is shown if a vector of \code{k} is provided.
 #' @references \code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}

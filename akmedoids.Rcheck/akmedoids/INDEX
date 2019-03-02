@@ -1,8 +1,0 @@
-akmedoids.clust         Anchored k-medoids clustering
-alphaLabel              Numerics ids to alphabetical ids
-dataImputation          Data imputation for longitudinal data
-gm.crime.sample1        Longitudinal dataset
-outlierDetect           Outlier detection and replacements
-plotr                   Plotting the cluster solution
-props                   Convert counts or rates to proportion
-wSpaces                 Removing whitespaces

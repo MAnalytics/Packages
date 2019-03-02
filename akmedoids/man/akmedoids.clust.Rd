@@ -27,10 +27,10 @@ This function works by first approximating the trajectories based on the chosen 
 \examples{
 traj <- gm.crime.sample1
 print(traj)
-traj2 <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE) #filling the missing values
-traj2 <- props(traj2, id_field = TRUE)
-print(traj2)
-output <- akmedoids.clust(traj2, id_field = TRUE, method = "linear", k = c(3,6))
+traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE) #filling the missing values
+traj <- props(traj, id_field = TRUE)
+print(traj)
+output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 print(output)
 }
 \references{

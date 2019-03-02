@@ -16,11 +16,11 @@
 #' @return A data.frame with missing values \code{(NA, Inf, null)} imputed according to the a specified technique.
 #' @export
 
-dataImputation <- function(traj, id_field = FALSE, method = 2, fill_zeros = FALSE){
+dataImputation <- function(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros = FALSE){
 
   # #usage dataImputation(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros = FALSE)
   # #aliases
-  #
+  #based on the specified \code{method}, for calculating the missing entries. For \code{1: arithmetic} method, \code{replace_with} options are: \code{1- Mean value of the corresp column; \code{2- Minimum value of corresp column}; \code{3- Maximum value of corresp column}; \code{4- Mean value of corresp row}; \code{5- Minimum value of corresp row}, or \code{6- Maximum value of corresp row}. For \code{2- regression} method: the available option for the \code{replace_with} is: \code{1- linear}. The regression method fits a linear regression line to a trajectory with missing entry(s) and estimate the missing data values from the regression line. Note: only the missing data points derive their new values from the regression line while the rest of the data points retain their original values. The function terminates if there are trajectories with only one observation. The default is \code{1- Mean value of the corresp column}
   # #examples
 
 
