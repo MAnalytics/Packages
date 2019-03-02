@@ -4,7 +4,7 @@
 \alias{akmedoids.clust}
 \title{Clustering of longitudinal data}
 \usage{
-akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6)) ##' #details Given a list of trajectories represented in a matrix or data.frame, and a method for choosing initial cluster centroids (e.g. \code{\link{lpm.centroids}}), a list of clusters is generated after a limited number of iterations.
+akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
 }
 \arguments{
 \item{traj}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observations at consecutive time steps.}
@@ -13,13 +13,16 @@ akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6)) ##' #deta
 
 \item{method}{Initialisation strategy. Available method: \code{linear}}
 
-\item{k}{either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined. The default is \code{c(3,15)}. When k is a range, the actual number of clusters is determined by Calinski-Harabatz criterion. number of clusters to generate. Default: \code{3}: (minimum value)}
+\item{k}{either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined. The default is \code{c(3,6)}. When k is a range, the actual number of clusters is determined by Calinski-Harabatz criterion.}
 }
 \value{
 A list containing cluster solutions for all value of k, including the solution at the optimal value of \code{k}, based on the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J, 1974)}
 }
 \description{
 This function group trajectories based on a functional definition of their long-term trends.
+}
+\details{
+Given a list of trajectories and a functional method, this function clusters the trajectories into a k number of groups. If a vector of two numbers is given, the function determines the best solution based on the Calinski-Harabatz criterion.
 }
 \examples{
 traj <- gm.crime.sample1
@@ -33,4 +36,6 @@ print(output)
 }
 \references{
 \code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}
+
+\code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}
 }
