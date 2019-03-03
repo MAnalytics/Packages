@@ -11,7 +11,7 @@ akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
 
 \item{id_field}{[numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.}
 
-\item{method}{[character] The parametric Initialisation strategy. Currently available method is \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regresion lines.}
+\item{method}{[character] The parametric Initialisation strategy. Currently available method is \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regresion lines and the resulting groups are order in the order on increasing slopes.}
 
 \item{k}{[integer or vector (numeric)] either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}. The best solution is determined using the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J 1974)}.}
 }
@@ -31,7 +31,7 @@ traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill
 traj <- props(traj, id_field = TRUE)
 print(traj)
 output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
-print(output)
+print(output)  #to extract the vector of membership type: 'as.vector(output$optimSolution)'
 }
 \references{
 \code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}
