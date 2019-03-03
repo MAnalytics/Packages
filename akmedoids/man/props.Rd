@@ -7,18 +7,18 @@
 props(traj, id_field = FALSE)
 }
 \arguments{
-\item{traj}{A matrix or data.frame with each row representing the trajectory of observations of a unique location. The columns show the observation at consecutive time steps.}
+\item{traj}{[matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.}
 
-\item{id_field}{Whether the first column is a unique (id) field. Default: \code{FALSE}}
+\item{id_field}{[numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.}
 }
 \value{
 A matrix of proportion measures
 }
 \description{
-This function converts counts or rates data to proportion.
+This function converts counts or rates to proportion.
 }
 \details{
-Given a matrix of observations (counts or rates), this function convert each observation to a proportion measure. A matrix or data.frame count or rate is converted by dividing each cell entry by the sum of the corresponding column, i.e. \code{prop = [a cell value] / sum[column]}
+Given a matrix of observations (counts or rates), this function convert each observation to a proportion equivalent of the sum of each column. In other words, each observation is dividing by the sum of the column where it is located. , i.e. \code{prop = [a cell value] / sum[corresponding column]}
 }
 \examples{
 traj <- gm.crime.sample1

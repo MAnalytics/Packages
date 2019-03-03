@@ -34,4 +34,5 @@ traj <- gm.crime.sample1
 traj <- dataImputation(traj, id_field=TRUE, method = 1, replace_with = 1)
 traj <- props(traj, id_field=TRUE)#remove this later
 outlierDetect(traj, id_field = TRUE, method = 1, threshold = 0.95, count = 1, replace_with = 1)
+outlierDetect(traj, id_field = TRUE, method = 2, threshold = 15, count = 4, replace_with = 3) #for method 2
 }

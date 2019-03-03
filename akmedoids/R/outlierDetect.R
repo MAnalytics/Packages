@@ -16,6 +16,7 @@
 #' traj <- dataImputation(traj, id_field=TRUE, method = 1, replace_with = 1)
 #' traj <- props(traj, id_field=TRUE)#remove this later
 #' outlierDetect(traj, id_field = TRUE, method = 1, threshold = 0.95, count = 1, replace_with = 1)
+#' outlierDetect(traj, id_field = TRUE, method = 2, threshold = 15, count = 4, replace_with = 3) #for method 2
 #' @return A dataframe with outlier observations replaced or removed.
 #' @export
 
@@ -28,6 +29,7 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
   #remove the id field
   if(id_field ==  TRUE){
     dat  <- dat[,2:ncol(dat)]
+    c_name <- colnames(traj)[1]
   }
 
   #matrix to track the outlier incidents [TRUE or FALSE]
@@ -62,7 +64,7 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
   if(replace_with == 1){
     wc_out <- which(c_out[,2]==nrow(dat))
     if(length(wc_out)!=0){
-      stop(paste("*--Function terminated!!!--* All observations on Column(s)", wc_out, "are outliers!! Please, set a lower 'threshold' value!!", sep=" "))
+      stop(paste("*--Function terminated!!!--* All observations on Column(s)", wc_out, "are outliers!! Please, set a higher 'threshold' value!!", sep=" "))
     }
   }
 
@@ -75,14 +77,14 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
     if(replace_with == 2){# check which trajectory has 100% outlier observations
         w_out <- which(r_out[,2]==ncol(dat))
         if(length(w_out)!=0){
-          stop(paste("*--Function terminated!!!--* All observations on Row(s)", w_out, "are outliers!! Please, set a lower 'threshold' value OR manually remove these row(s)!!", sep=" "))
+          stop(paste("*--Function terminated!!!--* All observations on Row(s)", w_out, "are outliers!! Please, set a higher 'threshold' value OR manually remove these row(s)!!", sep=" "))
         }
       }
 
 
   #--------------------------------------------------
+  #identify the rows in where outliers are found
   list_traj <- NULL
-  #identify the rows in which outlier is found
   for(j in 1:nrow(outlier_mat)){ #j<-1
     w_ <- length(which(outlier_mat[j,]==TRUE))
     if(w_ >= count){ #checking the count
@@ -90,7 +92,7 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
     }
   }
 
-  #to replace the outlier observation
+  #to replace the outlier observation,
   if(!is.null(list_traj)){
 
     #replace with mean of col
@@ -121,29 +123,36 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
       dat <- dat[-as.numeric(as.character(list_traj[,1])),]  #as.numeric(as.character(
     }
 
-  }
+  #}
 
   dat_ <- dat
 
   if(id_field ==  TRUE & replace_with != 3){
-    b_dat[,2:ncol(dat)] <- dat
-    dat_  <- b_dat
+   id <- data.frame(as.vector(b_dat[,1]))
+   colnames(id) <- c_name
+   b_dat <- cbind(id, dat)
+   dat_  <- b_dat
   }
 
   if(id_field ==  TRUE & replace_with == 3){
+    id <- data.frame(as.vector(b_dat[,1]))
+    colnames(id) <- c_name
+    #remove the oulier row from the column ids
+    id <- id[-as.numeric(as.character(list_traj[,1]))]
     b_dat <-  b_dat[-as.numeric(as.character(list_traj[,1])),] #first remove the outlier observations
-    b_dat[,2:ncol(dat)] <- dat
+    #b_dat <- b_dat[-as.numeric(as.character(list_traj[,1])),]
+    #b_dat <- cbind(id, dat)
     dat_  <- b_dat
   }
 
   #if 'replace_with' is 1 or 2
   if(replace_with==1|replace_with==2){
     flush.console()
-    print(paste(nrow(list_traj), "trajectories were found to contain outlier observations and modified accordingly!", sep=" "))
+    print(paste(nrow(list_traj), "trajectories were found to contain outlier observations and replaced accordingly!", sep=" "))
     print("Summary:")
     for(u_ in 1:nrow(list_traj)){ #u_<-1
       flush.console()
-      print(paste("*Outlier observation(s) was found in trajectory ", list_traj[u_,1]), sep="")
+      print(paste("*--Outlier observation(s) was found in trajectory ", list_traj[u_,1]," --*", sep=""))
     }
   }
 
@@ -157,6 +166,13 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
       print(paste("*----- trajectory ", list_traj[u_,1], "removed"), sep=" ")
     }
   }
+  }
+
+  #for method 2, in which outlier may not be found
+  if(is.null(list_traj)){
+    dat_ <- b_dat
+    print("No outlier(s) found!")
+    }
 
 
   return(dat_)
