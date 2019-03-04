@@ -43,7 +43,7 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
       stop("*--Terminated!!!--*, The 'threshold' value should be between 0 and 1.")
     }
     #calculate the cut-off value based on the 'threshold'
-    thres_ <- as.vector(round(quantile(as.vector(unlist(as.data.frame(dat))), threshold) , digits=5))
+    thres_ <- as.vector(round(quantile(as.vector(unlist(as.data.frame(dat))), threshold), digits=5))
     id_ <- which(dat > thres_)
     #update the outlier tracker
     outlier_mat[id_] <- "TRUE"
