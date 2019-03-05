@@ -2,7 +2,7 @@
 % Please edit documentation in R/wSpaces.R
 \name{wSpaces}
 \alias{wSpaces}
-\title{Removing whitespaces}
+\title{Whitespaces removal}
 \usage{
 wSpaces(traj)
 }

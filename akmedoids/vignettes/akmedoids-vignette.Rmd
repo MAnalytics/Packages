@@ -1,9 +1,9 @@
 ---
-title: "Using `akmedoids` package to identify long-term linear trends of longitudinal trajectories"
+title: "`Akmedoids` R-Package for longitudinal dataset: application to the clustering of long-term inequalities in micro-area exposure to crime"
 author: "Adepeju, M., Langton, S., and Bannister, J."
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-#output: pdf_document
+#output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -65,22 +65,74 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-Introduction here `vignette` 
+The `akmedoids` package introduce a set of functions for the analysis of longitudinal/repeated observations. This document provide demonstrations of how these functions can be applied to in a real application. These functions contained in this package are divided into two categories as follows:
 
-In this document, we provide a `worked example` of how various functions of the `akmediods` package can be employed for manipulating longitudinal dataset as well as generating clusters of the trajectories according to the similarities in their long-term linear trends over time.
+### 1. `Data manipulation` functions
+Table 1 shows the key functions under this category and their descriptions. The functions are used for exploring and manipulating a longitudinal observations, in preparation for further analysis.
 
-##Package installation
+```{r, echo=FALSE, include=FALSE}
+require(knitr)
+library(flextable)
+library(kableExtra)
+col1 <- c("1", "2","3","4")
+col2 <- c("`dataImputation`","`outlierDetect`","`wSpaces`", "`props`")
+col3 <- c("Data imputation for longitudinal data","Outlier detection and replacement","Whitespaces removal", "Conversion of counts (or rates) to 'Proportion'")
+col4 <- c("Calculates any missing entries (`NA`, `Inf`, `null`) in a longitudinal data, according to a specified method","Identifies outlier observations in the data, and replace or remove them","Removes all the leading and trailing whitespaces in a longitudinal data","Converts counts or rates observation to 'proportion'")
+tble <- data.frame(col1, col2, col3, col4)
+tble <- tble
+```
 
+```{r, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
+knitr::kable(tble, caption = "`Data manipulation` functions", col.names = c("SN","Function","Title","Description")) %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, width = "8em", background = "white") %>%
+  column_spec(3, width = "12em", background = "white") %>%
+  column_spec(4, width = "16em", background = "white")#%>%
+  #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
+```
+
+
+
+divided into two categories, namely: 
+* for manipulating longitudinal/repeated observations and clustering the observations according to a pre-defined long-term trends. In Table 1, we show the summary of functions included in the package and their use.
+
+
+In this document, we demonstrate the application of these functions to a simulated longitudinal data, and also provide a `work example` of their application to a real-life crime dataset for  how to use the above functions for manipulating longitudinal dataset 
+
+
+This package provides two categories of functions (i) `Data manipulation` functions and (ii) `clustering and stats` function.
+
+using a small sample of data. 
+
+Work example
+Data manipulation
+
+###Data manipulation  
+
+In this document, we demonstrate provide a `worked example` of how various functions of the `akmediods` package can be employed for manipulating longitudinal dataset as well as generating clusters of the trajectories according to the similarities in their long-term linear trends over time.
+
+##Installation of package
+In order to install the `akmedoids` package, follow the steps below:
+```{r, include=TRUE}
+#install 'devtools' package
+#install.packages("devtools")
+#library(devtools)
+#devtools::install_github("manalytics/packages/akmedoids")
+```
 
 
 ##Data
 
+##Installation of package
+
 For this demonstration, we use a small simulated dataset aggregated spatially using the `UK LSOA` units and consists of 9 temporal steps. This dataset is provided with the `akmedoids` package and can be found in the `data` folder after the installation.  preview. Below is the preview of this dataset:
 
-```{r load myData, include=TRUE}
-load("C:/Users/monsu/Documents/GitHub/Packages/akmedoids/data/gm.crime.sample1.rda")
-head(gm.crime.sample1)
-```
+#```{r load gm.crime.sample1, include=TRUE}
+#load("C:/Users/monsu/Documents/GitHub/Packages/akmedoids/data/gm.crime.sample1.rda")
+#load("gm.crime.sample1.rda")
+#```
+
 
 Each row represents a traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
 nrow()
@@ -142,3 +194,21 @@ Vignettes are long form documentation commonly included in packages. Because the
 - Never uses retina figures
 - Has a smaller default figure size
 - Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+
+
+```{r, echo=FALSE}
+require(knitr)
+col1 <- c("City", "Abidjan","Accra","Amman")
+col2 <- c("Optimized HDH","217","281","26398")
+col3 <- c("Standard HDH","0","0","37056")
+col4 <- c("Heating Demand [W/(°C x Capita)]", "0.0","0.0","28.3")
+col5 <- c("Heating Energy [kWh/(capita x yr)]","0","0","469.68")
+col6 <- c("Threshold Temperature","23.3","24","17.6")
+col7 <- c("Optimized CDH","31781","25264","32198")
+col8 <- c("Standard CDH", "59398","58895","22059")
+col9 <- c("Cooling Demand [W/(°C x capita)]", "1.67", "2.83", "45.72")
+col10 <- c("Cooling Energy [kWh/(capita x yr)]", "53", "143.56", "1256.62")
+tble2 <- data.frame(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10)
+
+colnames(tble2) <- tble2[1,]
+tble <- tble2[2:4,]

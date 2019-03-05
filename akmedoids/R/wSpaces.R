@@ -1,5 +1,5 @@
 
-#' @title Removing whitespaces
+#' @title Whitespaces removal
 #' @description This function removes all the leading and the trailing whitespaces in a longitudinal data
 #' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
 #' @usage wSpaces(traj)

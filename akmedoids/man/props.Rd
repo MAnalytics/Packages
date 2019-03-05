@@ -2,7 +2,7 @@
 % Please edit documentation in R/props.R
 \name{props}
 \alias{props}
-\title{Convert counts or rates to proportion}
+\title{Conversion of counts (or rates) to 'Proportion'}
 \usage{
 props(traj, id_field = FALSE)
 }

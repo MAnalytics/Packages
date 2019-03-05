@@ -1,5 +1,5 @@
 
-#' @title Convert counts or rates to proportion
+#' @title Conversion of counts (or rates) to 'Proportion'
 #' @description This function converts counts or rates to proportion.
 #' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
 #' @param id_field [numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.
