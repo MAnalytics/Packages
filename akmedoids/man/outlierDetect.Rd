@@ -13,12 +13,12 @@ outlierDetect(traj, id_field = FALSE, method = 1, threshold = 0.95, count = 1, r
 
 \item{method}{[integer (numeric)] indicating the method for identifying the outlier. Options are: \code{'1': quantile} method (\code{default}), and \code{'2': manual} method. The \code{manual} method requires a user-defined value.}
 
-\item{threshold}{[numeric] A cut-off value for outliers. If the \code{method} parameter is set as \code{'1': quantile}, the \code{threshold} should be a numeric vector of probability between \code{[0,1]}, whilst if the \code{method} is set as \code{'2': manual}, the \code{threshold} could be any numeric vector.}
+\item{threshold}{[numeric] A cut-off value for outliers. If the \code{method} parameter is set as \code{'1': quantile}, the \code{threshold} should be a numeric vector of probability between \code{[0,1]}, whilst if the \code{method} is set as \code{'2'}: \code{manual}, the \code{threshold} could be any numeric vector.}
 
 \item{count}{[integer (numeric)] indicating the number of observations (in a trajectory) that must exceed the \code{threshold} in order for the trajectory to be considered an \code{outlier}. Default is \code{1}.}
 
 \item{replace_with}{[integer (numeric)] indicating the technique to use for calculating a replacement for an outlier observation. The remaining observations on the row or the column in which the outlier observation is located are used to calculate the replacement.
-The replacement options are: \code{'1': Mean value of the column}, \code{'2': Mean value of the row} and \code{'3': remove the row (trajectory) completely from the data}. Default value is the \code{'1'} option.}
+The replacement options are: \code{'1'}: Mean value of the column, \code{'2'}: Mean value of the row and \code{'3'}: remove the row (trajectory) completely from the data. Default value is the \code{'1'} option.}
 }
 \value{
 A dataframe with outlier observations replaced or removed.
@@ -34,5 +34,5 @@ traj <- gm.crime.sample1
 traj <- dataImputation(traj, id_field=TRUE, method = 1, replace_with = 1)
 traj <- props(traj, id_field=TRUE)#remove this later
 outlierDetect(traj, id_field = TRUE, method = 1, threshold = 0.95, count = 1, replace_with = 1)
-outlierDetect(traj, id_field = TRUE, method = 2, threshold = 15, count = 4, replace_with = 3) #for method 2
+outlierDetect(traj, id_field = TRUE, method = 2, threshold = 15, count = 4, replace_with = 3)
 }

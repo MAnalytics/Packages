@@ -1,0 +1,144 @@
+---
+title: "Using `akmedoids` package to identify long-term linear trends of longitudinal trajectories"
+author: "Adepeju, M., Langton, S., and Bannister, J."
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+#output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style type="text/css">
+
+h1.title {
+  font-size: 18px;
+  color: Black;
+  text-align: center;
+}
+h4.author { /* Header 4 - and the author and data headers use this too  */
+    font-size: 12px;
+  font-family: "Arial", Times, serif;
+  color: Black;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 12px;
+  font-family: "Arial", Times, serif;
+  color: Black;
+  text-align: center;
+}
+
+body, td {
+   font-size: 11px;
+}
+code.r{
+  font-size: 10px;
+}
+pre {
+  font-size: 11px
+}
+h1 { /* Header 1 */
+  font-size: 14px;
+  color: DarkBlue;
+}
+h2 { /* Header 2 */
+    font-size: 12px;
+  color: DarkBlue;
+}
+h3 { /* Header 3 */
+  font-size: 11px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+
+</style>
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Abstract
+
+## Introduction
+
+Introduction here `vignette` 
+
+In this document, we provide a `worked example` of how various functions of the `akmediods` package can be employed for manipulating longitudinal dataset as well as generating clusters of the trajectories according to the similarities in their long-term linear trends over time.
+
+##Package installation
+
+
+
+##Data
+
+For this demonstration, we use a small simulated dataset aggregated spatially using the `UK LSOA` units and consists of 9 temporal steps. This dataset is provided with the `akmedoids` package and can be found in the `data` folder after the installation.  preview. Below is the preview of this dataset:
+
+```{r load myData, include=TRUE}
+load("C:/Users/monsu/Documents/GitHub/Packages/akmedoids/data/gm.crime.sample1.rda")
+head(gm.crime.sample1)
+```
+
+Each row represents a traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
+nrow()
+
+
+
+of downloaded from the `Birmingham city, England`.
+
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+#Data preparation
+#Clustering
+#Results 
+#Individual trajectories
+#Inequalities 
+#Discussions
+#Conclusion
+
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
+
+
+Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format: `ewqwve` 
+
+- Never uses retina figures
+- Has a smaller default figure size
+- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style

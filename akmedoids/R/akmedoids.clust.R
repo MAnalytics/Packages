@@ -3,22 +3,22 @@
 #' @description Given a list of trajectories and a functional method, this function clusters the trajectories into a k number of groups. If a vector of two numbers is given, the function determines the best solution based on the Calinski-Harabatz criterion.
 #' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
 #' @param id_field [numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.
-#' @param method [character] The parametric Initialisation strategy. Currently available method is \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regresion lines and the resulting groups are order in the order on increasing slopes.
-#' @param k [integer or vector (numeric)] either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}. The best solution is determined using the Calinski-Harabatz criterion \code{(Calinski T, Harabasz J 1974)}.
+#' @param method [character] The parametric Initialisation strategy. Currently, the only available method is \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regresion lines and the resulting groups are order in the order on increasing slopes.
+#' @param k [integer or vector (numeric)] either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}. The best solution is determined using the Calinski-Harabatz criterion \code{(Calinski T. & Harabasz J. 1974)}.
 #' @usage akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
-#' @details This function works by first approximating the trajectories based on the chosen parametric forms (e.g. linear, quadratic etc.), and then partition the original trajectories based on the form groupings, in similar fashion k-means clustering approach \code{(Genolini et al. 2015)}. The key distintion of the \code{akmedoids} as compared with the existing longitudinal approaches is that both the initial centroids as well as the subsequent cluster means (during the iteration) are based the selection of medoids observations.
+#' @details This function works by first approximating the trajectories based on the chosen parametric forms (e.g. linear, quadratic etc.), and then partition the original trajectories based on the form groupings, in similar fashion k-means clustering approach \code{(Genolini et al. 2015)}. The key distintion of the \code{akmedoids} as compared with the existing longitudinal approaches is that both the initial centroids as well as the subsequent cluster means (as the iteration progresses) are based the selection of medoids observations.
 #' @examples
 #' traj <- gm.crime.sample1
 #' print(traj)
-#' traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE) #filling the missing values
+#' traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
 #' traj <- props(traj, id_field = TRUE)
 #' print(traj)
 #' output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
-#' print(output)  #to extract the vector of membership type: 'as.vector(output$optimSolution)'
+#' print(output)  #type 'as.vector(output$optimSolution)'
 #' @return The key output is a vector of cluster labels of length equal to the number of trajectories. Each label indicate the group membership of the corresponding trajectory of the \code{traj}. In addition, a plot of the Calinski-Harabatz scores is shown is shown if a vector of \code{k} is provided.
-#' @references \code{Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27}
-#' @references \code{Christophe Genolini, Xavier Alacoque, Marianne Sentenac, Catherine Arnaud (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/}
-#' @references \code{Genolini, C., Falissard, B., Fang, D., Tierney, L. and Genolini, M.C., 2016. Package ‘longitudinalData’}
+#' @references \code{1}. Genolini, C. et al. (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/.
+#' \code{2}. Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27.
+#' \code{3}. Genolini, C.et al. (2016) Package ‘longitudinalData’
 #' @rawNamespace importFrom(kml, affectIndivC)
 #' @rawNamespace importFrom("grDevices", "dev.new")
 #' @rawNamespace import(reshape2, Hmisc, stats, utils, ggplot2, longitudinalData)

@@ -9,6 +9,6 @@
 gm.crime.sample1
 }
 \description{
-Simulated longitudinal datasets with missing values ('NA', 'Inf' and 'Null')
+Simulated longitudinal datasets with missing values (\code{NA}, \code{Inf}, \code{null})
 }
 \keyword{datasets}

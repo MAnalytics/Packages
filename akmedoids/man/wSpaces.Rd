@@ -16,7 +16,7 @@ A matrix with all whitespaces (if any) removed.
 This function removes all the leading and the trailing whitespaces in a longitudinal data
 }
 \details{
-Given a matrix suspected to contain whitespaces, this function removes all the whitespaces and returns a cleaned data. 'Whitespace' are white characters in introduced into data by typo error or systematically by data recording devices. For example, in R a character such as " abcd" (or "abcd ") is not the same as "abcd". The former contains a leading (or trailing) white-characters.
+Given a matrix suspected to contain whitespaces, this function removes all the whitespaces and returns a cleaned data. ’Whitespaces’ are white characters often introduced into data during data entry or data collection by recording devices. For example, neither " A" nor "A " equates "A" because of the whitespaces that exist in them.
 }
 \examples{
 traj <- gm.crime.sample1

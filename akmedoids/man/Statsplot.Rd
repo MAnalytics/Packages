@@ -8,7 +8,7 @@ Statsplot(clustr, traj, id_field = TRUE, bandw = 0.25,
   type = "lines", y.scaling = "fixed")
 }
 \arguments{
-\item{clustr}{[vector (charater)] A vector of cluster membership (labels). For instance, the result extracted from the \code{\link{akmedoids.clust}} function. See the @example.}
+\item{clustr}{[vector (charater)] A vector of cluster membership (labels). For instance, the result extracted from the \code{\link{akmedoids.clust}} function.}
 
 \item{traj}{[matrix (numeric)]: corresponding longitudinal data used to generate \code{clustr} (with rows corresponding to each label of \code{clustr}). For example, the first label of \code{clustr} is the group label of the first row of \code{traj} matrix, and so on.}
 
@@ -16,7 +16,7 @@ Statsplot(clustr, traj, id_field = TRUE, bandw = 0.25,
 
 \item{bandw}{[numeric] A small probability (quantile) value between \code{[0,1]} to partition the trajectories into three classes, i.e. \code{lower}, \code{central}, and the \code{uppper} classes. The middle of the \code{central} class is defined by the average slope of all trajectories. The upper and the lower limits of the \code{central} class is determined by the value of \code{bandw}. Default value is \code{0.25}, indicating that all slopes within 25th quantiles of the maximum slopes on both sides of the average slope are categorised as \code{central} class.}
 
-\item{type}{[character] plot type. Available options are: \code{"lines"} and "stacked".}
+\item{type}{[character] plot type. Available options are: \code{"lines"} and \code{"stacked"}.}
 
 \item{y.scaling}{[character] works only if \code{type="lines"}. \code{y.scaling} set the vertical scales of the cluster panels. Options are: \code{"fixed"}: uses uniform scale for all panels, \code{"free"}: uses variable scales for panels.}
 }
@@ -33,7 +33,7 @@ The function can generate a 'line' and a 'area stacked' plot drawing from the fu
 \examples{
 traj <- gm.crime.sample1
 print(traj)
-traj <- dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1, fill_zeros = FALSE) #replacing missing values
+traj <- dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1, fill_zeros = FALSE)
 print(traj)
 traj <- props(traj, id_field = TRUE)
 clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))

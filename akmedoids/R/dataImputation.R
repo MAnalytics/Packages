@@ -1,38 +1,32 @@
 
 #' @title Data imputation for longitudinal data
-#' @description This function fills any missing entries \code{(NA, Inf, null)} in a matrix or dataframe, according to a specified method. By default, \code{'0'} is considered a value.
-#' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
+#' @description This function fills any missing entries (\code{NA}, \code{Inf}, \code{null}) in a matrix or dataframe, according to a specified method. By default, \code{'0'} is considered a value.
+#' @param traj [\code{matrix (numeric)}]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
 #' @param id_field [numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.
-#' @param method [an integer] indicating a method for calculating the missing values. Options are: \code{1: arithmetic} method, and \code{2: regression} method. The default is \code{1: arithmetic} method
+#' @param method [an integer] indicating a method for calculating the missing values. Options are: \code{'1'}: \code{arithmetic} method, and \code{'2'}: \code{regression} method. The default is \code{'1'}: \code{arithmetic} method
 #' @param replace_with [an integer from 1 to 6] indicating the technique, based on a specified \code{method}, for calculating the missing entries.
-#' For \code{1: arithmetic} method, \code{replace_with} options are: \code{1: Mean value of the corresp column};
-#' \code{2: Minimum value of corresp column}; \code{3: Maximum value of corresp column};
-#' \code{4: Mean value of corresp row}; \code{5: Minimum value of corresp row},
-#' or \code{6: Maximum value of corresp row}. For \code{2: regression} method:
-#' the available option for the \code{replace_with} is: \code{1: linear}.
+#' \code{'1'}: \code{arithmetic} method, \code{replace_with} options are: \code{'1'}: Mean value of the corresp column;
+#' \code{'2'}: Minimum value of corresp column; \code{'3'}: Maximum value of corresp column;
+#' \code{'4'}: Mean value of corresp row; \code{'5'}: Minimum value of corresp row,
+#' or \code{'6'}: Maximum value of corresp row. For \code{'2'}: regression method:
+#' the available option for the \code{replace_with} is: \code{'1'}: \code{linear}.
 #' The regression method fits a linear regression line to a trajectory with missing entry(s)
 #' and estimate the missing data values from the regression line.
 #' Note: only the missing data points derive their new values from the regression line
 #' while the rest of the data points retain their original values. The function terminates if there are
-#' trajectories with only one observation. The default is \code{1: Mean value of the corresp column}
+#' trajectories with only one observation. The default is \code{'1'}: Mean value of the corresp column
 #' @param fill_zeros [TRUE or FALSE] whether to consider zeros \code{0} as missing values when \code{2: regression} method is used. The default is \code{FALSE}.
 #' @usage dataImputation(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros = FALSE)
-#' @details Given a matrix or data.frame with some missing values indicated by \code{(NA, Inf, null)}, this function impute the missing value by using either an estimation from the corresponding rows or columns, or to use a regression method to estimate the missing values.
+#' @details Given a matrix or data.frame with some missing values indicated by (\code{NA}, \code{Inf}, \code{null}), this function impute the missing value by using either an estimation from the corresponding rows or columns, or to use a regression method to estimate the missing values.
 #' @examples
 #' traj <- gm.crime.sample1
 #'  print(traj)
 #'  dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1, fill_zeros = FALSE)
 #' @rawNamespace import(stats)
-#' @return A data.frame with missing values \code{(NA, Inf, null)} imputed according to the a specified technique.
+#' @return A data.frame with missing values (\code{NA}, \code{Inf}, \code{null}) imputed according to the a specified technique.
 #' @export
 
 dataImputation <- function(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros = FALSE){
-
-  # #usage dataImputation(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros = FALSE)
-  # #aliases
-  #based on a specified \code{method}, for calculating the missing entries.
-  # #examples
-
 
   dat <- as.data.frame(traj)
 
