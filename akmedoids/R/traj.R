@@ -1,8 +1,8 @@
 #' @title Longitudinal dataset
 #' @description Simulated longitudinal datasets with missing values (\code{NA}, \code{Inf}, \code{null})
-#' @name gm.crime.sample1
+#' @name traj
 #' @docType data
-#' @usage gm.crime.sample1
+#' @usage traj
 #' @format A matrix
 #' @keywords datasets
 

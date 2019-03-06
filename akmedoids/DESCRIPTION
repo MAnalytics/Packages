@@ -6,7 +6,7 @@ Date: 2019-02-06
 Author: Monsuru Adepeju [cre, aut], Samuel Langton [aut], Jon Bannister [aut]
 Maintainer: Monsuru Adepeju <monsuurg2010@gmail.com> 
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: Advances a longitudinal clustering technique, 'akmedoids' for grouping trajectories based on the similarities of their long-term trends and determines the optimal solution based on the Calinski and Harabatz criterion. The 'Statsplot' function included helps to extract the descriptive statistics and generate a visualisation of the resulting groups. The package also include a list of other useful functions for exploring and manipulating longitudinal data prior to the clustering process. 
+Description: Advances a longitudinal clustering technique ('akmedoids') for grouping trajectories based on the similarities of their long-term trends and determines the optimal solution based on the Calinski-Harabatz criterion. Includes functions to extract descriptive statistics and generate a visualisation of the resulting groups. The package also include a number of other useful functions for exploring and manipulating longitudinal data prior to the clustering process. 
 Depends: R (>= 3.5.0)
 License: GPL-2
 Encoding: UTF-8

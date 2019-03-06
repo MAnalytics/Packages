@@ -1,13 +1,13 @@
 
 #' @title Whitespaces removal
-#' @description This function removes all the leading and the trailing whitespaces in a longitudinal data
-#' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
+#' @description This function removes all the leading and the trailing whitespaces in data
+#' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time points.
 #' @usage wSpaces(traj)
-#' @details Given a matrix suspected to contain whitespaces, this function removes all the whitespaces and returns a cleaned data. ’Whitespaces’ are white characters often introduced into data during data entry or data collection by recording devices. For example, neither " A" nor "A " equates "A" because of the whitespaces that exist in them.
+#' @details Given a matrix suspected to contain whitespaces, this function removes all the whitespaces and returns a cleaned data. ’Whitespaces’ are white characters often introduced into data during data entry, for instance by wrongly pressing the spacebar. For example, neither " A" nor "A " equates "A" because of the whitespaces that exist in them. They can also result from systematic errors in data recording devices.
 #' @return A matrix with all whitespaces (if any) removed.
 #' @references \url{https://en.wikipedia.org/wiki/Whitespace_character}
 #' @examples
-#' traj <- gm.crime.sample1
+#' traj <- traj
 #' wSpaces(traj)
 #' @export
 

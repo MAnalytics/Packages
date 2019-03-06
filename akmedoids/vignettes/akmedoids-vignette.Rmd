@@ -1,9 +1,9 @@
 ---
-title: "`Akmedoids` R-Package for longitudinal dataset: application to the clustering of long-term inequalities in micro-area exposure to crime"
+title: "`Akmedoids` R-package for longitudinal dataset: application to the clustering of long-term inequalities in micro-area exposure to crime"
 author: "Adepeju, M., Langton, S., and Bannister, J."
 date: "`r Sys.Date()`"
-#output: rmarkdown::html_vignette
-output: pdf_document
+output: rmarkdown::html_vignette
+#output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -27,6 +27,13 @@ h4.date { /* Header 4 - and the author and data headers use this too  */
   font-size: 12px;
   font-family: "Arial", Times, serif;
   color: Black;
+  text-align: center;
+}
+
+h4.abstract { /* Header 4 - and the author and data headers use this too  */
+  font-size: 12px;
+  font-family: "Arial", Times, serif;
+  color: red;
   text-align: center;
 }
 
@@ -61,14 +68,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Abstract
+\begin{abstract}
+The `akmedoids` advances a set of R-functions for longitudinal clustering of trajectories based on the similarities of their long-term trends and determines the optimal solution based on the Calinski-Harabatz criterion (Calinski and Harabatz, 1974). The package also include a number of other useful functions for exploring and manipulating longitudinal data prior to the clustering process.
+\end{abstract}
 
-## Introduction
+# Introduction
+Longitudinal clustering analysis play a prominent role in social and behavioral sciences for understanding the developmental processes  of a subject over time. blah blah blah!
 
-The `akmedoids` package introduce a set of functions for the analysis of longitudinal/repeated observations. This document provide demonstrations of how these functions can be applied to in a real application. These functions contained in this package are divided into two categories as follows:
+Data collection, feature and need for dat cleaning. 
 
-### 1. `Data manipulation` functions
-Table 1 shows the key functions under this category and their descriptions. The functions are used for exploring and manipulating a longitudinal observations, in preparation for further analysis.
+Purpose: The goal of this document is to provide a description of these functions and demonstrate how they can be used in a real application. Examples provided throughout this document should allow easy uptake of this package in any field. The functions are divided into two categories as follow:
+
+
+## 1. `Data manipulation` functions
+Table 1 shows the key functions under this category and their descriptions. Prior to an actual clustering analysis, the `data manipulation` functions can be used to address some of the data features, such as `outlier` and `whitespace`, which have the potential to cause errors in the analysis. In other words, these function can be used to get a longitudinal data into a proper shape for an advance analysis.
+
+Below is more detailed description of each function and how they work. For the current demonstration, we employ a simulated dataset `traj` which is provided with the `akmediod` package. The dataset can be accessed by typing `traj` in R console and can also be found in the library folder under `akmedoids/data/traj.rda`. 
 
 ```{r, echo=FALSE, include=FALSE}
 require(knitr)
@@ -92,123 +107,32 @@ knitr::kable(tble, caption = "`Data manipulation` functions", col.names = c("SN"
   #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
 ```
 
+### (i) `dataImputation`:
+This function calculates any missing entries (such as `NA`, `Inf`, `null`) in a data, according to a specified method. See examle below:
 
+```{r, eval=TRUE}
+#reading the data
+traj <- read.table(file="C:/demo/traj.csv", sep=",", head=TRUE)
+#preview the data
+head(traj)
+nrow(traj) #no. of rows
+ncol(traj) #no. of columns
+```
 
-divided into two categories, namely: 
-* for manipulating longitudinal/repeated observations and clustering the observations according to a pre-defined long-term trends. In Table 1, we show the summary of functions included in the package and their use.
+`traj` dataset contains a number of missing values which might have not been observed (such as in the case of `NA`) or have resulted due to a calculation error (such as in the case of `Inf`). The `dataImputation` function can be used to replace these entries based on the values of other cells. Two methods are proposed. First, an `arithmetic` method which uses the `mean`, `minimum` or `maximum` value from the corresponding rows or columns in which the missing values are located. A user decides what option is most appropriate for the data at hand. Second, a `regression` method which uses a linear regression line to estimate the missing values on a line. are found and then estimates their values. Note that only the missing data points derive values from the regression line while the rest of the data points retain their original values. The function terminates if there are trajectories with only one observation. Below is a demonstration of how the `regression` option will estimate the missing values of the `traj` dataset. 
 
-
-In this document, we demonstrate the application of these functions to a simulated longitudinal data, and also provide a `work example` of their application to a real-life crime dataset for  how to use the above functions for manipulating longitudinal dataset 
-
-
-This package provides two categories of functions (i) `Data manipulation` functions and (ii) `clustering and stats` function.
-
-using a small sample of data. 
-
-Work example
-Data manipulation
-
-###Data manipulation  
-
-In this document, we demonstrate provide a `worked example` of how various functions of the `akmediods` package can be employed for manipulating longitudinal dataset as well as generating clusters of the trajectories according to the similarities in their long-term linear trends over time.
-
-##Installation of package
-In order to install the `akmedoids` package, follow the steps below:
-```{r, include=TRUE}
-#install 'devtools' package
-#install.packages("devtools")
-#library(devtools)
-#devtools::install_github("manalytics/packages/akmedoids")
+```{r, eval=TRUE}
+#reading the data
+traj <- read.table(file="C:/demo/traj.csv", sep=",", head=TRUE)
+#preview the data
+head(traj)
+nrow(traj) #no. of rows
+ncol(traj) #no. of columns
 ```
 
 
-##Data
 
-##Installation of package
-
-For this demonstration, we use a small simulated dataset aggregated spatially using the `UK LSOA` units and consists of 9 temporal steps. This dataset is provided with the `akmedoids` package and can be found in the `data` folder after the installation.  preview. Below is the preview of this dataset:
-
-#```{r load gm.crime.sample1, include=TRUE}
-#load("C:/Users/monsu/Documents/GitHub/Packages/akmedoids/data/gm.crime.sample1.rda")
-#load("gm.crime.sample1.rda")
-#```
+### Special application - `generating population estimates between two census years` 
+The `dataImputation` function can useful for interpolating the population estimating the population information population data.
 
 
-Each row represents a traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
-nrow()
-
-
-
-of downloaded from the `Birmingham city, England`.
-
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-#Data preparation
-#Clustering
-#Results 
-#Individual trajectories
-#Inequalities 
-#Discussions
-#Conclusion
-
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
-
-
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format: `ewqwve` 
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-
-```{r, echo=FALSE}
-require(knitr)
-col1 <- c("City", "Abidjan","Accra","Amman")
-col2 <- c("Optimized HDH","217","281","26398")
-col3 <- c("Standard HDH","0","0","37056")
-col4 <- c("Heating Demand [W/(°C x Capita)]", "0.0","0.0","28.3")
-col5 <- c("Heating Energy [kWh/(capita x yr)]","0","0","469.68")
-col6 <- c("Threshold Temperature","23.3","24","17.6")
-col7 <- c("Optimized CDH","31781","25264","32198")
-col8 <- c("Standard CDH", "59398","58895","22059")
-col9 <- c("Cooling Demand [W/(°C x capita)]", "1.67", "2.83", "45.72")
-col10 <- c("Cooling Energy [kWh/(capita x yr)]", "53", "143.56", "1256.62")
-tble2 <- data.frame(col1, col2, col3, col4, col5, col6, col7, col8, col9, col10)
-
-colnames(tble2) <- tble2[1,]
-tble <- tble2[2:4,]
