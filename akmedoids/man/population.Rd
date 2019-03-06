@@ -9,6 +9,6 @@
 population
 }
 \description{
-Simulated denominator data with missing observation
+simulated denominator data for two consecutive census years
 }
 \keyword{datasets}

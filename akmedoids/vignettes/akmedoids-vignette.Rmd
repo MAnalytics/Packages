@@ -1,9 +1,15 @@
 ---
-title: "`Akmedoids` R-package for longitudinal dataset: application to the clustering of long-term inequalities in micro-area exposure to crime"
-author: "Adepeju, M., Langton, S., and Bannister, J."
+title: "`Akmedoids` R-package for longitudinal dataset: an application to clustering of long-term inequality in the exposure to crime"
+author: | 
+  | Adepeju, M., Langton, S., and Bannister, J.
+  | Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-#output: pdf_document
+abstract:
+  "The `akmedoids` advances a set of R-functions for longitudinal clustering of trajectories based on the similarities of their long-term trends and determines the optimal solution based on the Calinski-Harabatz criterion (Calinski and Harabatz, 1974). The package also include a number of other useful functions for exploring and manipulating longitudinal data prior to the clustering process."
+
+#output: rmarkdown::html_vignette
+output: pdf_document
+fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,12 +19,12 @@ vignette: >
 <style type="text/css">
 
 h1.title {
-  font-size: 18px;
+  font-size: 16px;
   color: Black;
   text-align: center;
 }
 h4.author { /* Header 4 - and the author and data headers use this too  */
-    font-size: 12px;
+    font-size: 14px;
   font-family: "Arial", Times, serif;
   color: Black;
   text-align: center;
@@ -33,7 +39,14 @@ h4.date { /* Header 4 - and the author and data headers use this too  */
 h4.abstract { /* Header 4 - and the author and data headers use this too  */
   font-size: 12px;
   font-family: "Arial", Times, serif;
-  color: red;
+  color: black;
+  text-align: center;
+}
+
+h4.affiliation{ /* Header 4 - and the author and data headers use this too  */
+  font-size: 12px;
+  font-family: "Arial", Times, serif;
+  color: black;
   text-align: center;
 }
 
@@ -67,23 +80,15 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
-\begin{abstract}
-The `akmedoids` advances a set of R-functions for longitudinal clustering of trajectories based on the similarities of their long-term trends and determines the optimal solution based on the Calinski-Harabatz criterion (Calinski and Harabatz, 1974). The package also include a number of other useful functions for exploring and manipulating longitudinal data prior to the clustering process.
-\end{abstract}
-
 # Introduction
-Longitudinal clustering analysis play a prominent role in social and behavioral sciences for understanding the developmental processes  of a subject over time. blah blah blah!
+Longitudinal clustering analysis has been widely used in the social and behavioral sciences for understanding the developmental processes of a subject over time. Examples of this type of application include developmental
+.
+.
 
-Data collection, feature and need for dat cleaning. 
+The goal of this document is to provide a description of the functions contained in this package and demonstrate how they can be used in a real application. Examples provided throughout this document should provide a template for the uptake of these package in the longitudinal studies in other fields. These functions are divided into two categories, `data manipulation` and `data clustering` functions. Details are as follow:
 
-Purpose: The goal of this document is to provide a description of these functions and demonstrate how they can be used in a real application. Examples provided throughout this document should allow easy uptake of this package in any field. The functions are divided into two categories as follow:
-
-
-## 1. `Data manipulation` functions
-Table 1 shows the key functions under this category and their descriptions. Prior to an actual clustering analysis, the `data manipulation` functions can be used to address some of the data features, such as `outlier` and `whitespace`, which have the potential to cause errors in the analysis. In other words, these function can be used to get a longitudinal data into a proper shape for an advance analysis.
-
-Below is more detailed description of each function and how they work. For the current demonstration, we employ a simulated dataset `traj` which is provided with the `akmediod` package. The dataset can be accessed by typing `traj` in R console and can also be found in the library folder under `akmedoids/data/traj.rda`. 
+## 1. Data manipulation
+Table 1 shows the key functions under this category and their descriptions. Prior to any advance longitudinal analysis, the `data manipulation` functions provided can be employed to addressed data issues, such as the `outliers` and `whitespaces`, which may hinder smooth data analysis. Below is more detailed description of each function and how they can be used. For our demonstration, we use a simulated dataset `traj` which is provided with the `akmediods` package. This dataset can be accessed by typing `traj` in R console after calling the library and can also be found in the package folder under `".../akmedoids/data/data/traj.rda"`. 
 
 ```{r, echo=FALSE, include=FALSE}
 require(knitr)
@@ -107,32 +112,190 @@ knitr::kable(tble, caption = "`Data manipulation` functions", col.names = c("SN"
   #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
 ```
 
-### (i) `dataImputation`:
-This function calculates any missing entries (such as `NA`, `Inf`, `null`) in a data, according to a specified method. See examle below:
+### (i) `"dataImputation"` function
+This function calculates any missing entries (such as `NA`, `Inf`, `null`) in a data, according to a specified method. The `traj` dataset contains a number of missing values which might have not been observed (such as in the case of `NA`) or have resulted due to a calculation error (such as in the case of `Inf`). The `dataImputation` function can be used to replace these entries based on the values of other cells. Two methods are proposed. First, an `arithmetic` method which uses the `mean`, `minimum` or `maximum` value from the corresponding rows or columns in which the missing values are located. A user decides what option is most appropriate for the data at hand. Second, a `regression` method which uses a linear regression line to estimate the missing values on a line. are found and then estimates their values. Note that only the missing data points derive values from the regression line while the rest of the data points retain their original values. The function terminates if there are trajectories with only one observation. Below is a demonstration of how the `regression` option will estimate the missing values of the `traj` dataset. 
+
+```{r, eval=FALSE}
+#installing packages
+install.packages("devtools")
+devtools::install_github("manalytics/packages/akmedoids")
+```
 
 ```{r, eval=TRUE}
-#reading the data
-traj <- read.table(file="C:/demo/traj.csv", sep=",", head=TRUE)
-#preview the data
+#loading the package
+library(akmedoids)
+```
+
+```{r, eval=TRUE}
+#previewing the data the first 6 rows
 head(traj)
 nrow(traj) #no. of rows
 ncol(traj) #no. of columns
 ```
 
-`traj` dataset contains a number of missing values which might have not been observed (such as in the case of `NA`) or have resulted due to a calculation error (such as in the case of `Inf`). The `dataImputation` function can be used to replace these entries based on the values of other cells. Two methods are proposed. First, an `arithmetic` method which uses the `mean`, `minimum` or `maximum` value from the corresponding rows or columns in which the missing values are located. A user decides what option is most appropriate for the data at hand. Second, a `regression` method which uses a linear regression line to estimate the missing values on a line. are found and then estimates their values. Note that only the missing data points derive values from the regression line while the rest of the data points retain their original values. The function terminates if there are trajectories with only one observation. Below is a demonstration of how the `regression` option will estimate the missing values of the `traj` dataset. 
+The first column of `traj` is a `id` (unique) field. In many applications, it is essential to preserve this field in order to allow mapping of the result to other datasets, such as the spatial location datasets (`.shp`). In most of the functions in this package, we added an option that allow users to either retain or ignore the unique field. Below is the results of the application of the `dataImputation` function to `traj` dataset.
 
 ```{r, eval=TRUE}
-#reading the data
-traj <- read.table(file="C:/demo/traj.csv", sep=",", head=TRUE)
-#preview the data
-head(traj)
-nrow(traj) #no. of rows
-ncol(traj) #no. of columns
+output <- dataImputation(traj, id_field = TRUE, method = 2, 
+               replace_with = 1, fill_zeros = FALSE)
+head(output)
+```
+
+From the syntax above, the argument `method = 2` refers to the regression technique, while the argument `replace_with = 1` indicate `linear` option (which is currently the only available option under this method). Fig. \ref{fig:figs} is a graphical illustration of how the technique derives the missing values.
+
+```{r figs, echo=FALSE, fig.width=6,fig.height=7,fig.align="center", fig.cap="\\label{fig:figs} data imputation with regression"}
+
+par(mar=c(2,2,2,2)+0.1)
+par(adj = 0)
+par(mfrow=c(6,2))
+dat <- as.data.frame(traj)
+t_name <- as.vector(traj[,1])
+dat <- dat[,2:ncol(dat)]
+#if(k==nrow(dat)){ 
+  #}
+#head(dat)
+for(k in 1:nrow(dat)){ #k<-2
+  y <- suppressWarnings(as.numeric(as.character(dat[k,])))
+  x <- 1:length(y)
+  known <- data.frame(x, y)
+  known_1 <- data.frame(known[is.na(known[,2])|is.infinite(known[,2]),])  #
+  known_2 <- data.frame(known[!is.na(known[,2])&!is.infinite(known[,2]),])
+  #train the available data using linear regression
+  model.lm <- lm(y ~ x, data = known_2)
+  # Use predict the y value for the removed data
+  newY <- predict(model.lm, newdata = data.frame(x = known_1[,1]))
+   l_pred <- predict(model.lm, newdata = data.frame(1:9)) #line
+  #add to the original data.
+  dat[k, known_1[,1]] <- newY
+  #Add the predicted points to the original data
+  #dev.new()
+  #plot(1:10, col=2) 
+  plot (known$x, known$y, type="o", main=paste("traj_id:",t_name[k], sep=" "), font.main = 1)
+  if(!length(newY)==0){#plot only if it has elements
+  lines(l_pred, lty="dotted", col="red", lwd=2)
+  }
+  points(known_1[,1], newY, col = "red")
+}
+#point legend
+plot_colors <- c("black","red")
+text <- c("Observed points", "Predicted points")
+plot.new()
+par(xpd=TRUE)
+legend("center",legend = text, text.width = max(sapply(text, strwidth)),
+       col=plot_colors, pch = 1, cex=1, horiz = FALSE)
+par(xpd=FALSE)
+
+#line legend
+plot_colors <- c("black","red")
+text <- c("line joining observed points", "regression line predicting missing points")
+plot.new()
+par(xpd=TRUE)
+legend("center",legend = text, text.width = max(sapply(text, strwidth)),
+       col=plot_colors, lwd=1, cex=1, lty=c(1,2), horiz = FALSE)
+par(xpd=FALSE)
 ```
 
 
+### Special application of '`dataImputation`' function:
 
-### Special application - `generating population estimates between two census years` 
-The `dataImputation` function can useful for interpolating the population estimating the population information population data.
+In many longitudinal studies, denominator information are often required in order to adjust observations to prevent a biased analysis. In crime studies for example, crime rates (e.g. crime per 100 people) is considered a better measure of crime risks as oppose to the absolute crime counts (*). However, population estimates are not always available at small geographical unit levels, especially for the non-census year. Given any two consecutive census years, the `dataImputation` function can be used to interpolate and/or extrapolate the population estimates for the missing years. 
 
+In order to achieve this task, a user needs to create a matrix (`.csv`), comprising both the available and the missing data (i.e. years), where `NAs` are entered for the latter. See below an example of a population data and the corresponding input for the `dataImputation` function. This data is prepared to conform with the `traj` dataset above. 
+
+```{r, eval=TRUE}
+#previewing the data the first 6 rows
+head(population)
+nrow(population) #no. of rows
+ncol(population) #no. of columns
+```
+
+Input dataset is:
+
+```{r, echo=FALSE}
+#create a matrix of the same rows and column as the `traj` data
+pop <- matrix(0, nrow(population), ncol(traj))
+colnames(pop) <- names(traj) 
+pop[,1] <- population[,1]
+#transfer the `location_id`
+#c(population$location_id, names(traj)[2:ncol(traj)])
+#colnames(pop) <- c(population$location_id[1], names(traj)[2:ncol(traj)])
+#pop$location_id <- populaton$location_ids
+pop
+```
+
+.
+.
+.
+
+
+
+
+. input for the `dataImputation` function should look similar to the matrix shown below with missing years, showing `NAs`. This can be prepared in Excel.  
+
+
+
+
+Import the `population` Prepare a new .csv file Let us now prepare this data for the `dataImputation` function: 
+
+
+
+
+
+For the purpose of this demonstration, let us assume that the `field2` and `field3` are census information data of `2001` and `2011`, respectively. We will to obtain  like to 
+
+
+
+
+
+unique locations, which matches many of the `ids` of the `traj` dataset.
+
+
+of the 
+
+
+population data, we observed that 
+
+### (ii) `outlierDetect`
+This function
+
+### (iii) `wSpaces`
+This function
+
+### (iv) `props`
+
+#2. Data Clustering
+
+Table 2 shows the key functions under this category and their descriptions. This ... sdfdf
+
+```{r, echo=FALSE, include=FALSE}
+require(knitr)
+library(flextable)
+library(kableExtra)
+col1 <- c("1", "2","3")
+col2 <- c("`akmedoids.clust`","`statPrint`","`spatialPlt`")
+col3 <- c("`Anchored k-medoids clustering`","`Descriptive (Change) statistics and plots`","`Spatial plot of groups`")
+col4 <- c("Clusters trajectories into a `k` number of groups according to the similarities in their long-term trend and determines the best solution based on the Calinski-Harabatz criterion","Generates the descriptive and change statistics of groups, and also plots the groups performances", "Plots the spatial manifestations of the groups")
+tble2 <- data.frame(col1, col2, col3, col4)
+tble2 <- tble2
+```
+
+```{r, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
+knitr::kable(tble2, caption = "`Data clustering` functions", col.names = c("SN","Function","Title","Description")) %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, width = "8em", background = "white") %>%
+  column_spec(3, width = "12em", background = "white") %>%
+  column_spec(4, width = "16em", background = "white")#%>%
+  #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
+```
+
+### (i) `akmedoids.clust` function:
+
+This function....
+
+### (ii) `statPrint` function:
+
+This function.....
+
+### (iii) `spatialPlt` function:
 
