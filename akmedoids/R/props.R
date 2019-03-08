@@ -20,14 +20,14 @@ props <- function(traj, id_field = FALSE){
   props <- dat
   if(id_field==FALSE){
     for(h in 1:ncol(dat)){ #h<-6
-      prop <- (as.numeric(dat[,h])/sum(as.numeric(as.character(dat[,h]))))
+      prop <- (as.numeric(as.character(dat[,h]))/sum(as.numeric(as.character(dat[,h]))))
       props[,h] <- round(prop, digits=2)
     }
   }
 
   if(id_field==TRUE){
     for(h in 2:ncol(dat)){ #h<-2
-      prop <- (as.numeric(dat[,h])/sum(as.numeric(as.character(dat[,h]))))
+      prop <- (as.numeric(as.character(dat[,h]))/sum(as.numeric(as.character(dat[,h]))))
       props[,h] <- round(prop, digits = 2)
     }
   }

@@ -87,12 +87,14 @@ knitr::opts_chunk$set(
 ```
 # Introduction
 Longitudinal clustering analysis has been widely used in the social and behavioral sciences for understanding the developmental processes of a subject over time. Examples of this type of application include developmental
-.
+
+In other fields, choosing initialisation points has been shown to optimize the final cluster solution and provide greater computational efficiency (Bradley and Fayyad, 1998). Moreover, no attempt has been made to tailor the iteration procedure to minimise the sensitivity of k-means to short-term fluctuations. This presents us with room for improvement in developing a bespoke implementation of k-means clustering for use in longitudinal crime concentration research. 
+
 .
 
 The goal of this document is to provide a description of the functions contained in this package and demonstrate how they can be used in a real application. Examples provided throughout this document should provide a template for the uptake of these package in the longitudinal studies in other fields. These functions are divided into two categories, `data manipulation` and `data clustering` functions. Details are as follow:
 
-## 1. Data manipulation
+#1. Data manipulation
 Table 1 shows the key functions under this category and their descriptions. Prior to any advance longitudinal analysis, the `data manipulation` functions provided can be employed to addressed data issues, such as the `outliers` and `whitespaces`, which may hinder smooth data analysis. Below is more detailed description of each function and how they can be used. For our demonstration, we use a simulated dataset `traj` which is provided with the `akmediods` package. This dataset can be accessed by typing `traj` in R console after calling the library and can also be found in the package folder under `".../akmedoids/data/data/traj.rda"`. 
 
 ```{r, echo=FALSE, include=FALSE}
@@ -257,7 +259,10 @@ Given a longitudinal matrix ($m\times n$) containing some count data and a corre
 crime_per_200_people <- rates(imp_traj, denomin=pop_imp_result, id_field=TRUE, 
                               multiplier = 200)
 #view the first few rows of the output
-head(crime_per_200_people)
+(crime_per_200_people)
+
+sum(as.numeric(as.character(crime_per_200_people[,2])))
+
 ```
 
 ###(iii) `"props"` function
@@ -266,10 +271,11 @@ Given longitudinal data, `props` function convert each observation (entry in eac
 
 
 ```{r, eval=TRUE}
-#Example of estimation of crimes per 200 residents
+#Proportions of crimes per 200 residents
 prop_crime_per200_people <- props(crime_per_200_people, id_field = TRUE)
 
-head(prop_crime_per200_people)
+prop_crime_per200_people
+colSums(prop_crime_per200_people[,2:ncol(head(prop_crime_per200_people))])
 ```
 
 **Note**: In many cases, calculating rates do results into a few `Inf` and `NA` cell entries. For example, in any cell where the 'population' data is missing or contains `character` inputs, the `rates` formular returns `Inf` or `NA`. We recommend that users re-run the `dataImputation` function after running `rates` function in order to address such occurences.
@@ -284,50 +290,49 @@ library(ggplot2)
 library(reshape2)
 
 #converting the wide data format into stacked format for plotting
-imp_traj.long <- melt(imp_traj, id="location_ids") 
-head(imp_traj.long)#previewing the first few rows
+imp_traj_long <- melt(imp_traj, id="location_ids") 
+head(imp_traj_long)#previewing the first few rows
 
 #plot function
-p <-  ggplot(imp_traj.long, aes(x=variable, y=value,
+p <-  ggplot(imp_traj_long, aes(x=variable, y=value,
             group=location_ids, color=location_ids)) + 
             geom_point() + 
             geom_line()
 print(p)
 ```
 
-Based Figure \ref{fig:figs2}, if we assume that observations `1` and `8` of trajectory id `E01004806` are outliers, we can set the cut-off (`threshold`) value as `20`. In this scenario, we do not have to use bother about the `count` argument as the trajectory is clearly separable from the rest of the trajectories. To replace the outlier point with the mean observation of the trajectory, we run the `outlierDetect` function as follows with the result shown in Figure \ref{fig:figs3}:
+Based Figure \ref{fig:figs2}, if we assume that observations of `x2001`, `x2007` and `x2008` of trajectory with id `E01004806` are outliers, we can set the cut-off (`threshold`) value as `20`. In this scenario, we do not have to bother about the `count` argument as the trajectory is clearly separable from the rest of the trajectories. Choosing the mean observation to replace these outlier points, the `outlierDetect` function generate the result shown in Figure \ref{fig:figs3}. 
 
 ```{r figs3, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs3} Replacing outliers with mean observation"}
 
 imp_traj_New <- outlierDetect(imp_traj, id_field = TRUE, method = 2, 
                               threshold = 20, count = 1, replace_with = 2)
 
-imp_traj_New <- melt(imp_traj_New, id="location_ids") 
+imp_traj_New_long <- melt(imp_traj_New, id="location_ids") 
 
 #plot function
-p <-  ggplot(imp_traj_New, aes(x=variable, y=value,
+p <-  ggplot(imp_traj_New_long, aes(x=variable, y=value,
             group=location_ids, color=location_ids)) + 
             geom_point() + 
             geom_line()
 print(p)
 ```
 
-***Note***: In a study that requires converting data from one measure to another, such as "`counts` --> `rates` --> to `proportion`, the user decides at what stage to remove the outliers (if any) from the data.
+***Note***: In a study that requires converting data from one measure to another, the user decides at what stage to remove the outliers (if any) from the data. For example, in [@Adepeju2019] in which crime `counts` is converted to `rates` and then to `proportion`, outliers were removed just before the `proportion` measurue is calculated.
 
 ###(v) 'Other' functions
-Please see the `akmedoids` user manual for other `data manipulation` functions. 
+Please see the `akmedoids` user manual for other useful `data manipulation` functions. 
 
 #2. Data Clustering
 
-Table 2 shows the key functions under this category and their descriptions. These functions are designed to cluster trajectories based on similarities between their long-term trends, which can be defined in terms of a set of $n^{th}$-order polynomial functions or a combination of multiple sets of different $n^{th}$-order functions ($ref$). Currently, the `akmedoids` provides a computationally efficient way of achieving the clustering of $1^{st}-order$ (`linear`) trajectories (trends), focussing on the directional similarities between the trajectories. In other words, this technique allows a user to ignore the short-term fluctuations of the trajectories. One potential area of application of this clustering approach is in crime concentration research for identifying theoretically-informed long-term crime stability at small geographical area levels ([@Griffith2004]; ).
+Table 2 shows the three key functions under this category. These include the `akmedoids.clust`for clustering trajectories according to the similarities of their long-term trends, the `statPrint` for generating both the descriptive statistics and the 'performance' plots of the best clustering solution, and lastly, the `spatialPlt` for representing the clusters spatially. The `akmedoids.clust` function employs the Calinki-Harabatz criterion to determine the best cluster solution (@Calinski1974). 
 
-In the implementation of the $1^{st}-order$ trajectory clustering, the `akmedoids` assumes that If the lines shown in \ref{fig:figs4} represent the long-term trends of trajectories, clustering these trend lines based on their directional similarities is synonymous to grouping the actual trajectories. 
+The long-term trends of trajectories can be defined in terms of a set of $n^{th}$-order polynomial functions or a combination of multiple sets of different $n^{th}$-order functions [@Nagin2005]. Currently, the `akmedoids` provides means of clustering trajectories based on the similarities of their linear trends ($1^{st}-order$), resulting into three simplified categories of trajectory groupings, namely; the `rising`, `stable`, and `falling` groups. The key benefit of this implementation is that it allows the user to ignore the short-term fluctuations of the trajectories, and focus on their long-term linear trends. A potential application of this clustering approach is in crime concentration research for identifying theory-based long-term stable groupings of trajectories in line with the socio-disorganisation and routine activities theories [@Griffith2004]. @Adepeju2019 were the first to demonstrate the utility of this idea for measuring long-term inequalities in the exposure to crime at micro-area levels, based on the conceptual (`inequality`) framework shown in \ref{fig:inequality}. The linear trendline of each trajectory is approximated by a time-dependent regression line and map the resulting groupings on the original trajectories. 
 
-the `akmedoids` can be employed to group cluster trajectoris according to the similarities between the small area trends. 
-
-used tosdfdsf as proposed in [@Adepeju2019]for measuring the linear long-term trend of trajectories. Although, in their In their application, they employed a proportion measure    that described for disenidentifying long-term tren
-
-
+```{r inequality, echo=FALSE, fig.cap=paste("Long-time linear trends of relative (`proportion`, `p`) crime exposure. Three inequality trends: trajectory i1: crime exposure is falling faster, i2, crime exposure is falling at the same rate, and i3, crime exposure is falling slower or increasing, relatively to the citywide trend. (Source:", "Adepeju et al. 2019)", sep=" "), out.width = '80%', fig.align="center"} 
+knitr::include_graphics("inequality.png")
+```
+Asides clustering the trajectory trend lines, there are two major distinctions between the `akmedoids` and other existing longitudinal clustering techniques [@Genolini2010; @Nagin2005]. First, the `akmedoids` uses k-number of median trend lines of equal partitioned trend slopes at the initialisation stage in order to represent `‘anchors’` for the algorithm to begin. The purpose behind this initial step is to give the algorithm a theoretically-driven starting point and try and ensure that heterogenous trends end up in different clusters (@Khan2004; @Steinley2007). Second, instead of recomputing centroids based on the mean distances between each trajectory trend lines and the cluster center, the median of each cluster is selected then used as the next centroid. This then becomes the new anchor for the current iteration of the expectation-maximisation step [@Celeux1992]. This strategy is implemented in order to ensure robustness to trend lines representing outliers trajectories. The iteration is then continue until an objective function is maximised.  
 
 ```{r, echo=FALSE, include=FALSE}
 require(knitr)
@@ -351,9 +356,36 @@ knitr::kable(tble2, caption = "`Data clustering` functions", col.names = c("SN",
   #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
 ```
 
-### (i) `akmedoids.clust` function:
+In the following sections, we provide a work example of clustering with `akmedoids.clust` function using the `prop_crime_per200_people` data plotted in Figure \ref{fig:figs4}. The `statPrint` function will then be used generate the descriptive summary of the clusters and `spatialPlt` function to generate the spatial manifestation of each group. 
 
-This function....
+```{r figs4, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs4} Trajectory of crime proportions per location"}
+
+#Plotting the data using ggplot library
+#library(ggplot2)
+#library(reshape2)
+
+colSums(prop_crime_per200_people[,2:ncol(prop_crime_per200_people)])
+#converting the wide data format into stacked format for plotting
+prop_crime_per200_people_melt <- melt(prop_crime_per200_people, id="location_ids") 
+head(prop_crime_per200_people_melt)#previewing the first few rows
+
+colSums(prop_crime_per200_people[,2:ncol(prop_crime_per200_people)])
+#plot function
+p <-  ggplot(prop_crime_per200_people_melt, aes(x=variable, y=value,
+            group=location_ids, color=location_ids)) + 
+            geom_point() + 
+            geom_line()
+print(p)
+```
+
+### (i) `akmedoids.clust` function
+
+***Data***: 
+Each trajectory in Figure \ref{fig:figs4}of row in the `"prop_crime_per200_people"` represents the proportion of data describes derived above 
+
+It should be noted, the interpretation will vary. Note:
+
+
 
 ### (ii) `statPrint` function:
 
@@ -361,3 +393,4 @@ This function.....
 
 ### (iii) `spatialPlt` function:
 
+#References
