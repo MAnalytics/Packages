@@ -4,7 +4,7 @@
 \alias{props}
 \title{Conversion of counts (or rates) to 'Proportion'}
 \usage{
-props(traj, id_field = FALSE)
+props(traj, id_field = TRUE)
 }
 \arguments{
 \item{traj}{[matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time points.}
@@ -18,7 +18,7 @@ A matrix of proportion measures
 This function converts counts or rates to proportions.
 }
 \details{
-Given a matrix of observations (counts or rates), this function converts each observation to a proportion equivalent to the sum of each column. In other words, each observation is divided by the sum of the column where it is located. , i.e. \code{prop = [a cell value] / sum[corresponding column]}
+Given a matrix of observations (counts or rates), this function converts each observation to a proportion equivalent to the sum of each column. In other words, each observation is divided by the sum of the column where it is located, i.e. \code{prop = [a cell value] / sum[corresponding column]}
 }
 \examples{
 traj <- traj

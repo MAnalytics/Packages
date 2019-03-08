@@ -19,8 +19,8 @@
 #' @usage dataImputation(traj, id_field = FALSE, method = 2, replace_with = 1, fill_zeros = FALSE)
 #' @details Given a matrix or data.frame with some missing values indicated by (\code{NA}, \code{Inf}, \code{null}), this function impute the missing value by using either an estimation from the corresponding rows or columns, or to use a regression method to estimate the missing values.
 #' @examples
-#' traj <- traj
-#'  print(traj)
+#' traj <- data(traj)
+#' print(traj)
 #'  dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1, fill_zeros = FALSE)
 #' @rawNamespace import(stats)
 #' @return A data.frame with missing values (\code{NA}, \code{Inf}, \code{null}) imputed according to the a specified technique.
@@ -88,7 +88,7 @@ dataImputation <- function(traj, id_field = FALSE, method = 2, replace_with = 1,
 
         if(length(i_m)!=0){
           if(replace_with==4){
-            ave_ <- mean(as.numeric(as.character(subset_)))
+            ave_ <- round(mean(as.numeric(as.character(subset_))),digits=2)
           }
           if(replace_with==5){
             ave_ <- min(as.numeric(as.character(subset_)))
@@ -136,7 +136,7 @@ dataImputation <- function(traj, id_field = FALSE, method = 2, replace_with = 1,
       newY <- predict(model.lm, newdata = data.frame(x = known_1[,1]))
 
       #add to the original data.
-      dat[k, known_1[,1]] <- newY
+      dat[k, known_1[,1]] <- round(newY, digits = 2)
 
     }
   }

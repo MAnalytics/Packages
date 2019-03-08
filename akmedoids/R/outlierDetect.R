@@ -106,7 +106,7 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
 
         #loop through each column and remove the outlier in them before calculating the value of the mean column value
         for(l_ in 1:length(idd_)){ #l_<-1
-          dat[as.numeric(as.character(list_traj[k,1])),idd_[l_]] <- mean(dat[-which(outlier_mat[,idd_[l_]]==TRUE),idd_[l_]])
+          dat[as.numeric(as.character(list_traj[k,1])),idd_[l_]] <- round(mean(dat[-which(outlier_mat[,idd_[l_]]==TRUE),idd_[l_]]), digits = 2)
         }
 
       }
@@ -117,7 +117,7 @@ outlierDetect <- function(traj, id_field = FALSE, method = 1, threshold = 0.95, 
         #use the non-outlier observation for the calculation
         idd_nonOutlier <- which(outlier_mat[as.numeric(as.character(list_traj[k,1])),]==FALSE)
         idd_Outlier <- which(outlier_mat[as.numeric(as.character(list_traj[k,1])),]==TRUE)
-         dat[list_traj[k,1],idd_Outlier] <-  mean(as.numeric(as.character(dat[list_traj[k,1],idd_nonOutlier])))
+         dat[list_traj[k,1],idd_Outlier] <-  round(mean(as.numeric(as.character(dat[list_traj[k,1],idd_nonOutlier]))), digits = 2)
       }
     }
 

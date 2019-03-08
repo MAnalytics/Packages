@@ -1,19 +1,23 @@
 ---
-title: "`Akmedoids` R-package for longitudinal dataset: an application to clustering of long-term inequality in the exposure to crime"
-author: | 
+title: "`Akmedoids` R-package for longitudinal dataset: Measuring long-term inequality in the exposure to crime at small area level"
+author: |
   | Adepeju, M., Langton, S., and Bannister, J.
   | Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH
 date: "`r Sys.Date()`"
-abstract:
-  "The `akmedoids` advances a set of R-functions for longitudinal clustering of trajectories based on the similarities of their long-term trends and determines the optimal solution based on the Calinski-Harabatz criterion (Calinski and Harabatz, 1974). The package also include a number of other useful functions for exploring and manipulating longitudinal data prior to the clustering process."
-
-#output: rmarkdown::html_vignette
-output: pdf_document
+output:
+  #word_document: default
+  #always_allow_html: yes
+  pdf_document: default
+always_allow_html: yes
 fig_caption: yes
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+bibliography: references.bib
+abstract: The `akmedoids` advances a set of R-functions for longitudinal clustering
+  of trajectories based on the similarities of their long-term trends and determines
+  the optimal solution based on the Calinski-Harabatz criterion (Calinski and Harabatz,
+  1974). The package also include a number of other useful functions for exploring
+  and manipulating longitudinal data prior to the clustering process.
+vignette: |
+  %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
 <style type="text/css">
@@ -23,6 +27,7 @@ h1.title {
   color: Black;
   text-align: center;
 }
+
 h4.author { /* Header 4 - and the author and data headers use this too  */
     font-size: 14px;
   font-family: "Arial", Times, serif;
@@ -94,10 +99,10 @@ Table 1 shows the key functions under this category and their descriptions. Prio
 require(knitr)
 library(flextable)
 library(kableExtra)
-col1 <- c("1", "2","3","4")
-col2 <- c("`dataImputation`","`outlierDetect`","`wSpaces`", "`props`")
-col3 <- c("Data imputation for longitudinal data","Outlier detection and replacement","Whitespaces removal", "Conversion of counts (or rates) to 'Proportion'")
-col4 <- c("Calculates any missing entries (`NA`, `Inf`, `null`) in a longitudinal data, according to a specified method","Identifies outlier observations in the data, and replace or remove them","Removes all the leading and trailing whitespaces in a longitudinal data","Converts counts or rates observation to 'proportion'")
+col1 <- c("1", "2","3","4", "5")
+col2 <- c("`dataImputation`","`rates`", "`outlierDetect`","`wSpaces`", "`props`")
+col3 <- c("Data imputation for longitudinal data", "Conversion of counts to rates", "Outlier detection and replacement","Whitespaces removal", "Conversion of counts (or rates) to 'Proportion'")
+col4 <- c("Calculates any missing entries (`NA`, `Inf`, `null`) in a longitudinal data, according to a specified method","Calculates rates from 'observed' count and a denominator data", "Identifies outlier observations in the data, and replace or remove them","Removes all the leading and trailing whitespaces in a longitudinal data","Converts counts or rates observation to 'proportion'")
 tble <- data.frame(col1, col2, col3, col4)
 tble <- tble
 ```
@@ -112,7 +117,7 @@ knitr::kable(tble, caption = "`Data manipulation` functions", col.names = c("SN"
   #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
 ```
 
-### (i) `"dataImputation"` function
+### (i) `"dataImputation"` functions
 This function calculates any missing entries (such as `NA`, `Inf`, `null`) in a data, according to a specified method. The `traj` dataset contains a number of missing values which might have not been observed (such as in the case of `NA`) or have resulted due to a calculation error (such as in the case of `Inf`). The `dataImputation` function can be used to replace these entries based on the values of other cells. Two methods are proposed. First, an `arithmetic` method which uses the `mean`, `minimum` or `maximum` value from the corresponding rows or columns in which the missing values are located. A user decides what option is most appropriate for the data at hand. Second, a `regression` method which uses a linear regression line to estimate the missing values on a line. are found and then estimates their values. Note that only the missing data points derive values from the regression line while the rest of the data points retain their original values. The function terminates if there are trajectories with only one observation. Below is a demonstration of how the `regression` option will estimate the missing values of the `traj` dataset. 
 
 ```{r, eval=FALSE}
@@ -127,7 +132,7 @@ library(akmedoids)
 ```
 
 ```{r, eval=TRUE}
-#previewing the data the first 6 rows
+#view the first few rows
 head(traj)
 nrow(traj) #no. of rows
 ncol(traj) #no. of columns
@@ -136,12 +141,13 @@ ncol(traj) #no. of columns
 The first column of `traj` is a `id` (unique) field. In many applications, it is essential to preserve this field in order to allow mapping of the result to other datasets, such as the spatial location datasets (`.shp`). In most of the functions in this package, we added an option that allow users to either retain or ignore the unique field. Below is the results of the application of the `dataImputation` function to `traj` dataset.
 
 ```{r, eval=TRUE}
-output <- dataImputation(traj, id_field = TRUE, method = 2, 
+imp_traj <- dataImputation(traj, id_field = TRUE, method = 2, 
                replace_with = 1, fill_zeros = FALSE)
-head(output)
+head(imp_traj)
 ```
 
-From the syntax above, the argument `method = 2` refers to the regression technique, while the argument `replace_with = 1` indicate `linear` option (which is currently the only available option under this method). Fig. \ref{fig:figs} is a graphical illustration of how the technique derives the missing values.
+From the syntax above, the argument `method = 2` refers to the regression technique, while the argument `replace_with = 1` indicate `linear` option (which is currently the only available option under this method). Figure \ref{fig:figs} is a graphical illustration of how the technique derives the missing values.
+
 
 ```{r figs, echo=FALSE, fig.width=6,fig.height=7,fig.align="center", fig.cap="\\label{fig:figs} data imputation with regression"}
 
@@ -151,7 +157,7 @@ par(mfrow=c(6,2))
 dat <- as.data.frame(traj)
 t_name <- as.vector(traj[,1])
 dat <- dat[,2:ncol(dat)]
-#if(k==nrow(dat)){ 
+#if(k==nrow(dat)){
   #}
 #head(dat)
 for(k in 1:nrow(dat)){ #k<-2
@@ -169,7 +175,7 @@ for(k in 1:nrow(dat)){ #k<-2
   dat[k, known_1[,1]] <- newY
   #Add the predicted points to the original data
   #dev.new()
-  #plot(1:10, col=2) 
+  #plot(1:10, col=2)
   plot (known$x, known$y, type="o", main=paste("traj_id:",t_name[k], sep=" "), font.main = 1)
   if(!length(newY)==0){#plot only if it has elements
   lines(l_pred, lty="dotted", col="red", lwd=2)
@@ -198,74 +204,130 @@ par(xpd=FALSE)
 
 ### Special application of '`dataImputation`' function:
 
-In many longitudinal studies, denominator information are often required in order to adjust observations to prevent a biased analysis. In crime studies for example, crime rates (e.g. crime per 100 people) is considered a better measure of crime risks as oppose to the absolute crime counts (*). However, population estimates are not always available at small geographical unit levels, especially for the non-census year. Given any two consecutive census years, the `dataImputation` function can be used to interpolate and/or extrapolate the population estimates for the missing years. 
+Apart from census years, it is generally difficult to obtain denominator information (i.e. population) for local geographical units. In a longitudinal studies, this challenge pose a significant drawback to accurate estimation of measures such as crime risk level at local areas across a space. However, we can interpolate and/or extrapolate the missing population information given a limited data points. The `dataImputation` function can be used for this purpose.
 
-In order to achieve this task, a user needs to create a matrix (`.csv`), comprising both the available and the missing data (i.e. years), where `NAs` are entered for the latter. See below an example of a population data and the corresponding input for the `dataImputation` function. This data is prepared to conform with the `traj` dataset above. 
+The key step to achieving this task is to create a matrix (`.csv`), containing both the available and the missing fields, in which `NA` is entered for any missing cell. See below an example of a population data (with only two fields) and its corresponding `input` matrix for the `dataImputation` function. This example is design to conform with the `traj` dataset above. 
 
 ```{r, eval=TRUE}
-#previewing the data the first 6 rows
+#view the data first few rows
 head(population)
 nrow(population) #no. of rows
 ncol(population) #no. of columns
 ```
 
-Input dataset is:
+The corresponding input dataset, named `population2` is prepared as shown below:
 
 ```{r, echo=FALSE}
 #create a matrix of the same rows and column as the `traj` data
-pop <- matrix(0, nrow(population), ncol(traj))
+pop <- as.data.frame(matrix(0, nrow(population), ncol(traj)))
 colnames(pop) <- names(traj) 
-pop[,1] <- population[,1]
+pop[,1] <- as.vector(as.character(population[,1]))
+pop[,4] <- as.vector(as.character(population[,2]))
+pop[,8] <- as.vector(as.character(population[,3]))
+list_ <- c(2, 3, 5, 6, 7, 9, 10)
+for(u_ in 1:length(list_)){ #u_<-1
+  pop[,list_[u_]] <- "NA"
+}
 #transfer the `location_id`
 #c(population$location_id, names(traj)[2:ncol(traj)])
 #colnames(pop) <- c(population$location_id[1], names(traj)[2:ncol(traj)])
 #pop$location_id <- populaton$location_ids
-pop
+head(pop)
+population2 <- pop
 ```
 
-.
-.
-.
+The `dataImputation` function is ran as follows:
+
+```{r, eval=TRUE}
+#the
+pop_imp_result <- dataImputation(population2, id_field = TRUE, method = 2, 
+               replace_with = 1, fill_zeros = FALSE)
+head(pop_imp_result)
+```
+
+The above is the result of the `imputation` process which in this case is synonymous to fitting a straight to the two data points and then estimate the population of other fields. More advance options will be provided in the future. 
 
 
+###(ii) `"rates"` function
+
+Given a longitudinal matrix ($m\times n$) containing some count data and a corresponding denominator information with the same number of columns ($n$), the `rate` function derives the 'rates' measures (e.g. count per 100 people) for the `id` ***rows that match***. We demonstrate this with the `imp_traj` data and the population estimates ('`pop_imp_result`') derived above. 
+
+```{r, eval=TRUE}
+#Example of estimation of crimes per 200 residents
+crime_per_200_people <- rates(imp_traj, denomin=pop_imp_result, id_field=TRUE, 
+                              multiplier = 200)
+#view the first few rows of the output
+head(crime_per_200_people)
+```
+
+###(iii) `"props"` function
+
+Given longitudinal data, `props` function convert each observation (entry in each cell) to the proportion of the sum of each column. In other words, each observation is divided by the sum of the column where it is located. i.e. `prop = [a cell value] / sum[corresponding column]`. This 'proportion' measure was applied by [@Adepeju2019] in their study focusing on measuring the long-term inequality in the exposure to crime at small geographical areas. Using the 'rates' estimates obtained above:  
 
 
-. input for the `dataImputation` function should look similar to the matrix shown below with missing years, showing `NAs`. This can be prepared in Excel.  
+```{r, eval=TRUE}
+#Example of estimation of crimes per 200 residents
+prop_crime_per200_people <- props(crime_per_200_people, id_field = TRUE)
 
+head(prop_crime_per200_people)
+```
 
+**Note**: In many cases, calculating rates do results into a few `Inf` and `NA` cell entries. For example, in any cell where the 'population' data is missing or contains `character` inputs, the `rates` formular returns `Inf` or `NA`. We recommend that users re-run the `dataImputation` function after running `rates` function in order to address such occurences.
 
+### (iv) `"outlierDetect"` function
+This function is aimed at allowing users to identify any outlier observations in a longitudinal data, and replace or remove them accordingly. The first step to dealing with outliers is to first visualise (plot) the data. After that, a user can then decide the cut-off for the outliers. The `outlierDetect` function provides two options for setting a cut-off value: (i) `quantile` method, that is any observation over certain quantile of the value distribution, and (ii) `manual` method, in which a user defines the cut-off value. The 'replacement' option for any detected outliers include either to use the mean value of the row or the mean value of the column in which the outlier entry is found. The user also has the option to simply remove the trajectory that contains the outlier. In deciding whether a trajectory contains outlier or not, the `count` argument allows the user to decide the number of observations (in a trajectory) that must exceed the cut-off. Using the `imp_traj` data, the `outlierDetect` function will work as follows:
 
-Import the `population` Prepare a new .csv file Let us now prepare this data for the `dataImputation` function: 
+```{r figs2, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs2} Identifying outliers"}
 
+#Plotting the data using ggplot library
+library(ggplot2)
+library(reshape2)
 
+#converting the wide data format into stacked format for plotting
+imp_traj.long <- melt(imp_traj, id="location_ids") 
+head(imp_traj.long)#previewing the first few rows
 
+#plot function
+p <-  ggplot(imp_traj.long, aes(x=variable, y=value,
+            group=location_ids, color=location_ids)) + 
+            geom_point() + 
+            geom_line()
+print(p)
+```
 
+Based Figure \ref{fig:figs2}, if we assume that observations `1` and `8` of trajectory id `E01004806` are outliers, we can set the cut-off (`threshold`) value as `20`. In this scenario, we do not have to use bother about the `count` argument as the trajectory is clearly separable from the rest of the trajectories. To replace the outlier point with the mean observation of the trajectory, we run the `outlierDetect` function as follows with the result shown in Figure \ref{fig:figs3}:
 
-For the purpose of this demonstration, let us assume that the `field2` and `field3` are census information data of `2001` and `2011`, respectively. We will to obtain  like to 
+```{r figs3, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs3} Replacing outliers with mean observation"}
 
+imp_traj_New <- outlierDetect(imp_traj, id_field = TRUE, method = 2, 
+                              threshold = 20, count = 1, replace_with = 2)
 
+imp_traj_New <- melt(imp_traj_New, id="location_ids") 
 
+#plot function
+p <-  ggplot(imp_traj_New, aes(x=variable, y=value,
+            group=location_ids, color=location_ids)) + 
+            geom_point() + 
+            geom_line()
+print(p)
+```
 
+***Note***: In a study that requires converting data from one measure to another, such as "`counts` --> `rates` --> to `proportion`, the user decides at what stage to remove the outliers (if any) from the data.
 
-unique locations, which matches many of the `ids` of the `traj` dataset.
-
-
-of the 
-
-
-population data, we observed that 
-
-### (ii) `outlierDetect`
-This function
-
-### (iii) `wSpaces`
-This function
-
-### (iv) `props`
+###(v) 'Other' functions
+Please see the `akmedoids` user manual for other `data manipulation` functions. 
 
 #2. Data Clustering
 
-Table 2 shows the key functions under this category and their descriptions. This ... sdfdf
+Table 2 shows the key functions under this category and their descriptions. These functions are designed to cluster trajectories based on similarities between their long-term trends, which can be defined in terms of a set of $n^{th}$-order polynomial functions or a combination of multiple sets of different $n^{th}$-order functions ($ref$). Currently, the `akmedoids` provides a computationally efficient way of achieving the clustering of $1^{st}-order$ (`linear`) trajectories (trends), focussing on the directional similarities between the trajectories. In other words, this technique allows a user to ignore the short-term fluctuations of the trajectories. One potential area of application of this clustering approach is in crime concentration research for identifying theoretically-informed long-term crime stability at small geographical area levels ([@Griffith2004]; ).
+
+In the implementation of the $1^{st}-order$ trajectory clustering, the `akmedoids` assumes that If the lines shown in \ref{fig:figs4} represent the long-term trends of trajectories, clustering these trend lines based on their directional similarities is synonymous to grouping the actual trajectories. 
+
+the `akmedoids` can be employed to group cluster trajectoris according to the similarities between the small area trends. 
+
+used tosdfdsf as proposed in [@Adepeju2019]for measuring the linear long-term trend of trajectories. Although, in their In their application, they employed a proportion measure    that described for disenidentifying long-term tren
+
+
 
 ```{r, echo=FALSE, include=FALSE}
 require(knitr)
