@@ -16,7 +16,7 @@ abstract: The `akmedoids` advances a set of R-functions for longitudinal cluster
   the optimal solution based on the Calinski-Harabatz criterion (Calinski and Harabatz,
   1974). The package also include a number of other useful functions for exploring
   and manipulating longitudinal data prior to the clustering process.
-  In this document, we provide a guide towards using this package for measuring long-term inequalities in the exposure to crime at small geographical area levels. 
+  The primary goal of the `akmedoids` package is to aid replication of crime inequality study under crime drop for cities around the world (see Adepeju et al. 2019). In this document, we provide a guide to carrying out this investigation. Meanwhile, the package can also be employed for other similar longitudinal studies. 
 vignette: |
   %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
@@ -96,7 +96,7 @@ In other fields, choosing initialisation points has been shown to optimize the f
 The goal of this document is to provide a description of the functions contained in this package and demonstrate how they can be used in a real application. Examples provided throughout this document should provide a template for the uptake of these package in the longitudinal studies in other fields. These functions are divided into two categories, `data manipulation` and `data clustering` functions. Details are as follow:
 
 #1. Data manipulation
-Table 1 shows the key functions under this category and their descriptions. This include functions to replace certain entries, such as missing data and outliers, in the data. Data manipulation functions also also include functions to carry out basic conversion of data from one type of measure to another. For example, from `counts` to `rates`. In order to demonstrate the utility of these functions, we use a simulated dataset `traj` which is provided with the `akmediods` package. This dataset can be accessed by typing `traj` in R console after calling the library and can also be found in the package folder under `".../akmedoids/data/data/traj.rda"`. 
+Table \ref{tab:table1} shows the key functions under this category and their descriptions. This include functions to replace certain entries, such as missing data and outliers, in the data. Data manipulation functions also also include functions to carry out basic conversion of data from one type of measure to another. For example, from `counts` to `rates`. In order to demonstrate the utility of these functions, we use a simulated dataset `traj` which is provided with the `akmediods` package. This dataset can be accessed by typing `traj` in R console after calling the library and can also be found in the package folder under `".../akmedoids/data/data/traj.rda"`. 
 
 ```{r, echo=FALSE, include=FALSE}
 require(knitr)
@@ -110,7 +110,7 @@ tble <- data.frame(col1, col2, col3, col4)
 tble <- tble
 ```
 
-```{r, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
+```{r table1, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
 knitr::kable(tble, caption = "`Data manipulation` functions", col.names = c("SN","Function","Title","Description")) %>%
   kable_styling(full_width = F) %>%
   column_spec(1, bold = T, border_right = T) %>%
@@ -327,7 +327,7 @@ Please see the `akmedoids` user manual for other useful `data manipulation` func
 
 #2. Data Clustering
 
-Table 2 shows the three key functions under this category. These include the `akmedoids.clust`for clustering trajectories according to the similarities of their long-term trends, the `statPrint` for generating both the descriptive statistics and the 'performance' plots of the best clustering solution, and lastly, the `spatialPlt` for representing the clusters spatially.
+Table \ref{tab:table2} shows the three key functions under this category. These include the `akmedoids.clust`for clustering trajectories according to the similarities of their long-term trends, the `statPrint` for generating both the descriptive statistics and the 'performance' plots of the best clustering solution, and lastly, the `spatialPlt` for representing the clusters spatially.
 
 The long-term trends of trajectories can be defined in terms of a set of $n^{th}$-order polynomial functions or a combination of multiple sets of different $n^{th}$-order functions [@Nagin2005]. Currently, the `akmedoids` provides means of clustering trajectories based on the similarities of their linear trends ($1^{st}-order$), resulting into three simplified categories of trajectory groupings, namely; the `rising`, `stable`, and `falling` groups. The key benefit of this implementation is that it allows the user to ignore the short-term fluctuations of the trajectories, and focus on their long-term linear trends. A potential application of this clustering approach is in crime concentration research for identifying theory-based long-term stable groupings of trajectories in line with the socio-disorganisation and routine activities theories [@Griffith2004]. @Adepeju2019 were the first to demonstrate the utility of this idea for measuring long-term inequalities in the exposure to crime at micro-area levels, based on the conceptual (`inequality`) framework shown in Figure \ref{fig:figs4}. The linear trendline of each trajectory is approximated by a time-dependent regression line and map the resulting groupings on the original trajectories. 
 
@@ -349,7 +349,7 @@ tble2 <- data.frame(col1, col2, col3, col4)
 tble2 <- tble2
 ```
 
-```{r, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
+```{r table2, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
 knitr::kable(tble2, caption = "`Data clustering` functions", col.names = c("SN","Function","Title","Description")) %>%
   kable_styling(full_width = F) %>%
   column_spec(1, bold = T, border_right = T) %>%
@@ -416,29 +416,84 @@ The above extract represents the vector of group memberships of trajectories wit
 
 ### (ii) `statPrint` function:
 
-Given the vector of group membership (labels) and its corresponding trajectory object data matrix indexed correspondingly, the `statPrint` function reports the descriptive as well as change statistics of each group. The function can also generates the plots of the group membership and performances over time.
-
-Using the output from the `akmedoids.clust`, the `spatialPlt` function can be executed as follows:
+Given the vector of group membership (labels), that is `as.vector(cluster_output$optimSolution)` and its corresponding trajectory object  `prop_crime_per200_people`, the `statPrint` function reports both the `descriptive` and the `change` statistics of the groups. The function also generates the plots of the `group memberships` and `performances` (i.e. share of measure captured) over time. An important argument of `statPrint` function is the `bandw` parameter which determines the final classification of the resulting groups into `Rising`, `Stable`, or `Falling`. Please, see the package user manual for more details about this parameter. The outputs can be generated for our current example as follows:
 
 
-```{r figs7, eval=TRUE, echo=FALSE, include=FALSE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs7}, group memberships"}
+```{r, echo=TRUE, include=TRUE}
 
 #cluster solution
 clustr <- as.vector(cluster_output$optimSolution) 
 
 #plotting the group membership
 print(statPrint(clustr, prop_crime_per200_people, id_field=TRUE, 
-                type="lines", y.scaling="fixed"))
+                bandw = 0.40, type="lines", y.scaling="fixed"))
 
 ```
 
-```{r figs8, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs8}, group performance"}
-
-print(statPrint(clustr, prop_crime_per200_people, id_field=TRUE, 
-                bandw = 0.60, type="stacked"))
-knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+```{r figs7, echo=FALSE, fig.cap=paste("group memberships"), out.width = '120%', fig.align="center"} 
+knitr::include_graphics("traj_perfm.png")
 ```
 
+See Table \ref{tab:table3} for the detailed description of the field names of outputs above. These outputs are generated along with the plot of group memberships as shown in Figure \ref{fig:figs7}. By changing the argument `type` to `"stacked"` (i.e. `type="stacked"`), a `performance plot` is generated instead (see Figure \ref{fig:figs8}) Note that these plots draw from the `ggplot2` library [@Wickham2016]. For a more customised visualisation, we recommend that users deploy the `ggplot2` library directly. 
 
+In the context of long-term inequality study, the combination of these outputs should allow inferences to be made regarding whether a group of areas have gained or lost in relation to the overall citywide trend [@Adepeju2019]. For example, whilst relative crime exposure have declined in 33.3% (groups `A` and `B`) of the area, the relative crime exposure have risen in 44.4% (groups `D` and `E`) of the area. The relative crime exposure can be said to be stable in 22.2% (group `C`) of the area, based on the `bandw` parameter.   
+
+
+```{r figs8, echo=FALSE, fig.cap=paste("group performance over time"), out.width = '100%', fig.align="center"} 
+knitr::include_graphics("traj_perfm2.png")
+```
+
+```{r, echo=FALSE, include=FALSE}
+
+col1 <- c("1", "2","3","4","5","6", "7","8","9","10")
+col2 <- c("`group`", "`n`", "`n(%)`", "`%Prop.time1`", "`%Prop.timeT`", "`Change`", "`%Change`", "`%+ve Traj.`", "`%-ve Traj.`", "`class`")
+col3 <- c("`group membershp`", "`size (no.of.trajectories.)`", "`% size`", "`% proportion of obs. at time 1 (2001)`", "`proportion of obs. at time T (2009)`", "`absolute change in proportion between time1 and timeT`", "`% change in proportion between time 1 and time T`", "`% of trajectories with positive slopes`", "`% of trajectories with negative slopes`", "`classification based on slope`")
+tble3 <- data.frame(col1, col2, col3)
+tble3 <- tble3
+```
+
+```{r table3, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
+knitr::kable(tble3, caption = "`field description of clustering outputs`", col.names = c("SN","field","Description")) %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, width = "8em", background = "white") %>%
+  column_spec(3, width = "12em", background = "white") #%>%
+  #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
+```
+
+### (ii) `spatialPlt` function:
+
+In a study where the trajectories represent geographically-related observations, an analyst may be interested in examining whether there are spatial patterning in the observed phenomenon. Therefore, the resulting cluster groups have to be linked to their respective geographical locations in order to map their potential spatial patterning. In the example used in this study, each trajectory is the simulated longitidinal crime exposure of eleven fictitious census units created in a GIS environment (as `.shp` format). Using both our clustering output (`clustr`) and the `.shp`, we employ the `spatialPlt` function to visualise the spatial patterning of our clustering result. 
+
+```{r, echo=FALSE, include=TRUE}
+#import libraries
+library(rgdal)
+
+#read and visualise the shapefile
+#readOS
+
+#identifying the `id` field of the shapefile
+#head(cityA@data)
+
+#the `id` field is identified as "loc_code"
+```
+
+From the above, the `id` field of the shapefile is identified as `"loc_code"`. The `spatialPlt` function is then executed as follows:
+
+```{r, echo=FALSE, include=TRUE}
+
+
+```
+
+Figure * represents the spatial plot of our longitudinal clusering analysis. For a more customised spatial plotting, please see the `ggplot2` package 
+
+
+#Conclusion
+
+The `akmedoids` package is developed in order to aid the replication of crime inequality investigation under a citywide crime drop scenario [@Adepeju2019]. However, many functions in this package, such as the `data manipulation` functions are applicable to any longitudinal datasets. For example, the `dataImputation` and `outlierDetect` functions which are used for imputing missing data and identifying outliers, respectively, should be applicable to any longitudinal data analysis. 
+
+This package is being updated on a regular basis to add more functionalities to the existing `functions`. For instance, we understand that there are several other options for estimating missing data points, all these alternatives will be included in the package in due time. We also plan to add more `data manipulation` functions as well as expand the clustering `anchor` options for higher-order polynomials. 
+
+Lastly, we employ users to report any bugs encountered while using the package and direct their queries to us. We also welcome contributions from users.
 
 #References

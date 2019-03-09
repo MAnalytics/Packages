@@ -7,8 +7,6 @@
 #' @param type [character] plot type. Available options are: \code{"lines"} and \code{"stacked"}.
 #' @param y.scaling [character] works only if \code{type="lines"}. \code{y.scaling} set the vertical scales of the cluster panels. Options are: \code{"fixed"}: uses uniform scale for all panels, \code{"free"}: uses variable scales for panels.
 #' @param bandw [numeric] A small probability (quantile) value between \code{[0,1]} to partition the trajectories into three classes, i.e. \code{lower}, \code{central}, and the \code{uppper} classes. The middle of the \code{central} class is defined by the average slope of all trajectories. The upper and the lower limits of the \code{central} class is determined by the value of \code{bandw}. Default value is \code{0.25}, indicating that all slopes within 25th quantiles of the maximum slopes on both sides of the average slope are categorised as \code{central} class.
-#' @param show.plot Whether to show a plot. Default: \code{TRUE}
-#' @param show.stat Whether to show statistics
 #' @examples
 #' traj <- traj
 #' print(traj)
@@ -19,7 +17,7 @@
 #' clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 #' clustr <- as.vector(clustr$optimSolution)
 #' print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, type="lines", y.scaling="fixed"))
-#' print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, bandw = 0.60, type="stacked"))
+#' print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, bandw = 0.30, type="stacked"))
 #' @details Generates the descriptive and change statistics of the trajectory groupings. Given a vector of group membership (labels) and the corresponding data matrix (or data.frame) indexed in the same order, this function generates all the descriptive and change statistics of all the groups.
 #' The function can generate a line and an area stacked plot drawing from the functionalities of the \code{ggplot2} library. For a more customised visualisation, we recommend that users deploy \code{ggplot2} directly (\code{Wickham H. (2016)}).
 #' @return A plot showing group membership or sizes (proportion) and statistics.
@@ -28,7 +26,7 @@
 #' @references \code{Wickham H. (2016). Elegant graphics for Data Analysis. Spring-Verlag New York (2016)}
 #' @export
 
-statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, show.plot=TRUE, show.stat = TRUE, type = "lines", y.scaling="fixed"){
+statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, type = "lines", y.scaling="fixed"){
 
   #joining the data with the clusters
   clustr <- data.frame(cbind(traj, clusters=clustr))
@@ -150,7 +148,8 @@ statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, show.plot=TRUE,
   }
   colnames(desc_Stats) <- c("n","n(%)","%Prop.time1","%Prop.timeT", "Change", "%Change")
   rownames(desc_Stats) <- 1:nrow(desc_Stats)
-  desc_Stats <- as.data.frame(cbind(desc_Stats, group))
+  #desc_Stats <- as.data.frame(cbind(desc_Stats[,1], group, desc_Stats[,2:ncol(desc_Stats)]))
+  desc_Stats <- as.data.frame(cbind(group, desc_Stats))
   attrib1 <- c("'n'->size (number of traj.); 'n(%)'->%size; '%Prop.time1'->% proportion of obs. at time 1; '%Prop.timeT'-> % proportion of obs. at time T; 'Change'-> absolute change in proportion between time1 and timeT; '%Change'-> % change in proportion between time 1 and timeT")
   #attr(desc_Stats,"field description") <- c("'n'->size (number of traj.): 'n(%)'->%size: '%Prop.time1'->% proportion of obs. at time 1: '%Prop.timeT'-> % proportion of obs. at time T: 'Change'-> absolute change in proportion between time1 and timeT: '%Change'-> % change in proportion between time 1 and timeT")
   #attr(desc_Stats,"field_description") <- 6
@@ -193,7 +192,8 @@ statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, show.plot=TRUE,
   }
   colnames(change_Stats) <- c("sn","%+ve Traj.","%-ve Traj.")
   rownames(change_Stats) <- 1:nrow(change_Stats)
-  change_Stats <- as.data.frame(cbind(change_Stats, group))
+  #change_Stats <- as.data.frame(cbind(change_Stats[,1], group, change_Stats))
+  change_Stats <- as.data.frame(cbind(group, change_Stats))
   attrib2 <- c("'%+ve Traj.'-> % of trajectories with positive slopes; '%+ve Traj.'-> % of trajectories with negative slopes")
 
   #---------------------------------------------------------------------
@@ -218,7 +218,7 @@ statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, show.plot=TRUE,
   all_min <- c(as.numeric(as.character(temp_upper_classes$slope)), as.numeric(as.character(ave_slope$slope)))
   #what's the quantile value
   upper_clas <- which(all_min < as.vector(round(quantile(all_min, (1-bandw)) , digits=8)))  #bandw =
-  clas_[upper_clas] <- "RISING"
+  clas_[upper_clas] <- "Rising"
 
   #determining the 'lower' class from the remaining groups.
   temp_lower_classes <- gr_slopes[which(as.numeric(as.character(gr_slopes$slope)) > as.numeric(as.character(ave_slope$slope))),] #separating the slopes into two
@@ -226,10 +226,10 @@ statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, show.plot=TRUE,
   all_max <- c(as.numeric(as.character(ave_slope$slope)), as.numeric(as.character(temp_lower_classes$slope)))
   #what's the quantile value
   lower_clas <- which(all_max > as.vector(round(quantile(all_max, bandw) , digits=8)))  #bandw =
-  clas_[nrow(gr_slopes) - (0:(length(lower_clas)-1))] <- "FALLING"
+  clas_[nrow(gr_slopes) - (0:(length(lower_clas)-1))] <- "Falling"
 
-  #input for the stable group
-  clas_[which(!clas_%in%c("RISING", "FALLING"))] <- "STABLE"
+  #input for the Stable group
+  clas_[which(!clas_%in%c("Rising", "Falling"))] <- "Stable"
   class <- data.frame(class=clas_)
   change_Stats <- cbind(change_Stats, class)
 
