@@ -259,12 +259,15 @@ Given a longitudinal matrix ($m\times n$) containing some count data and a corre
 #Example of estimation of crimes per 200 residents
 crime_per_200_people <- rates(imp_traj, denomin=pop_imp_result, id_field=TRUE, 
                               multiplier = 200)
-#view the first few rows of the output
-(crime_per_200_people)
+#view the result
+crime_per_200_people
 
-sum(as.numeric(as.character(crime_per_200_people[,2])))
+#check the number of rows
+nrow(crime_per_200_people)
 
 ```
+
+It can be observed that the number of rows in the output is 9. This indicates that only 9 `location_ids` in the `count` and `population` data match.  
 
 ###(iii) `"props"` function {#props}
 
@@ -275,7 +278,7 @@ Given longitudinal data, `props` function convert each observation (entry in eac
 #Proportions of crimes per 200 residents
 prop_crime_per200_people <- props(crime_per_200_people, id_field = TRUE)
 
-head(prop_crime_per200_people)
+prop_crime_per200_people
 ```
 
 **Note**: In many cases, calculating rates do results into a few `Inf` and `NA` cell entries. For example, in any cell where the 'population' data is missing or contains `character` inputs, the `rates` formular returns `Inf` or `NA`. We recommend that users re-run the `dataImputation` function after running `rates` function in order to address such occurences.
