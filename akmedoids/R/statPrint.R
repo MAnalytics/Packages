@@ -7,6 +7,8 @@
 #' @param type [character] plot type. Available options are: \code{"lines"} and \code{"stacked"}.
 #' @param y.scaling [character] works only if \code{type="lines"}. \code{y.scaling} set the vertical scales of the cluster panels. Options are: \code{"fixed"}: uses uniform scale for all panels, \code{"free"}: uses variable scales for panels.
 #' @param bandw [numeric] A small probability (quantile) value between \code{[0,1]} to partition the trajectories into three classes, i.e. \code{lower}, \code{central}, and the \code{uppper} classes. The middle of the \code{central} class is defined by the average slope of all trajectories. The upper and the lower limits of the \code{central} class is determined by the value of \code{bandw}. Default value is \code{0.25}, indicating that all slopes within 25th quantiles of the maximum slopes on both sides of the average slope are categorised as \code{central} class.
+#' @param show.plot Whether to show a plot. Default: \code{TRUE}
+#' @param show.stat Whether to show statistics
 #' @examples
 #' traj <- traj
 #' print(traj)
@@ -16,8 +18,8 @@
 #' traj <- props(traj, id_field = TRUE)
 #' clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 #' clustr <- as.vector(clustr$optimSolution)
-#' print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="fixed"))
-#' print(statPrint(clustr, traj, id_field=TRUE, bandw = 0.60, type="stacked"))
+#' print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, type="lines", y.scaling="fixed"))
+#' print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, bandw = 0.60, type="stacked"))
 #' @details Generates the descriptive and change statistics of the trajectory groupings. Given a vector of group membership (labels) and the corresponding data matrix (or data.frame) indexed in the same order, this function generates all the descriptive and change statistics of all the groups.
 #' The function can generate a line and an area stacked plot drawing from the functionalities of the \code{ggplot2} library. For a more customised visualisation, we recommend that users deploy \code{ggplot2} directly (\code{Wickham H. (2016)}).
 #' @return A plot showing group membership or sizes (proportion) and statistics.
@@ -26,7 +28,7 @@
 #' @references \code{Wickham H. (2016). Elegant graphics for Data Analysis. Spring-Verlag New York (2016)}
 #' @export
 
-statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, type = "lines", y.scaling="fixed"){
+statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, show.plot=TRUE, show.stat = TRUE, type = "lines", y.scaling="fixed"){
 
   #joining the data with the clusters
   clustr <- data.frame(cbind(traj, clusters=clustr))
@@ -216,7 +218,7 @@ statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, type = "lines",
   all_min <- c(as.numeric(as.character(temp_upper_classes$slope)), as.numeric(as.character(ave_slope$slope)))
   #what's the quantile value
   upper_clas <- which(all_min < as.vector(round(quantile(all_min, (1-bandw)) , digits=8)))  #bandw =
-  clas_[upper_clas] <- "UPPER"
+  clas_[upper_clas] <- "RISING"
 
   #determining the 'lower' class from the remaining groups.
   temp_lower_classes <- gr_slopes[which(as.numeric(as.character(gr_slopes$slope)) > as.numeric(as.character(ave_slope$slope))),] #separating the slopes into two
@@ -224,16 +226,17 @@ statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, type = "lines",
   all_max <- c(as.numeric(as.character(ave_slope$slope)), as.numeric(as.character(temp_lower_classes$slope)))
   #what's the quantile value
   lower_clas <- which(all_max > as.vector(round(quantile(all_max, bandw) , digits=8)))  #bandw =
-  clas_[nrow(gr_slopes) - (0:(length(lower_clas)-1))] <- "LOWER"
+  clas_[nrow(gr_slopes) - (0:(length(lower_clas)-1))] <- "FALLING"
 
   #input for the stable group
-  clas_[which(!clas_%in%c("UPPER", "LOWER"))] <- "CENTRAL"
+  clas_[which(!clas_%in%c("RISING", "FALLING"))] <- "STABLE"
   class <- data.frame(class=clas_)
   change_Stats <- cbind(change_Stats, class)
 
   #-------------------
 
-  all_statistics <- list(descriptiveStats = desc_Stats, attrib.descr = attrib1, changeStats = change_Stats, attrib.slopes = attrib2)
+  #all_statistics <- list(descriptiveStats = desc_Stats, attrib.descr = attrib1, changeStats = change_Stats, attrib.slopes = attrib2)
+  all_statistics <- list(descriptiveStats = desc_Stats, changeStats = change_Stats)
 
   #-------------------
 

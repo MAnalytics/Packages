@@ -5,7 +5,8 @@
 \title{Descriptive (Change) statistics and plots}
 \usage{
 statPrint(clustr, traj, id_field = TRUE, bandw = 0.25,
-  type = "lines", y.scaling = "fixed")
+  show.plot = TRUE, show.stat = TRUE, type = "lines",
+  y.scaling = "fixed")
 }
 \arguments{
 \item{clustr}{[vector (charater)] A vector of cluster membership (labels). For instance, the result extracted from the \code{\link{akmedoids.clust}} function.}
@@ -15,6 +16,10 @@ statPrint(clustr, traj, id_field = TRUE, bandw = 0.25,
 \item{id_field}{[numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.}
 
 \item{bandw}{[numeric] A small probability (quantile) value between \code{[0,1]} to partition the trajectories into three classes, i.e. \code{lower}, \code{central}, and the \code{uppper} classes. The middle of the \code{central} class is defined by the average slope of all trajectories. The upper and the lower limits of the \code{central} class is determined by the value of \code{bandw}. Default value is \code{0.25}, indicating that all slopes within 25th quantiles of the maximum slopes on both sides of the average slope are categorised as \code{central} class.}
+
+\item{show.plot}{Whether to show a plot. Default: \code{TRUE}}
+
+\item{show.stat}{Whether to show statistics}
 
 \item{type}{[character] plot type. Available options are: \code{"lines"} and \code{"stacked"}.}
 
@@ -39,8 +44,8 @@ print(traj)
 traj <- props(traj, id_field = TRUE)
 clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 clustr <- as.vector(clustr$optimSolution)
-print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="fixed"))
-print(statPrint(clustr, traj, id_field=TRUE, bandw = 0.60, type="stacked"))
+print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, type="lines", y.scaling="fixed"))
+print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, bandw = 0.60, type="stacked"))
 }
 \references{
 \code{Wickham H. (2016). Elegant graphics for Data Analysis. Spring-Verlag New York (2016)}
