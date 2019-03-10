@@ -409,7 +409,7 @@ knitr::kable(tble2, caption = "`Data clustering` functions", col.names = c("SN",
 
 ```
 
-In the following sections, we provide a work example of clustering with `akmedoids.clust` function using the `prop_crime_per200_people` represented in Figure \ref{fig:figs5}. The `statPrint` function will is then be to generate the descriptive summary of the clusters.
+In the following sections, we provide a work example of clustering with `akmedoids.clust` function using the `prop_crime_per200_people` calculated with the ['props'](#props) function. The `statPrint` function will is then be to generate the descriptive summary of the clusters.
 
 
 
@@ -439,7 +439,7 @@ The above plot function generate the plot shown in Figure \ref{fig:figs5}
 ### (i) `akmedoids.clust` function
 
 ***Data***: 
-We use the `prop_crime_per200_people` object derived with the ['props'](#props) function. Each trajectory in Figure \ref{fig:figs5} represents the proportion of crimes per 200 residents in each location over time as calculated under the ['props'](#props) function. In other words, they represent the inequality trajectories and the goal is to extract the inequality trend lines (\ref{fig:figs4}) and cluster them accordingly. In order to achieve this task, a user is required to supply the trajectory object into the `akmedoids.clust` function and set `k`, a vector of length two specifying the minimum and maximum numbers of clusters to loop through. The `akmedoids.clust` function employs the `Calinki-Harabatz` score to determine the best cluster solution (@Calinski1974). The function is ran as follows:
+Figure \ref{fig:figs5} is the plot of the `prop_crime_per200_people` object from the ['props'](#props) function. Each trajectory in Figure \ref{fig:figs5} represents the proportion of crimes per 200 residents in each location over time. In other words, they represent the inequality trajectories and the goal is to first extract the inequality trend lines such as in Figure (\ref{fig:figs4}) and cluster them accordingly. For the `akmedoids.clust` function, a user sets the `k` value which may be an integer or a vector of length two specifying the minimum and maximum numbers of clusters to loop through. In the latter case, the `akmedoids.clust` function employs the `Calinki-Harabatz` score (@Calinski1974;  @Genolini2010) to determine the best cluster solution. The function is ran as follows:
 
 ```{r, echo=TRUE, include=TRUE}
 
@@ -457,7 +457,7 @@ knitr::include_graphics("caliHara.png")
 ```
 
 
-The function generates a performance plot (Figure \ref{fig:figs6}) that shows the `Calinki-Harabatz` scores at different values of `k`. From the plot, the value of `k` at which the score is highest is considered the best. In this case, k = 5 is determine the best solution. The print out from the function also list the group membership (labels) associated to each trajectory, based on the best solution. This can be extracted as follows:   
+In addition to printing the output messages (as above), the `akmedoids.clust` function generates a performance plot (Figure \ref{fig:figs6}) that shows the `Calinki-Harabatz` scores at different values of `k`. From the plot, the best value of `k` is highest at `k=5`, and therefore determined the best solution. Note that the group membership (labels) listed in the output message is that of the best solution determined (i.e. group `A` to group `E`). These labels can be extracted by typing the following command:   
 
 ```{r, echo=TRUE, include=TRUE}
 
@@ -466,17 +466,17 @@ as.vector(cluster_output$optimSolution)
 
 ```
 
-The above extract represents the vector of group memberships of trajectories with indexes corresponding to the row number of the trajectory object (`prop_crime_per200_people`). 
-
+Also, note that the indexes of the group memberships correspond to that of the trajectory object (`prop_crime_per200_people`) inputted into the function. That is, the labels, `"C"`, `"D"`, `"E"`, `....` are the group membership of the trajectories `"E01012628"`,`"E01004768"`,`"E01004803"`,`...` of the object `prop_crime_per200_people`.
 
 ### (ii) `statPrint` function:
 
-Given the vector of group membership (labels), that is `as.vector(cluster_output$optimSolution)` and its corresponding trajectory object  `prop_crime_per200_people`, the `statPrint` function reports both the `descriptive` and the `change` statistics of the groups. The function also generates the plots of the `group memberships` and `performances` (i.e. share of measure captured) over time. An important argument of `statPrint` function is the `bandw` parameter which determines the final classification of the resulting groups into `Rising`, `Stable`, or `Falling`. Please, see the package user manual for more details about this parameter. The outputs can be generated for our current example as follows:
+Given the vector of group membership (labels), such as  `= c("C", "D", "E", "B",....)` in the example above, and its corresponding trajectory object  `prop_crime_per200_people`, the `statPrint` function generates both the `descriptive` and the `change` statistics of the groups. The function also generates the plots of the `group memberships` and their `performances` in terms of their share of the `proportion` measure captured over time. An important argument of `statPrint` function is the `bandw` parameter which determines the final classification of the groups in terms of slope. The `bandw` argument classify each groups into `Rising`, `Stable`, or `Falling` class. Please, see the package `user manual` for more details about this parameter. Using the current example, the function can be ran as follows: 
+
 
 
 ```{r, echo=TRUE, include=TRUE}
 
-#cluster solution
+#assigning cluster membership to a variable
 clustr <- as.vector(cluster_output$optimSolution) 
 
 #plotting the group membership
@@ -486,16 +486,20 @@ print(statPrint(clustr, prop_crime_per200_people, id_field=TRUE,
 ```
 
 ```{r figs7, echo=FALSE, fig.cap=paste("group memberships"), out.width = '120%', fig.align="center"} 
+
 knitr::include_graphics("traj_perfm.png")
+
 ```
 
-See Table \ref{tab:table3} for the detailed description of the field names of outputs above. These outputs are generated along with the plot of group memberships as shown in Figure \ref{fig:figs7}. By changing the argument `type` to `"stacked"` (i.e. `type="stacked"`), a `performance plot` is generated instead (see Figure \ref{fig:figs8}) Note that these plots draw from the `ggplot2` library [@Wickham2016]. For a more customised visualisation, we recommend that users deploy the `ggplot2` library directly. 
+See Table \ref{tab:table3} for the description of the output table fields. These outputs are generated along with the plot of group memberships as shown in Figure \ref{fig:figs7}. By changing the argument `type="line"` to `type="stacked"`, a `performance plot` is generated instead (see Figure \ref{fig:figs8}). Note that these plots draw from the `ggplot2` library [@Wickham2016]. For a more customised visualisation, we recommend that users deploy the `ggplot2` library directly. 
 
-In the context of long-term inequality study, the combination of these outputs should allow inferences to be made regarding whether a group of areas have gained or lost in relation to the overall citywide trend [@Adepeju2019]. For example, whilst relative crime exposure have declined in 33.3% (groups `A` and `B`) of the area, the relative crime exposure have risen in 44.4% (groups `D` and `E`) of the area. The relative crime exposure can be said to be stable in 22.2% (group `C`) of the area, based on the `bandw` parameter.   
+In the context of long-term inequality study, the these outputs should allow inferences to be made regarding relative crime exposure of crime in the area represented by each group or class [@Adepeju2019]. For example, whilst relative crime exposure have declined in 33.3% (groups `A` and `B`) of the area, the relative crime exposure have risen in 44.4% (groups `D` and `E`) of the area. The relative crime exposure can be said to be stable in 22.2% (group `C`) of the area, based on the `bandw` parameter.   
 
 
 ```{r figs8, echo=FALSE, fig.cap=paste("group performance over time"), out.width = '100%', fig.align="center"} 
+
 knitr::include_graphics("traj_perfm2.png")
+
 ```
 
 
@@ -506,24 +510,29 @@ col2 <- c("`group`", "`n`", "`n(%)`", "`%Prop.time1`", "`%Prop.timeT`", "`Change
 col3 <- c("`group membershp`", "`size (no.of.trajectories.)`", "`% size`", "`% proportion of obs. at time 1 (2001)`", "`proportion of obs. at time T (2009)`", "`absolute change in proportion between time1 and timeT`", "`% change in proportion between time 1 and time T`", "`% of trajectories with positive slopes`", "`% of trajectories with negative slopes`", "`classification based on slope`")
 tble3 <- data.frame(col1, col2, col3)
 tble3 <- tble3
+
 ```
 
 ```{r table3, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
+
 knitr::kable(tble3, caption = "`field description of clustering outputs`", col.names = c("SN","field","Description")) %>%
   kable_styling(full_width = F) %>%
   column_spec(1, bold = T, border_right = T) %>%
   column_spec(2, width = "8em", background = "white") %>%
   column_spec(3, width = "12em", background = "white") #%>%
   #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
+
 ```
 
 
 #Conclusion
 
-The `akmedoids` package is developed in order to aid the replication of crime inequality investigation under a citywide crime drop scenario [@Adepeju2019]. However, many functions in this package, such as the `data manipulation` functions are applicable to any longitudinal datasets. For example, the `dataImputation` and `outlierDetect` functions which are used for imputing missing data and identifying outliers, respectively, should be applicable to any longitudinal data analysis. 
+The `akmedoids` package is developed in order to aid the replication of crime inequality investigation conducted in @Adepeju2019. Meanwhile, the utility of the functions in this package is not limited to this study, but rather applicable to any longitudinal datasets. This package is being updated on a regular basis to add more functionalities to the existing `functions` or add new functions to perform new longitudinal data analysis. 
 
-This package is being updated on a regular basis to add more functionalities to the existing `functions`. For instance, we understand that there are several other options for estimating missing data points, all these alternatives will be included in the package in due time. We also plan to add more `data manipulation` functions as well as expand the clustering `anchor` options for higher-order polynomials. 
+Lastly, we employ users to report any bugs encountered while using the package so that they can be fixed immediately. Also, we welcome contributions to this package and such contributions shall be acknowledged accordingly. 
 
-Lastly, we employ users to report any bugs encountered while using the package and direct their queries to us. We also welcome contributions from users.
+
+#Acknowledgment
+
 
 #References
