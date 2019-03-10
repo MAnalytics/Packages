@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.19)  10 MAR 2019 20:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.19)  10 MAR 2019 21:19
 entering extended mode
-**C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmedoid
-s-vignette.tex
+**C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akmedoi
+ds-vignette.tex
 
-(C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmedoids
--vignette.tex
+(C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akmedoid
+s-vignette.tex
 LaTeX2e <2018-12-01>
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -1000,15 +1000,15 @@ Package xcolor Warning: Incompatible color definition on input line 311.
 
 Package xcolor Warning: Incompatible color definition on input line 311.
 
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmedoids
--vignette_files/figure-latex/figs1-1.pdf, id=84, 433.62pt x 505.89pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akme
-doids-vignette_files/figure-latex/figs1-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmed
-oids-vignette_files/figure-latex/figs1-1.pdf>
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akmedoid
+s-vignette_files/figure-latex/figs1-1.pdf, id=84, 433.62pt x 505.89pt>
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akm
+edoids-vignette_files/figure-latex/figs1-1.pdf Graphic file (type pdf)
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akme
+doids-vignette_files/figure-latex/figs1-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-710781557e.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf  used on input
- line 322.
+7106d6b2508.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf  used on inpu
+t line 322.
 (pdftex.def)             Requested size: 433.62555pt x 505.89645pt.
 
 Package xcolor Warning: Incompatible color definition on input line 352.
@@ -1026,7 +1026,7 @@ Package xcolor Warning: Incompatible color definition on input line 371.
                                                   \fi \fi 
 l.384 \end{verbatim}
                      <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710
-781557e.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf>]
+6d6b2508.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 389.
 
@@ -1074,15 +1074,15 @@ Package xcolor Warning: Incompatible color definition on input line 554.
 
 Package xcolor Warning: Incompatible color definition on input line 554.
 
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmedoids
--vignette_files/figure-latex/figs2-1.pdf, id=110, 578.16pt x 289.08pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akme
-doids-vignette_files/figure-latex/figs2-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmed
-oids-vignette_files/figure-latex/figs2-1.pdf>
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akmedoid
+s-vignette_files/figure-latex/figs2-1.pdf, id=110, 578.16pt x 289.08pt>
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akm
+edoids-vignette_files/figure-latex/figs2-1.pdf Graphic file (type pdf)
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akme
+doids-vignette_files/figure-latex/figs2-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-710781557e.dir/akmedoids-vignette_files/figure-latex/figs2-1.pdf  used on input
- line 558.
+7106d6b2508.dir/akmedoids-vignette_files/figure-latex/figs2-1.pdf  used on inpu
+t line 558.
 (pdftex.def)             Requested size: 469.75385pt x 234.8769pt.
 [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
@@ -1090,8 +1090,8 @@ has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.576 
-       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/ak
-medoids-vignette_files/figure-latex/figs2-1.pdf>]
+       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/a
+kmedoids-vignette_files/figure-latex/figs2-1.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 577.
 
@@ -1101,15 +1101,15 @@ Package xcolor Warning: Incompatible color definition on input line 596.
 
 Package xcolor Warning: Incompatible color definition on input line 596.
 
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmedoids
--vignette_files/figure-latex/figs3-1.pdf, id=125, 578.16pt x 289.08pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akme
-doids-vignette_files/figure-latex/figs3-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmed
-oids-vignette_files/figure-latex/figs3-1.pdf>
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akmedoid
+s-vignette_files/figure-latex/figs3-1.pdf, id=125, 578.16pt x 289.08pt>
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akm
+edoids-vignette_files/figure-latex/figs3-1.pdf Graphic file (type pdf)
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akme
+doids-vignette_files/figure-latex/figs3-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-710781557e.dir/akmedoids-vignette_files/figure-latex/figs3-1.pdf  used on input
- line 600.
+7106d6b2508.dir/akmedoids-vignette_files/figure-latex/figs3-1.pdf  used on inpu
+t line 600.
 (pdftex.def)             Requested size: 469.75385pt x 234.8769pt.
 [8pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
@@ -1117,8 +1117,8 @@ has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.638 
-       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/ak
-medoids-vignette_files/figure-latex/figs3-1.pdf>]
+       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/a
+kmedoids-vignette_files/figure-latex/figs3-1.pdf>]
 <inequality.png, id=139, 336.7782pt x 239.4546pt>
 File: inequality.png Graphic file (type png)
 <use inequality.png>
@@ -1149,15 +1149,15 @@ Package xcolor Warning: Incompatible color definition on input line 711.
 
 Package xcolor Warning: Incompatible color definition on input line 711.
 
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmedoids
--vignette_files/figure-latex/figs5-1.pdf, id=147, 578.16pt x 289.08pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akme
-doids-vignette_files/figure-latex/figs5-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/akmed
-oids-vignette_files/figure-latex/figs5-1.pdf>
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akmedoid
+s-vignette_files/figure-latex/figs5-1.pdf, id=147, 578.16pt x 289.08pt>
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akm
+edoids-vignette_files/figure-latex/figs5-1.pdf Graphic file (type pdf)
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/akme
+doids-vignette_files/figure-latex/figs5-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-710781557e.dir/akmedoids-vignette_files/figure-latex/figs5-1.pdf  used on input
- line 715.
+7106d6b2508.dir/akmedoids-vignette_files/figure-latex/figs5-1.pdf  used on inpu
+t line 715.
 (pdftex.def)             Requested size: 469.75385pt x 234.8769pt.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
@@ -1175,8 +1175,8 @@ l.741
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.741 
-       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710781557e.dir/ak
-medoids-vignette_files/figure-latex/figs5-1.pdf>]
+       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-57106d6b2508.dir/a
+kmedoids-vignette_files/figure-latex/figs5-1.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 742.
 
@@ -1261,12 +1261,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 980.
  ) 
 Here is how much of TeX's memory you used:
  14905 strings out of 492946
- 220922 string characters out of 3126266
- 347782 words of memory out of 3000000
+ 220942 string characters out of 3126266
+ 347786 words of memory out of 3000000
  18409 multiletter control sequences out of 15000+200000
  59540 words of font info for 95 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,11n,38p,1050b,461s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,11n,38p,1051b,461s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.en
 c}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-maths
 y.enc}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
@@ -1288,7 +1288,7 @@ Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Users/monsu/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/monsu/
 AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb><C:/Users/mon
 su/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb>
-Output written on akmedoids-vignette.pdf (15 pages, 505865 bytes).
+Output written on akmedoids-vignette.pdf (15 pages, 505877 bytes).
 PDF statistics:
  276 PDF objects out of 1000 (max. 8388607)
  51 named destinations out of 1000 (max. 500000)

@@ -1,5 +1,5 @@
 ---
-title: "`Akmedoids` R-package for longitudinal dataset: A guide to measuring long-term inequality in the exposure to crime at small area level"
+title: "`Akmedoids` R-package for longitudinal dataset: A guide to measuring long-term inequality in the exposure to crime at micro-area levels"
 author: |
   | Adepeju, M., Langton, S., and Bannister, J.
   | Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH
