@@ -1,0 +1,46 @@
+\begin{theindex}
+
+  \item $*$Topic{\relax \fontsize  {12}{14}\selectfont  \ \textbf  {clusters}}
+    \subitem \texttt  {statPrint}, \hyperpage{7}
+  \item $*$Topic{\relax \fontsize  {12}{14}\selectfont  \ \textbf  {datasets}}
+    \subitem \texttt  {population}, \hyperpage{5}
+    \subitem \texttt  {traj}, \hyperpage{9}
+  \item $*$Topic{\relax \fontsize  {12}{14}\selectfont  \ \textbf  {plot,}}
+    \subitem \texttt  {statPrint}, \hyperpage{7}
+
+  \indexspace
+
+  \item \texttt  {akmedoids.clust}, \hyperpage{2}, 
+		\hyperindexformat{\textit}{7, 8}
+  \item \texttt  {alphaLabel}, \hyperpage{3}
+
+  \indexspace
+
+  \item \texttt  {dataImputation}, \hyperpage{3}
+
+  \indexspace
+
+  \item \texttt  {outlierDetect}, \hyperpage{4}
+
+  \indexspace
+
+  \item \texttt  {population}, \hyperpage{5}
+  \item \texttt  {props}, \hyperpage{6}
+
+  \indexspace
+
+  \item \texttt  {rates}, \hyperpage{6}
+
+  \indexspace
+
+  \item \texttt  {statPrint}, \hyperpage{7}
+
+  \indexspace
+
+  \item \texttt  {traj}, \hyperpage{9}
+
+  \indexspace
+
+  \item \texttt  {wSpaces}, \hyperpage{9}
+
+\end{theindex}
