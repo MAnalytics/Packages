@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.19)  10 MAR 2019 16:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.19)  10 MAR 2019 19:42
 entering extended mode
-**C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akmedoi
+**C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akmedoi
 ds-vignette.tex
 
-(C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akmedoid
+(C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akmedoid
 s-vignette.tex
 LaTeX2e <2018-12-01>
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls"
@@ -901,33 +901,33 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 145.
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 213.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 211.
 
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 213.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 211.
 
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 213
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 211
 .
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 213
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 211
 .
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 213.
+(Font)              <10> on input line 211.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 213.
+(Font)              <7> on input line 211.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 213.
-LaTeX Font Info:    Try loading font information for U+msa on input line 213.
+(Font)              <5> on input line 211.
+LaTeX Font Info:    Try loading font information for U+msa on input line 211.
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -935,7 +935,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 fg"
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 213.
+LaTeX Font Info:    Try loading font information for U+msb on input line 211.
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -944,181 +944,172 @@ fg"
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 231.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 229.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 231.
+(hyperref)                than one, level fixed on input line 229.
 
 [1
 
 {C:/Users/monsu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
-Package xcolor Warning: Incompatible color definition on input line 253.
+Package xcolor Warning: Incompatible color definition on input line 247.
 
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 255
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 250
 .
 ("C:\Users\monsu\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ts1lmtt.fd"
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-Package xcolor Warning: Incompatible color definition on input line 259.
+Package xcolor Warning: Incompatible color definition on input line 254.
 
 
-Package xcolor Warning: Incompatible color definition on input line 259.
+Package xcolor Warning: Incompatible color definition on input line 254.
 
 
-Package xcolor Warning: Incompatible color definition on input line 261.
+Package xcolor Warning: Incompatible color definition on input line 256.
 
 
-Package xcolor Warning: Incompatible color definition on input line 266.
+Package xcolor Warning: Incompatible color definition on input line 262.
 
 
-Package xcolor Warning: Incompatible color definition on input line 266.
+Package xcolor Warning: Incompatible color definition on input line 262.
 
 
-Package xcolor Warning: Incompatible color definition on input line 268.
+Package xcolor Warning: Incompatible color definition on input line 264.
 
 
-Package xcolor Warning: Incompatible color definition on input line 286.
+Package xcolor Warning: Incompatible color definition on input line 285.
 
 
-Package xcolor Warning: Incompatible color definition on input line 286.
-
-
-Package xcolor Warning: Incompatible color definition on input line 296.
+Package xcolor Warning: Incompatible color definition on input line 285.
 
 [2pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
 as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.296 \begin{Shaded}
-                    ]
+l.294 
+      ]
 
-Package xcolor Warning: Incompatible color definition on input line 312.
+Package xcolor Warning: Incompatible color definition on input line 295.
 
 
-Package xcolor Warning: Incompatible color definition on input line 312.
+Package xcolor Warning: Incompatible color definition on input line 311.
 
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akmedoid
+
+Package xcolor Warning: Incompatible color definition on input line 311.
+
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akmedoid
 s-vignette_files/figure-latex/figs1-1.pdf, id=80, 433.62pt x 505.89pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akm
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akm
 edoids-vignette_files/figure-latex/figs1-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akme
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akme
 doids-vignette_files/figure-latex/figs1-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-71024fa336b.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf  used on inpu
+710523e7eca.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf  used on inpu
 t line 322.
 (pdftex.def)             Requested size: 433.62555pt x 505.89645pt.
 
-Package xcolor Warning: Incompatible color definition on input line 349.
+Package xcolor Warning: Incompatible color definition on input line 352.
 
 
-Package xcolor Warning: Incompatible color definition on input line 368.
+Package xcolor Warning: Incompatible color definition on input line 371.
 
 
-Package xcolor Warning: Incompatible color definition on input line 368.
+Package xcolor Warning: Incompatible color definition on input line 371.
 
 [3] [4pdfTeX warning (ext4): destination with the same identifier (name{figure.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.381 \end{verbatim}
+l.384 \end{verbatim}
                      <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710
-24fa336b.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf>]
+523e7eca.dir/akmedoids-vignette_files/figure-latex/figs1-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 385.
-
-
-Package xcolor Warning: Incompatible color definition on input line 402.
+Package xcolor Warning: Incompatible color definition on input line 389.
 
 
-Package xcolor Warning: Incompatible color definition on input line 402.
+Package xcolor Warning: Incompatible color definition on input line 406.
 
 
-Package xcolor Warning: Incompatible color definition on input line 419.
+Package xcolor Warning: Incompatible color definition on input line 406.
 
 
-Package xcolor Warning: Incompatible color definition on input line 443.
+Package xcolor Warning: Incompatible color definition on input line 428.
 
 
-Package xcolor Warning: Incompatible color definition on input line 443.
+Package xcolor Warning: Incompatible color definition on input line 452.
+
+
+Package xcolor Warning: Incompatible color definition on input line 452.
+
+
+Package xcolor Warning: Incompatible color definition on input line 452.
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 463.
+Package xcolor Warning: Incompatible color definition on input line 452.
 
 
-Package xcolor Warning: Incompatible color definition on input line 482.
+Package xcolor Warning: Incompatible color definition on input line 452.
 
 
-Package xcolor Warning: Incompatible color definition on input line 482.
+Package xcolor Warning: Incompatible color definition on input line 472.
 
 
-Package xcolor Warning: Incompatible color definition on input line 512.
+Package xcolor Warning: Incompatible color definition on input line 497.
 
 
-Package xcolor Warning: Incompatible color definition on input line 540.
+Package xcolor Warning: Incompatible color definition on input line 497.
 
 
-Package xcolor Warning: Incompatible color definition on input line 540.
-
-
-Package xcolor Warning: Incompatible color definition on input line 540.
+Package xcolor Warning: Incompatible color definition on input line 526.
 
 [6]
 
-Package xcolor Warning: Incompatible color definition on input line 540.
+Package xcolor Warning: Incompatible color definition on input line 554.
 
 
-Package xcolor Warning: Incompatible color definition on input line 540.
+Package xcolor Warning: Incompatible color definition on input line 554.
 
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akmedoid
-s-vignette_files/figure-latex/figs2-1.pdf, id=107, 578.16pt x 289.08pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akm
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akmedoid
+s-vignette_files/figure-latex/figs2-1.pdf, id=106, 578.16pt x 289.08pt>
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akm
 edoids-vignette_files/figure-latex/figs2-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akme
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akme
 doids-vignette_files/figure-latex/figs2-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-71024fa336b.dir/akmedoids-vignette_files/figure-latex/figs2-1.pdf  used on inpu
-t line 544.
+710523e7eca.dir/akmedoids-vignette_files/figure-latex/figs2-1.pdf  used on inpu
+t line 558.
 (pdftex.def)             Requested size: 469.75385pt x 234.8769pt.
-
-Package xcolor Warning: Incompatible color definition on input line 563.
-
-
-Package xcolor Warning: Incompatible color definition on input line 582.
-
-
-Package xcolor Warning: Incompatible color definition on input line 582.
-
-
-Package xcolor Warning: Incompatible color definition on input line 582.
-
 [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.582 \end{Shaded}
-                   <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024
-fa336b.dir/akmedoids-vignette_files/figure-latex/figs2-1.pdf>]
+l.576 
+       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/a
+kmedoids-vignette_files/figure-latex/figs2-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 582.
+Package xcolor Warning: Incompatible color definition on input line 577.
 
 
-Package xcolor Warning: Incompatible color definition on input line 582.
+Package xcolor Warning: Incompatible color definition on input line 596.
 
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akmedoid
-s-vignette_files/figure-latex/figs3-1.pdf, id=123, 578.16pt x 289.08pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akm
+
+Package xcolor Warning: Incompatible color definition on input line 596.
+
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akmedoid
+s-vignette_files/figure-latex/figs3-1.pdf, id=121, 578.16pt x 289.08pt>
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akm
 edoids-vignette_files/figure-latex/figs3-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akme
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akme
 doids-vignette_files/figure-latex/figs3-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-71024fa336b.dir/akmedoids-vignette_files/figure-latex/figs3-1.pdf  used on inpu
-t line 586.
+710523e7eca.dir/akmedoids-vignette_files/figure-latex/figs3-1.pdf  used on inpu
+t line 600.
 (pdftex.def)             Requested size: 469.75385pt x 234.8769pt.
 [8pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
@@ -1126,183 +1117,180 @@ has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.638 
-       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/a
+       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/a
 kmedoids-vignette_files/figure-latex/figs3-1.pdf>]
-<inequality.png, id=139, 336.7782pt x 239.4546pt>
+<inequality.png, id=135, 336.7782pt x 239.4546pt>
 File: inequality.png Graphic file (type png)
 <use inequality.png>
 Package pdftex.def Info: inequality.png  used on input line 641.
 (pdftex.def)             Requested size: 336.77737pt x 239.45401pt.
+
+Package xcolor Warning: Incompatible color definition on input line 685.
+
+
+Package xcolor Warning: Incompatible color definition on input line 710.
+
+
+Package xcolor Warning: Incompatible color definition on input line 710.
+
+
+Package xcolor Warning: Incompatible color definition on input line 710.
+
 [9pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.686 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.2
-}) has been already used, duplicate ignored
+l.710 \end{Shaded}
+                   <./inequality.png>]
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.686 
-       <./inequality.png>]
-
-Package xcolor Warning: Incompatible color definition on input line 687.
+Package xcolor Warning: Incompatible color definition on input line 710.
 
 
-Package xcolor Warning: Incompatible color definition on input line 695.
+Package xcolor Warning: Incompatible color definition on input line 710.
 
-
-Package xcolor Warning: Incompatible color definition on input line 695.
-
-
-Package xcolor Warning: Incompatible color definition on input line 697.
-
-
-Package xcolor Warning: Incompatible color definition on input line 722.
-
-
-Package xcolor Warning: Incompatible color definition on input line 722.
-
-<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akmedoid
-s-vignette_files/figure-latex/figs5-1.pdf, id=147, 578.16pt x 289.08pt>
-File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akm
+<C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akmedoid
+s-vignette_files/figure-latex/figs5-1.pdf, id=144, 578.16pt x 289.08pt>
+File: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akm
 edoids-vignette_files/figure-latex/figs5-1.pdf Graphic file (type pdf)
-<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akme
+<use C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/akme
 doids-vignette_files/figure-latex/figs5-1.pdf>
 Package pdftex.def Info: C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5
-71024fa336b.dir/akmedoids-vignette_files/figure-latex/figs5-1.pdf  used on inpu
-t line 726.
+710523e7eca.dir/akmedoids-vignette_files/figure-latex/figs5-1.pdf  used on inpu
+t line 714.
 (pdftex.def)             Requested size: 469.75385pt x 234.8769pt.
-[10pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
- has been already used, duplicate ignored
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 725.
+
+[10pdfTeX warning (ext4): destination with the same identifier (name{table.2}) 
+has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.736 \subsubsection
-                    {\texorpdfstring{(i) \texttt{akmedoids.clust} <C:/Users/mon
-su/AppData/Local/Temp/RtmpwtO6bc/preview-571024fa336b.dir/akmedoids-vignette_fi
-les/figure-latex/figs5-1.pdf>]
+l.741 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+5}) has been already used, duplicate ignored
 
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 737.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.741 
+       <C:/Users/monsu/AppData/Local/Temp/RtmpwtO6bc/preview-5710523e7eca.dir/a
+kmedoids-vignette_files/figure-latex/figs5-1.pdf>]
 
-
-Package xcolor Warning: Incompatible color definition on input line 754.
-
-
-Package xcolor Warning: Incompatible color definition on input line 779.
+Package xcolor Warning: Incompatible color definition on input line 742.
 
 
-Package xcolor Warning: Incompatible color definition on input line 779.
+Package xcolor Warning: Incompatible color definition on input line 767.
 
-<caliHara.png, id=163, 342.078pt x 174.05025pt>
+
+Package xcolor Warning: Incompatible color definition on input line 767.
+
+<caliHara.png, id=159, 342.078pt x 174.05025pt>
 File: caliHara.png Graphic file (type png)
 <use caliHara.png>
-Package pdftex.def Info: caliHara.png  used on input line 783.
+Package pdftex.def Info: caliHara.png  used on input line 771.
 (pdftex.def)             Requested size: 342.08237pt x 174.05246pt.
+
+Package xcolor Warning: Incompatible color definition on input line 786.
+
 [11pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.797 
-       <./caliHara.png>]
+l.786 \begin{Shaded}
+                     <./caliHara.png>]
 
-Package xcolor Warning: Incompatible color definition on input line 798.
-
-
-Package xcolor Warning: Incompatible color definition on input line 805.
+Package xcolor Warning: Incompatible color definition on input line 793.
 
 
-Package xcolor Warning: Incompatible color definition on input line 805.
+Package xcolor Warning: Incompatible color definition on input line 793.
 
 
-Package xcolor Warning: Incompatible color definition on input line 828.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Package xcolor Warning: Incompatible color definition on input line 853.
+Package xcolor Warning: Incompatible color definition on input line 841.
 
 
-Package xcolor Warning: Incompatible color definition on input line 853.
+Package xcolor Warning: Incompatible color definition on input line 841.
 
-<traj_perfm.png, id=170, 398.08725pt x 269.20575pt>
+<traj_perfm.png, id=167, 398.08725pt x 269.20575pt>
 File: traj_perfm.png Graphic file (type png)
 <use traj_perfm.png>
-Package pdftex.def Info: traj_perfm.png  used on input line 857.
+Package pdftex.def Info: traj_perfm.png  used on input line 845.
 (pdftex.def)             Requested size: 398.11057pt x 269.2215pt.
-<traj_perfm2.png, id=174, 316.18124pt x 274.626pt>
+<traj_perfm2.png, id=171, 316.18124pt x 274.626pt>
 File: traj_perfm2.png Graphic file (type png)
 <use traj_perfm2.png>
-Package pdftex.def Info: traj_perfm2.png  used on input line 886.
+Package pdftex.def Info: traj_perfm2.png  used on input line 874.
 (pdftex.def)             Requested size: 316.18047pt x 274.62532pt.
 [12] [13pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.934 
+l.922 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.934 
+l.922 
        <./traj_perfm.png> <./traj_perfm2.png>] [14pdfTeX warning (ext4): destin
 ation with the same identifier (name{table.3}) has been already used, duplicate
  ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.982 
+l.970 
       ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 997.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 976.
 [15]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 997.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 976.
 (akmedoids-vignette.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 997.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 997.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 976.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 976.
 Package rerunfilecheck Info: File `akmedoids-vignette.out' has not changed.
-(rerunfilecheck)             Checksum: 4B54CB48EF24ABB90BA01ED8123E0A9B;2232.
+(rerunfilecheck)             Checksum: BB155D6981D7F054E74B0DD25F35FD41;2205.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 997.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 976.
  ) 
 Here is how much of TeX's memory you used:
- 14911 strings out of 492946
- 221001 string characters out of 3126266
- 347754 words of memory out of 3000000
+ 14907 strings out of 492946
+ 220948 string characters out of 3126266
+ 346743 words of memory out of 3000000
  18407 multiletter control sequences out of 15000+200000
- 59890 words of font info for 99 fonts, out of 3000000 for 9000
+ 59789 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  32i,11n,38p,1051b,461s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.en
-c}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.en
-c}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathi
-t.enc}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
-athsy.enc}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
+c}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-maths
+y.enc}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
+athit.enc}{C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
 lm-ts1.enc}<C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
 /lm/lmbx10.pfb><C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/lm/lmbx12.pfb><C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 1/public/lm/lmbx9.pfb><C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/t
 ype1/public/lm/lmbxi10.pfb><C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/public/lm/lmmi10.pfb><C:/Users/monsu/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/lm/lmmi7.pfb><C:/Users/monsu/AppData/Local/Programs/MiKTeX
- 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/monsu/AppData/Local/Programs/MiK
-TeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/monsu/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb><C:/Users/monsu/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/monsu/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/monsu/AppData/Local
-/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/monsu/AppData/L
-ocal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb><C:/Users/monsu/AppDa
-ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Users/monsu/A
-ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/mon
-su/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb><C:/Users/
-monsu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb>
-Output written on akmedoids-vignette.pdf (15 pages, 511505 bytes).
+9/fonts/type1/public/lm/lmr10.pfb><C:/Users/monsu/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/monsu/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/lm/lmr9.pfb><C:/Users/monsu/AppData/Local/Programs/M
+iKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/monsu/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/monsu/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/monsu/AppData/Loca
+l/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb><C:/Users/monsu/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Users/monsu/AppD
+ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Users/monsu/
+AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb><C:/Users/mon
+su/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb>
+Output written on akmedoids-vignette.pdf (15 pages, 504855 bytes).
 PDF statistics:
- 281 PDF objects out of 1000 (max. 8388607)
- 51 named destinations out of 1000 (max. 500000)
+ 271 PDF objects out of 1000 (max. 8388607)
+ 49 named destinations out of 1000 (max. 500000)
  12433 words of extra memory for PDF output out of 14400 (max. 10000000)
 
