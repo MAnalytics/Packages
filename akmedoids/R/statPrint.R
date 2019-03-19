@@ -8,7 +8,6 @@
 #' @param y.scaling [character] works only if \code{type="lines"}. \code{y.scaling} set the vertical scales of the cluster panels. Options are: \code{"fixed"}: uses uniform scale for all panels, \code{"free"}: uses variable scales for panels.
 #' @param bandw [numeric] A small probability (quantile) value between \code{[0,1]} to partition the trajectories into three classes, i.e. \code{lower}, \code{central}, and the \code{uppper} classes. The middle of the \code{central} class is defined by the average slope of all trajectories. The upper and the lower limits of the \code{central} class is determined by the value of \code{bandw}. Default value is \code{0.25}, indicating that all slopes within 25th quantiles of the maximum slopes on both sides of the average slope are categorised as \code{central} class.
 #' @examples
-#' traj <- traj
 #' print(traj)
 #' traj <- dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1,
 #' fill_zeros = FALSE)
@@ -16,8 +15,8 @@
 #' traj <- props(traj, id_field = TRUE)
 #' clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 #' clustr <- as.vector(clustr$optimSolution)
-#' print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, type="lines", y.scaling="fixed"))
-#' print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, bandw = 0.30, type="stacked"))
+#' print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="fixed"))
+#' print(statPrint(clustr, traj, id_field=TRUE, bandw = 0.30, type="stacked"))
 #' @details Generates the descriptive and change statistics of the trajectory groupings. Given a vector of group membership (labels) and the corresponding data matrix (or data.frame) indexed in the same order, this function generates all the descriptive and change statistics of all the groups.
 #' The function can generate a line and an area stacked plot drawing from the functionalities of the \code{ggplot2} library. For a more customised visualisation, we recommend that users deploy \code{ggplot2} directly (\code{Wickham H. (2016)}).
 #' @return A plot showing group membership or sizes (proportion) and statistics.

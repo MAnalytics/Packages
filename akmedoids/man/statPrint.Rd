@@ -31,7 +31,6 @@ Generates the descriptive and change statistics of the trajectory groupings. Giv
 The function can generate a line and an area stacked plot drawing from the functionalities of the \code{ggplot2} library. For a more customised visualisation, we recommend that users deploy \code{ggplot2} directly (\code{Wickham H. (2016)}).
 }
 \examples{
-traj <- traj
 print(traj)
 traj <- dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1,
 fill_zeros = FALSE)
@@ -39,8 +38,8 @@ print(traj)
 traj <- props(traj, id_field = TRUE)
 clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 clustr <- as.vector(clustr$optimSolution)
-print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, type="lines", y.scaling="fixed"))
-print(statPrint(clustr, traj, id_field=TRUE, show.plot, show.stat, bandw = 0.30, type="stacked"))
+print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="fixed"))
+print(statPrint(clustr, traj, id_field=TRUE, bandw = 0.30, type="stacked"))
 }
 \references{
 \code{Wickham H. (2016). Elegant graphics for Data Analysis. Spring-Verlag New York (2016)}
