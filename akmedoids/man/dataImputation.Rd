@@ -37,7 +37,6 @@ This function fills any missing entries (\code{NA}, \code{Inf}, \code{null}) in 
 Given a matrix or data.frame with some missing values indicated by (\code{NA}, \code{Inf}, \code{null}), this function impute the missing value by using either an estimation from the corresponding rows or columns, or to use a regression method to estimate the missing values.
 }
 \examples{
-traj <- data(traj)
 print(traj)
- dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1, fill_zeros = FALSE)
+dataImputation(traj, id_field = TRUE, method = 1, replace_with = 1, fill_zeros = FALSE)
 }
