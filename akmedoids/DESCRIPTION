@@ -17,4 +17,3 @@ Suggests:
     knitr,
     rmarkdown,
     pander
-VignetteBuilder: knitr
