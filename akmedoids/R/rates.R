@@ -20,10 +20,11 @@
 #'     pop2[,list_[u_]] <- "NA"
 #' }
 #' #estimate missing fields
-#' pop_imp_result <- dataImputation(pop2, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
+#' pop_imp_result <- dataImputation(pop2, id_field = TRUE, method = 2,
+#' replace_with = 1, fill_zeros = FALSE)
 #' #calculate rates i.e. crimes per 200 population
 #' crime_rates <- rates(traj2, denomin=pop_imp_result, id_field=TRUE, multiplier = 200)
-#' @return The key output is a
+#' @return A matrix of 'rates' measures
 #' @export
 
 

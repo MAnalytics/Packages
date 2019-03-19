@@ -16,7 +16,7 @@ rates(traj, denomin, id_field, multiplier)
 \item{multiplier}{[numeric] A quantify by which to the ratio \code{traj/denomin} is expressed. Default is \code{100}.}
 }
 \value{
-The key output is a
+A matrix of 'rates' measures
 }
 \description{
 Calculates rates from 'observed' count and a denominator data
@@ -36,7 +36,8 @@ for(u_ in 1:length(list_)){
     pop2[,list_[u_]] <- "NA"
 }
 #estimate missing fields
-pop_imp_result <- dataImputation(pop2, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
+pop_imp_result <- dataImputation(pop2, id_field = TRUE, method = 2,
+replace_with = 1, fill_zeros = FALSE)
 #calculate rates i.e. crimes per 200 population
 crime_rates <- rates(traj2, denomin=pop_imp_result, id_field=TRUE, multiplier = 200)
 }

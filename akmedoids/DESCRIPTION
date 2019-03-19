@@ -1,11 +1,10 @@
 Package: akmedoids
 Type: Package
-Title: Akmedoids: 'Anchored kmedoids' for longitudinal data clustering
+Title: The 'anchored kmedoids' for longitudinal data clustering
 Version: 0.1.0
-Date: 2019-02-06
+Date: 2019-03-19
 Author: Monsuru Adepeju [cre, aut], Samuel Langton [aut], Jon Bannister [aut]
 Maintainer: Monsuru Adepeju <monsuur2010@yahoo.com> 
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: Advances a longitudinal clustering technique ('akmedoids') for grouping trajectories based on the similarities of their long-term trends and determines the optimal solution based on the Calinski-Harabatz criterion. Includes functions to extract descriptive statistics and generate a visualisation of the resulting groups. The package also include a number of other useful functions for exploring and manipulating longitudinal data prior to the clustering process. 
 Depends: R (>= 3.5.0)
 License: GPL-2

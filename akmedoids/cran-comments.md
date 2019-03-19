@@ -1,10 +1,10 @@
----
-title: "cran-comments.md"
-author: "geoMADE"
-date: "19 March 2019"
-output: html_document
----
+## Test environments
+* local OS X install, R 3.5.2
+* ubuntu 14.04 (on travis-ci), R 3.5.2
+* win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
 
+0 errors | 0 warnings | 0 note
+
+* This is a new release.

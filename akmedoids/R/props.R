@@ -15,7 +15,7 @@
 #' @return A matrix of proportion measures
 #' @export
 
-props <- function(traj, id_field = FALSE){
+props <- function(traj, id_field = TRUE){
   dat <- traj
   props <- dat
   if(id_field==FALSE){

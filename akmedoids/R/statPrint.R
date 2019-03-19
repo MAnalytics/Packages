@@ -79,7 +79,7 @@ statPrint <- function(clustr, traj, id_field=TRUE, bandw = 0.25, type = "lines",
   #----------------------------------------------------
   #plotting
   #----------------------------------------------------
-  ggplot <- aes <- Year <- value <- id <- geom_line <- facet_wrap <- geom_smooth <- theme_minimal <- NULL
+  ggplot <- aes <- Year <- value <- id <- geom_line <- facet_wrap <- geom_smooth <- theme_minimal <- variable <- NULL
   #plot option 1:
   if(type=="lines"){
   if(y.scaling=="fixed"){
