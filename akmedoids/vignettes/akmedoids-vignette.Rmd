@@ -4,16 +4,21 @@ author: |
   | Adepeju, M., Langton, S., and Bannister, J.
   | Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH
 date: "`r Sys.Date()`"
+
 output:
+  pdf_document:
+    dev: png
+  
+#output:
   #word_document: default
   #always_allow_html: yes
-  pdf_document: default
+#  pdf_document: default
 always_allow_html: yes
 fig_caption: yes
 bibliography: references.bib
-abstract: The `akmedoids` advances a set of R-functions for longitudinal clustering
-  of trajectories based on the similarities of their long-term trends and determines
-  the optimal solution based on the `Calinski-Harabatz` criterion [@Calinski1974]. The package also include a number of useful functions for addressing common data issues prior to any advanced analysis. The primary goal of the `akmedoids` package is to aid replication of `crime inequality investigation under crime drop` for cities around the world (see Adepeju et al. 2019). In this document, we provide a guide to replicating this investigation. Meanwhile, it is argued that both the data manipulation and clustering functions provided in this package can be applied in any field.  
+abstract: The `akmedoids` package advances a set of R-functions for longitudinal clustering of long-term trajectories and determines the optimal solution based on the `Caliński-Harabatz` criterion (Caliński and Harabasz 1974). The package also includes a set of functions for addressing common data issues, such as missing entries and outliers, prior to conducting advance longitudinal data analysis. One of the key objectives of this package is to facilitate easy replication of a recent paper which examined small area inequality in the crime drop (see Adepeju et al. 2019). This document is created to provide a guide towards accomplishing this objective. Many of the functions provided in the `akmedoids` package may be applied to longitudinal data in general. 
+  
+  
 vignette: |
   %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
@@ -85,12 +90,13 @@ knitr::opts_chunk$set(
 ```
 # Introduction
 
-The longitudinal clustering analysis is ubiquitous in social and behavioural sciences for investigating the developmental processes of a phenomenon over time. Examples of the commonly used techniques in these areas include the group-based trajectory modelling (GBTM) and the non-parametric kmeans methods. A key feature of these techniques is their high sensitivity to outliers and short-term fluctuations in the trajectories, thereby minimising the power of the techniques to identify long-term linear trends in the data. In crime and place research, for example, the identification of such `long-term` linear trends may help to develop some theoretical understanding of criminal victimisation within a geographical space [@Griffith2004]. In order to address this challenge, we advance a novel technique named `anchored kmedoids` (`akmedoids`) which implements three key modifications to the existing longitudinal `kmeans` approach. First, it approximates trajectories using ordinary least square regression (`OLS`) and second, it `anchors` the initialisation process with median observations. And third, it uses `medoid` observations as new anchors for each iteration of the expectation-maximisation procedure [@Celeux1992]. These modifications ensure that the impacts of short-term fluctuations and outliers are eliminated. By linking the final groupings back to the original trajectories, a clearer delineation of the long-term linear trends of trajectories are obtained.
+Longitudinal clustering analysis is ubiquitous in social and behavioural sciences for investigating the developmental processes of a phenomenon over time. Examples of the commonly used techniques in these areas include group-based trajectory modelling (GBTM) and the non-parametric kmeans method. Whilst kmeans has a number of benefits over GBTM, such as more relaxed statistical assumptions, generic implementations render it more sensitive to outliers and short-term fluctuations, which minimises its ability to identify long-term linear trends in data. In crime and place research, for example, the identification of such `long-term` linear trends may help to develop some theoretical understanding of criminal victimisation within a geographical space [@Weisburd2004; @Griffith2004]. In order to address this sensitivity problem, we advance a novel technique named `anchored kmedoids` (`'akmedoids'`) which implements three key modifications to the existing longitudinal `kmeans` approach. First, it approximates trajectories using ordinary least square regression (`OLS`) and second, `anchors` the initialisation process with median observations. It then deploys the `medoids` observations as new anchors for each iteration of the expectation-maximisation procedure [@Celeux1992]. These modifications ensure that the impacts of short-term fluctuations and outliers are minimised. By linking the final groupings back to the original trajectories, a clearer delineation of the long-term linear trends of trajectories are obtained.
 
-We provide the `akmedoids` as an open-source package using `R` platform. The goal is to facilitate easy uptake of the package in any field. Leading to the main `clustering` functions are a number of useful `data manipulation` functions for addressing common data issues, such as `missing entries` and extreme `outliers` in a longitudinal dataset. We provided a worked example using a small sample dataset that should allow users to get a clear understanding of the operation of each function. 
+We facilitate the easy use of `akmedoids` through an open-source package using `R`. We encourage the use of the package outside of criminology, should it be appropriate. Before outlining the main `clustering` functions, we demonstrate the use of a few `data manipulation` functions that assist in data preparation. The worked demonstration uses a small example dataset which should allow users to get a clear understanding of the operation of each function. 
 
 #1. Data manipulation
-Table \ref{tab:table1} shows the main data manipulation functions and their descriptions. The data manipulation functions is to help prepare data for advance analysis. They also include functions to convert longitudinal data from `count` measure to the `proportion` measure required for the crime inequality investigation. In order to demonstrate the utility of these functions, we provide a simulated dataset `traj` which can be called by typing `traj` in `R` console after loading the `akmedoids` library.
+
+Table \ref{tab:table1} shows the main data manipulation functions and their descriptions. These functions help to address common data issues prior to analysis, as well as basic data manipulation tasks such as converting longitudinal data from `count` to `proportion` measures (as per the crime inequality paper where `akmedoids` was first implemented). In order to demonstrate the utility of these functions, we provide a simulated dataset `traj` which can be called by typing `traj` in `R` console after loading the `akmedoids` library.
 
 ```{r, echo=FALSE, include=FALSE}
 require(knitr)
@@ -114,8 +120,9 @@ knitr::kable(tble, caption = "`Data manipulation` functions", col.names = c("SN"
   #row_spec(3:5, bold = T, color = "white", background = "#D7261E")
 ```
 
-### (i) `"dataImputation"` functions
-This function calculates any missing entries in a data, according to a chosen method. This function recognises three types of data entries as missing, namely `NA`, `Inf`, `null`, with an option to either consider `0` as a missing value or not. Furthermore, the function provide a replacement option for the missing entries, based on two methods. First, an `arithmetic` method which uses the `mean`, `minimum` or `maximum` value from the corresponding rows or columns in which a missing value is located. Second, a `regression` method which uses a linear regression line to estimate the missing values. Using the regression method, only the missing data points derive values from the regression line while the remaining (observed) data points retain their original values. The function terminates if there are trajectories with only one observation. Below is a demonstration of how the `regression` option estimates the missing values using the `traj` dataset. 
+### (i) `"dataImputation"` function
+
+Calculates any missing entries in a data, according to a chosen method. This function recognises three kinds of data entries as missing. These are `NA`, `Inf`, `null`, and an option of whether or not to consider `0`'s as missing values. The function provides a replacement option for the missing entries using two methods. First, an `arithmetic` method which uses the `mean`, `minimum` or `maximum` value of the corresponding rows or columns of the missing values. Second, a `regression` method which uses OLS  regression lines to estimate the missing values. Using the regression method, only the missing data points derive values from the regression line while the remaining (observed) data points retain their original values. The function terminates if there is any trajectory with only one observation in it. Using the `'traj'` dataset, we demonstrate how the `'regression'` method estimates missing values. 
 
 
 ```{r, eval=FALSE}
@@ -147,7 +154,7 @@ ncol(traj)
 ```
 
 
-The first column of the `traj` object is the `id` (unique) field. In many applications, it is necessary to preserve the `id` column in order to allow the linking of outputs to other external datasets. Many of the functions in the `akmedoids` provides an option to recognise the first column of an input dataset as the unique field. The `dataImputation` function can be used to imput the missing data point of `traj` object as follows:
+The first column of the `traj` object is the `id` (unique) field. In many applications, it is necessary to preserve the `id` column in order to allow linking of outputs to other external datasets, such as spatial location data. Most of the functions of the `akmedoids` provides an option to recognise the first column of an input dataset as the unique field. The `dataImputation` function can be used to imput the missing data point of `traj` object as follows:
 
 
 ```{r, eval=TRUE}
@@ -158,7 +165,7 @@ imp_traj <- dataImputation(traj, id_field = TRUE, method = 2,
 head(imp_traj)
 ```
 
-The argument `method = 2` in the function refers to the `regression` technique, while the argument `replace_with = 1` indicate `linear` option (which is currently the only available option for the regression method). Figure \ref{fig:figs1} is a graphical illustration of how the function approximates the missing values for the dataset.
+The argument `method = 2` refers to the `regression` technique, while the argument `replace_with = 1` refers to the `linear` option (currently the only available option). Figure \ref{fig:figs1} is a graphical illustration of how this method approximates the missing values of the `traj` object.
 
 
 ```{r figs1, echo=FALSE, fig.width=6,fig.height=7,fig.align="center", fig.cap="\\label{fig:figs1} data imputation with regression"}
@@ -214,11 +221,11 @@ par(xpd=FALSE)
 ```
 
 
-### A special use of '`dataImputation`' function:
+### Estimating the population data using the `'dataImputation'` function
 
-Generally, obtaining the denominator information (i.e. population) for non-census years is a difficult task in longitudinal studies. This challenge pose a significant drawback to accurate estimation of measures, such as crime rates and population-at-risk of an infectious disease, across a geographical space. Given a limited number of denominator information, an alternative way of obtaining the missing data points is to interpolate and/or extrapolate the missing population information using the available data points. The `dataImputation` function can be used for perform this task. 
+Obtaining the denominator information (e.g. population estimates to normalise counts) of local areas within a city for non-census years is problematic in longitudinal studies. This challenge poses a significant drawback to the accurate estimation of various measures, such as crime rates and population-at-risk of an infectious disease. Assuming a limited amount of denominator information is available, an alternative way of obtaining the missing data points is to interpolate and/or extrapolate the missing population information using the available data points. The `dataImputation` function can be used to perform this task. 
 
-The key step towards using the function for this purpose is to create a matrix (in `Excel`), containing both the available fields and the missing fields arranged in their appropriate order. All the entries of the missing fields can be filled with either `NA` or `null`. An example of this type of problem is demonstrated below with a population data with only two available data fields. The corresponding `input` matrix of the population data is also shown.
+The key step towards using the function for this purpose is to create a matrix, containing both the available fields and the missing fields arranged in their appropriate order. All the entries of the missing fields can be filled with either `NA` or `null`. Below is a demonstration of this task with a sample population dataset with only two available data fields. The corresponding `input` matrix is constructed as shown.
 
 ```{r, eval=TRUE}
 
@@ -266,11 +273,12 @@ head(pop_imp_result)
 ```
 
 
-Given that there are only two data points in each row, the `regression` method simply generates the missing values by fitting a straight line to the available data points. In other words, the higher the number of available data points for any trajectory the better the estimation of the missing points. 
+Given that there are only two data points in each row, the `regression` method will simply generate the missing values by fitting a straight line to the available data points. The higher the number of available data points in any trajectory the better the estimation of the missing points. Figure \ref{fig:figs1} illustrates this estimation process. 
 
 
 ###(ii) `"rates"` function
-Given a longitudinal data ($m\times n$) and its associated denominator data ($s\times n$), the `rates` function converts the longitudinal data to 'rates' measures (e.g. counts per 100 residents). Both the longitudinal and the denominator data may contain different number of rows, but they must have the same number of columns, and must include the `id` (unique) field in their respective first column. They do not have to be sorted. The output contains only rows whose `id` values match in both data. We demonstrate the utility of this function with the `imp_traj` object (above) and the estimated population data ('`pop_imp_result`'). 
+
+Given a longitudinal data ($m\times n$) and its associated denominator data ($s\times n$), the `'rates'` function converts the longitudinal data to 'rates' measures (e.g. counts per 100 residents). Both the longitudinal and the denominator data may contain different number of rows, but need to have the same number of columns, and must include the `id` (unique) field as their first column. The rows do not have to be sorted in any particular order. The rate measures (i.e. the output) will contain only rows whose `id's` match from both datasets. We demonstrate the utility of this function using the `imp_traj` object (above) and the estimated population data ('`pop_imp_result`'). 
 
 
 ```{r, eval=TRUE}
@@ -287,13 +295,13 @@ nrow(crime_per_200_people)
 
 ```
 
-It can be observed that the number of rows of the output data is 9. This implies that only 9 `location_ids` match between the two dataset. The unmatched `ids` are ignored. **Note**: the calculation of `rates` often returns output with some of the cell entries having `Inf` and `NA` values due to calculation errors and character inputs in the data. We therefore recommend that users re-run the `dataImputation` function after generating `rates` measures for a large data matrix.
+From the output, it can be observed that the number of rows of the output data is 9. This implies that only 9 `location_ids` match between the two datasets. The unmatched `ids` are ignored. **Note**: the calculation of `rates` often returns outputs with some of the cell entries having `Inf` and `NA` values, due to calculation errors and character values in the data. We therefore recommend that users re-run the `dataImputation` function after generating `rates` measures, especially for a large data matrix.
 
 
 ###(iii) `"props"` function {#props}
 
 
-Given a longitudinal data, the `props` function converts each data point (i.e. entry in each cell) to the proportion of the sum of their corresponding column. Using the `crime_per_200_people` estimates above, we can derive the `proportion of crime per 200 people` for each entry as:  
+Given a longitudinal data, the `props` function converts each data point (i.e. entry in each cell) to the proportion of the sum of their corresponding column. Using the `crime_per_200_people` estimated above, we can derive the `proportion of crime per 200 people` for each entry as follows:  
 
 
 ```{r, eval=TRUE}
@@ -311,11 +319,11 @@ colSums(prop_crime_per200_people[,2:ncol(prop_crime_per200_people)])
 
 ```
 
-As first demonstrated in @Adepeju2019 in their long-term inequality study, we will use this `proportion` measure to demonstrate the main clustering function of this package. 
+In line with the demonstration in @Adepeju2019, we will use these `proportion` measures to demonstrate the main clustering function of this package. 
 
 
 ### (iv) `"outlierDetect"` function
-This function is aimed at allowing users to identify any outlier observations in a longitudinal data, and replace or remove them accordingly. The first step to addressing outliers in any data is to first visualise (plot) the data. A user can then decide the cut-off for isolating the outliers. The `outlierDetect` function provides two options for doing this: (`i`) a `quantile` method, while isolate any observation with a value higher than a specified quantile of the values distribution, and (`ii`) a `manual` method, in which a user defines the cut-off value. The '`replace_with`' argument is used to determine whether the outlier value should be replaced with the mean value of the row or the column in which they are located. The user also has the option to simply remove the trajectory that contains the outlier value. In deciding whether a trajectory contains outlier or not, the `count` argument allows the user to set the `horizontal threshold` (i.e. number of outlier values that must detected in a trajectory) in order for the trajectory to be considered as having an outlier observations. Below, we demonstrate the utility of the `outlierDetect` function using the `imp_traj` data above. 
+This function is aimed at allowing users to identify any outlier observations in their longitudinal data, and replace or remove them accordingly. The first step towards identifying outliers in any data is to visualise the data. A user can then decide a cut-off value for isolating the outliers. The `outlierDetect` function provides two options for doing this: (`i`) a `quantile` method, which isolates any observations with values higher than a specified quantile of the data values distribution, and (`ii`) a `manual` method, in which a user specifies the cut-off value. The '`replace_with`' argument is used to determine whether an outlier value should be replaced with the mean value of the row or the mean value of the column in which the outlier is located. The user also has the option to simply remove the trajectory that contains an outlier value. In deciding whether a trajectory contains outlier or not, the `count` argument allows the user to set an horizontal threshold (i.e. number of outlier values that must occur in a trajectory) in order for the trajectory to be considered as having outlier observations. Below, we demonstrate the utility of the `outlierDetect` function using the `imp_traj` data above. 
 
 
 ```{r figs2, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs2}, Identifying outliers"}
@@ -342,7 +350,7 @@ print(p)
 
 Figure \ref{fig:figs2} is the output of the above plot function.  
 
-Based on Figure \ref{fig:figs2}, if we assume that observations of `x2001`, `x2007` and `x2008` of trajectory with id `E01004806` are outliers, we can set the `threshold` argument as `20`. In this scenario, we do not have to bother about the `count` argument as the trajectory is clearly separable from the rest of the trajectories using only the `threshold` argument. Setting `replace_with = 2`, that is to replace the outlier points with the mean of the row observations, the function generates results re-plotted in Figure \ref{fig:figs3}. 
+Based on Figure \ref{fig:figs2}, if we assume that observations of `x2001`, `x2007` and `x2008` of trajectory id `E01004806` are outliers, we can set the `threshold` argument as `20`. In this case, setting `count=1` will suffice as the trajectory is clearly separable from the rest of the trajectories. Setting `replace_with = 2`, that is to replace the outlier points with the 'mean of the row observations', the function generates outputs re-plotted in Figure \ref{fig:figs3}. 
 
 
 ```{r figs3, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs3}, Replacing outliers with mean observation"}
@@ -366,21 +374,21 @@ print(p)
 
 ###(v) 'Other' functions
 
-Please see the `akmedoids` user manual for other useful `data manipulation` functions. 
+Please see the `akmedoids` user manual for the remaining `data manipulation` functions. 
 
 
 #2. Data Clustering
 
-Table \ref{tab:table2} shows the two main functions for performing the longitudinal clustering and representing the results. These are the `akmedoids.clust` function and the `statPrint` function. The `akmedoids.clust` function cluster trajectories according to the similarities of their long-term trends, while the `statPrint` function extracts descriptive and change statistics of the clusters. Furthermore, the latter also generates `performance` plots for the best clustering solution as determined by the quality criterion.
+Table \ref{tab:table2} shows the two main functions required to carry out the longitudinal clustering and generate the descriptive statistics of the resulting groups. The relevant functions are `akmedoids.clust` and `statPrint`. The `akmedoids.clust` function clusters trajectories according to the similarities of their long-term trends, while the `statPrint` function extracts descriptive and change statistics for each of the clusters. The latter also generates `performance` plots for the best cluster solution.
 
-The long-term trends of trajectories is defined in terms of a set of OLS regression lines. This allows the clustering function to classify the final groupings in terms of their slopes as `rising`, `stable`, and `falling`. The key benefit of this implementation is that it allows the clustering function to ignore the short-term fluctuations of the trajectories, and focus on their long-term linear trends. @Adepeju2019 were the first to demonstrate the utility of this idea in crime concentration research for measuring long-term inequalities in the exposure to crime at micro-area levels. They proposed the conceptual (`inequality`) framework shown in Figure \ref{fig:figs4} to describe trend lines to be clustered and mapped the final clustering output back to the original trajectory in order to allow the extraction of the performance statistics. 
+The long-term trends of trajectories are defined in terms of a set of OLS regression lines. This allows the clustering function to classify the final groupings in terms of their slopes as `rising`, `stable`, and `falling`. The key benefits of this implementation is that it allows the clustering process to ignore the short-term fluctuations of actual trajectories and focus on their long-term linear trends. Adepeju and colleagues (2019) applied this technique in crime concentration research for measuring long-term inequalities in the exposure to crime at find-grained spatial scales. Their implementation was informed by the conceptual (`inequality`) framework shown in Figure \ref{fig:figs4}. That said, `akmedoids` can be deployed on any measure (counts, rates) and is not limited to criminology, but rather, any field where the aim is to cluster longitudinal data based on long-term trajectories. By mapping the resulting trend lines grouping to the original trajectories, various performance statistics can be generated. 
 
 
 ```{r figs4, echo=FALSE, fig.cap=paste("Long-time linear trends of relative (`proportion`, `p`) crime exposure. Three inequality trends: trajectory i1: crime exposure is falling faster, i2, crime exposure is falling at the same rate, and i3, crime exposure is falling slower or increasing, relatively to the citywide trend. (Source:", "Adepeju et al. 2019)", sep=" "), out.width = '80%', fig.align="center"} 
 knitr::include_graphics("inequality.png")
 ```
 
-In addition to the use of trend lines, the `akmedoids` made two other modifications to the `kmeans-like` clustering routines. First, the `akmedoids` uses anchored initialisation strategy stage in order to represent `‘anchors’` for the algorithm to begin. The purpose behind this initial step is to give the algorithm a theoretically-driven starting point and try and ensure that heterogenous trends end up in different clusters (@Khan2004; @Steinley2007). Second, instead of recomputing centroids based on the mean distances between each trajectory trend lines and the cluster centers, the median of each cluster is selected and then used as the next centroid. This then becomes the new anchor for the current iteration of the expectation-maximisation step [@Celeux1992]. This strategy is implemented in order to minimise the impact of the outlier trend lines. The iteration is then continue until an objective function is maximised.  
+In addition to the use of trend lines, the `akmedoids` makes two other modifications to the expectation-maximisation clustering routines [@Celeux1992]. First, the `akmedoids` implements an anchored median-based initialisation strategy for the clustering to begin. The purpose behind this step is to give the algorithm a theoretically-driven starting point and try and ensure that heterogenous trend slopes end up in different clusters (@Khan2004; @Steinley2007). Second, instead of recomputing centroids based on the mean distances between each trajectory trend lines and the cluster centers, the median of each cluster is selected and then used as the next centroid. This then becomes the new anchor for the current iteration of the expectation-maximisation step [@Celeux1992]. This strategy is implemented in order to minimise the impact of outliers. The iteration then continues until an objective function is maximised.  
 
 
 ```{r, echo=FALSE, include=FALSE}
@@ -409,8 +417,7 @@ knitr::kable(tble2, caption = "`Data clustering` functions", col.names = c("SN",
 
 ```
 
-In the following sections, we provide a work example of clustering with `akmedoids.clust` function using the `prop_crime_per200_people` calculated with the ['props'](#props) function. The `statPrint` function will is then be to generate the descriptive summary of the clusters.
-
+In the following sections, we provide a worked example of clustering with `akmedoids.clust` function using the `prop_crime_per200_people` object. The `statPrint` function will then generate the descriptive summary of the clusters. The `prop_crime_per200_people` object is plotted in \ref{fig:figs5} as follows: 
 
 
 ```{r figs5, echo=TRUE, fig.width=8,fig.height=4,fig.align="center", fig.cap="\\label{fig:figs5} Trajectory of crime proportions over time"}
@@ -433,13 +440,11 @@ print(p)
 ```
 
 
-The above plot function generate the plot shown in Figure \ref{fig:figs5}
-
-
 ### (i) `akmedoids.clust` function
 
-***Data***: 
-Figure \ref{fig:figs5} is the plot of the `prop_crime_per200_people` object from the ['props'](#props) function. Each trajectory in Figure \ref{fig:figs5} represents the proportion of crimes per 200 residents in each location over time. In other words, they represent the inequality trajectories and the goal is to first extract the inequality trend lines such as in Figure (\ref{fig:figs4}) and cluster them accordingly. For the `akmedoids.clust` function, a user sets the `k` value which may be an integer or a vector of length two specifying the minimum and maximum numbers of clusters to loop through. In the latter case, the `akmedoids.clust` function employs the `Calinki-Harabatz` score (@Calinski1974;  @Genolini2010) to determine the best cluster solution. The function is ran as follows:
+***Dataset***: 
+
+Each trajectory in Figure \ref{fig:figs5} represents the proportion of crimes per 200 residents in each location over time. This represents the relative exposure to crime of each observation over time. The goal is to first extract the inequality trend lines such as in Figure (\ref{fig:figs4}) and then cluster them according to the similarity of their slopes. For the `akmedoids.clust` function, a user sets the `k` value which may be an integer or a vector of length two specifying the minimum and maximum numbers of clusters to loop through. In the latter case, the `akmedoids.clust` function employs the `Calinki-Harabatz` score (@Calinski1974;  @Genolini2010) to determine the best cluster solution. The function is executed as follows:
 
 ```{r, echo=TRUE, include=TRUE}
 
@@ -457,7 +462,7 @@ knitr::include_graphics("caliHara.png")
 ```
 
 
-In addition to printing the output messages (as above), the `akmedoids.clust` function generates a performance plot (Figure \ref{fig:figs6}) that shows the `Calinki-Harabatz` scores at different values of `k`. From the plot, the best value of `k` is highest at `k=5`, and therefore determined the best solution. Note that the group membership (labels) listed in the output message is that of the best solution determined (i.e. group `A` to group `E`). These labels can be extracted by typing the following command:   
+In addition to the output messages (as shown above), the `akmedoids.clust` function generates a performance plot (Figure \ref{fig:figs6}) that shows the `Calinki-Harabatz` scores at different values of `k`. From the plot, the best value of `k` is highest at `k=5`, and therefore determined the best solution. Note that the group membership (labels) listed in the output message is that of the best solution determined, which contains five groups labelled from A to E according to increasing slopes. These labels can be extracted by typing the following command:   
 
 ```{r, echo=TRUE, include=TRUE}
 
@@ -466,11 +471,11 @@ as.vector(cluster_output$optimSolution)
 
 ```
 
-Also, note that the indexes of the group memberships correspond to that of the trajectory object (`prop_crime_per200_people`) inputted into the function. That is, the labels, `"C"`, `"D"`, `"E"`, `....` are the group membership of the trajectories `"E01012628"`,`"E01004768"`,`"E01004803"`,`...` of the object `prop_crime_per200_people`.
+Also, note that the indexes of the group memberships correspond to that of the trajectory object (`prop_crime_per200_people`) inputted into the function. That is, the membership labels, `"C"`, `"D"`, `"E"`, `....` are the group membership of the trajectories `"E01012628"`,`"E01004768"`,`"E01004803"`,`...` of the object `prop_crime_per200_people`.
 
 ### (ii) `statPrint` function:
 
-Given the vector of group membership (labels), such as  `= c("C", "D", "E", "B",....)` in the example above, and its corresponding trajectory object  `prop_crime_per200_people`, the `statPrint` function generates both the `descriptive` and the `change` statistics of the groups. The function also generates the plots of the `group memberships` and their `performances` in terms of their share of the `proportion` measure captured over time. An important argument of `statPrint` function is the `bandw` parameter which determines the final classification of the groups in terms of slope. The `bandw` argument classify each groups into `Rising`, `Stable`, or `Falling` class. Please, see the package `user manual` for more details about this parameter. Using the current example, the function can be ran as follows: 
+Given the vector of group membership (labels), such as  `= c("C", "D", "E", "B",....)` in the example above, and its corresponding trajectory object,  `prop_crime_per200_people`, the `statPrint` function generates both the `descriptive` and the `change` statistics of the groups. The function also generates the plots of the `group memberships` and their `performances` in terms of their shares of the `proportion` measure captured over time. An important argument of `statPrint` function is the `bandw` parameter which determines the final classification of the groups in terms of slope. The `bandw` argument classify each groups into `Rising`, `Stable`, or `Falling` class. We refer users to the package `user manual` for more details about this parameter. Using the current example, the function can be ran as follows: 
 
 
 
@@ -491,9 +496,9 @@ knitr::include_graphics("traj_perfm.png")
 
 ```
 
-See Table \ref{tab:table3} for the description of the output table fields. These outputs are generated along with the plot of group memberships as shown in Figure \ref{fig:figs7}. By changing the argument `type="line"` to `type="stacked"`, a `performance plot` is generated instead (see Figure \ref{fig:figs8}). Note that these plots draw from the `ggplot2` library [@Wickham2016]. For a more customised visualisation, we recommend that users deploy the `ggplot2` library directly. 
+See Table \ref{tab:table3} for the description of the output table fields. These outputs are generated along with the plot of group memberships as shown in Figure \ref{fig:figs7}. By changing the argument `type="line"` to `type="stacked"`, a `performance plot` is generated instead (see Figure \ref{fig:figs8}). Note that these plots make use of functions within the `ggplot2` library [@Wickham2016]. For a more customised visualisation, we recommend that users deploy the `ggplot2` library directly. 
 
-In the context of long-term inequality study, the these outputs should allow inferences to be made regarding relative crime exposure of crime in the area represented by each group or class [@Adepeju2019]. For example, whilst relative crime exposure have declined in 33.3% (groups `A` and `B`) of the area, the relative crime exposure have risen in 44.4% (groups `D` and `E`) of the area. The relative crime exposure can be said to be stable in 22.2% (group `C`) of the area, based on the `bandw` parameter.   
+In the context of the long-term inequality study, these outputs  broad conclusions to be made regarding relative crime exposure of crime in the area represented by each group or class [@Adepeju2019]. For example, whilst relative crime exposure have declined in 33.3% (groups `A` and `B`) of the study area, the relative crime exposure have risen in 44.4% (groups `D` and `E`) of the area. The relative crime exposure can be said to be stable in 22.2% (group `C`) of the area, based on the `bandw` parameter.   
 
 
 ```{r figs8, echo=FALSE, fig.cap=paste("group performance over time"), out.width = '100%', fig.align="center"} 
@@ -527,9 +532,9 @@ knitr::kable(tble3, caption = "`field description of clustering outputs`", col.n
 
 #Conclusion
 
-The `akmedoids` package is developed in order to aid the replication of crime inequality investigation conducted in @Adepeju2019. Meanwhile, the utility of the functions in this package is not limited to this study, but rather applicable to any longitudinal datasets. This package is being updated on a regular basis to add more functionalities to the existing `functions` or add new functions to perform new longitudinal data analysis. 
+The `akmedoids` package has been developed in order to aid the replication of a place-based crime inequality investigation conducted in @Adepeju2019. Meanwhile, the utility of the functions in this package are not limited to criminology, but rather can be applicable to longitudinal datasets more generally. This package is being updated on a regular basis to add more functionalities to the existing `functions` and add new functions to carry out other longitudinal data analysis. 
 
-Lastly, we employ users to report any bugs encountered while using the package so that they can be fixed immediately. Also, we welcome contributions to this package and such contributions shall be acknowledged accordingly. 
+We encourage users to report any bugs encountered while using the package so that they can be fixed immediately. Welcome contributions to this package which will be acknowledged accordingly. 
 
 
 #Acknowledgment
