@@ -19,9 +19,7 @@
 #' @references \code{1}. Genolini, C. et al. (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/.
 #' \code{2}. Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27.
 #' \code{3}. Genolini, C.et al. (2016) Package ‘longitudinalData’
-#' @rawNamespace importFrom(kml, affectIndivC)
-#' @rawNamespace importFrom("grDevices", "dev.new")
-#' @rawNamespace import(reshape2, Hmisc, stats, utils, ggplot2, longitudinalData)
+#' @rawNamespace import(kml, grDevices, reshape2, Hmisc, stats, utils, ggplot2, longitudinalData)
 #' @export
 
 
