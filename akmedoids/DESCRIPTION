@@ -11,7 +11,7 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports: 
-   kml, devtools, Hmisc, ggplot2, rgdal, base, utils, reshape2, later, Rdpack, longitudinalData
+   kml, Hmisc, ggplot2, utils, reshape2, longitudinalData
 RoxygenNote: 6.1.1
 Suggests:
     knitr,
