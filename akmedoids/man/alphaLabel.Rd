@@ -9,6 +9,16 @@ alphaLabel(x)
 \arguments{
 \item{x}{A vector of numeric ids}
 }
+\value{
+A vector of alphabetical ids.
+}
 \description{
 Function to transform a list of numeric ids to alphabetic ids
+}
+\details{
+Given a vector of numeric cluster ids, `alphaLabel` converts each id to its corresponding alphabets. It combines alphabets for ids greater than 26.
+}
+\examples{
+ids <- sample(1:100, 10, replace=FALSE)
+ids_alphab <- alphaLabel(ids)
 }

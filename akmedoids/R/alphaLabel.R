@@ -5,8 +5,10 @@
 #' @details Given a vector of numeric cluster ids, `alphaLabel` converts each id to its corresponding alphabets. It combines alphabets for ids greater than 26.
 #' @return A vector of alphabetical ids.
 #' @examples
-#' ids <- traj
+#' ids <- sample(1:100, 10, replace=FALSE)
+#' ids_alphab <- alphaLabel(ids)
 #' @rawNamespace import(utils)
+#' @export
 
 alphaLabel <- function(x){
   combind_A <- LETTERS
