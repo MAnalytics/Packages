@@ -2,6 +2,10 @@
 #' @description Function to transform a list of numeric ids to alphabetic ids
 #' @param x A vector of numeric ids
 #' @usage alphaLabel(x)
+#' @details Given a vector of numeric cluster ids, `alphaLabel` converts each id to its corresponding alphabets. It combines alphabets for ids greater than 26.
+#' @return A vector of alphabetical ids.
+#' @examples
+#' ids <- traj
 #' @rawNamespace import(utils)
 
 alphaLabel <- function(x){
