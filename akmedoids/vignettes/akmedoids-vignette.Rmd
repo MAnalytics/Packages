@@ -1,14 +1,20 @@
 ---
-title: "`Akmedoids` R-package for longitudinal dataset: A guide to measuring long-term inequality in the exposure to crime at micro-area levels"
+title: "`'Akmedoids'` R-package for longitudinal dataset: A guide to measuring long-term inequality in the exposure to crime at micro-area levels"
+
 author: |
-  | Adepeju, M., Langton, S., and Bannister, J.
-  | Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH
-date: "`r Sys.Date()`"
+  | `Authors:`
+  | `Adepeju, M., Langton, S., and Bannister, J.`
+  | `Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH`
+  
+date: |
+  | `Date:`
+  | ``r Sys.Date()``
 
 output:
-  pdf_document:
-    dev: png
-  
+  #beamer_presentation
+  rmarkdown::html_vignette
+
+#dev: png
 #output:
   #word_document: default
   #always_allow_html: yes
@@ -16,24 +22,34 @@ output:
 always_allow_html: yes
 fig_caption: yes
 bibliography: references.bib
-abstract: The `akmedoids` package advances a set of R-functions for longitudinal clustering of long-term trajectories and determines the optimal solution based on the `Caliński-Harabatz` criterion (Caliński and Harabasz 1974). The package also includes a set of functions for addressing common data issues, such as missing entries and outliers, prior to conducting advance longitudinal data analysis. One of the key objectives of this package is to facilitate easy replication of a recent paper which examined small area inequality in the crime drop (see Adepeju et al. 2019). This document is created to provide a guide towards accomplishing this objective. Many of the functions provided in the `akmedoids` package may be applied to longitudinal data in general. 
+
+abstract: The `'akmedoids'` package advances a set of R-functions for longitudinal clustering of long-term trajectories and determines the optimal solution based on the `Caliński-Harabatz` criterion (Caliński and Harabasz 1974). The package also includes a set of functions for addressing common data issues, such as missing entries and outliers, prior to conducting advance longitudinal data analysis. One of the key objectives of this package is to facilitate easy replication of a recent paper which examined small area inequality in the crime drop (see Adepeju et al. 2019). This document is created to provide a guide towards accomplishing this objective. Many of the functions provided in the `akmedoids` package may be applied to longitudinal data in general.
   
-  
-vignette: |
-  %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+vignette: >
+  %\VignetteIndexEntry{Put the title of your vignette here}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 <style type="text/css">
 
 h1.title {
   font-size: 16px;
+  line-height: 100%;
+  color: Black;
+  text-align: center;
+}
+
+h2.subtitle {
+  font-size: 13px;
+  line-height: 100%;
   color: Black;
   text-align: center;
 }
 
 h4.author { /* Header 4 - and the author and data headers use this too  */
-    font-size: 18px;
-  font-family: "Arial", Times, serif;
+  font-size: 12px;
+  font-family: "Arial";
   color: Black;
   text-align: center;
 }
@@ -45,21 +61,21 @@ h4.date { /* Header 4 - and the author and data headers use this too  */
 }
 
 h4.abstract { /* Header 4 - and the author and data headers use this too  */
-  font-size: 12px;
+  font-size: 10px;
   font-family: "Arial", Times, serif;
   color: black;
   text-align: center;
 }
 
-h4.affiliation{ /* Header 4 - and the author and data headers use this too  */
-  font-size: 12px;
+h4.institute{ /* Header 4 - and the author and data headers use this too  */
+  font-size: 10px;
   font-family: "Arial", Times, serif;
   color: black;
   text-align: center;
 }
 
 body, td {
-   font-size: 11px;
+   font-size: 12px;
 }
 code.r{
   font-size: 10px;
@@ -76,7 +92,7 @@ h2 { /* Header 2 */
   color: DarkBlue;
 }
 h3 { /* Header 3 */
-  font-size: 11px;
+  font-size: 13px;
   font-family: "Times New Roman", Times, serif;
   color: DarkBlue;
 

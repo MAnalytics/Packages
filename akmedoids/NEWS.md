@@ -7,5 +7,4 @@ output: html_document
 
 ### R Markdown
 
-This is the first submission of the package.
-
+This is re-submission with vignette included.

@@ -15,4 +15,7 @@ Imports:
 RoxygenNote: 6.1.1
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    flextable,
+    kableExtra
+VignetteBuilder: knitr
