@@ -7,4 +7,4 @@ output: html_document
 
 ### R Markdown
 
-This is re-submission with vignette included.
+This is re-submission
