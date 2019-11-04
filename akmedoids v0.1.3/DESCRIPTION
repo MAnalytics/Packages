@@ -17,5 +17,6 @@ Suggests:
     knitr,
     rmarkdown,
     flextable,
-    kableExtra
+    kableExtra,
+    clusterCrit
 VignetteBuilder: knitr

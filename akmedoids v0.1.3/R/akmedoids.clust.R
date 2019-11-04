@@ -11,7 +11,7 @@
 #' traj <- traj
 #' print(traj)
 #' traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
-#' traj <- props(traj, id_field = TRUE)
+#' traj <- props(traj, id_field = TRUE, digits=4)
 #' print(traj)
 #' output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3))
 #' print(output)  #type 'as.vector(output$optimSolution)'
@@ -19,7 +19,7 @@
 #' @references \code{1}. Genolini, C. et al. (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/.
 #' \code{2}. Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27.
 #' \code{3}. Genolini, C.et al. (2016) Package ‘longitudinalData’
-#' @rawNamespace import(kml, grDevices, reshape2, Hmisc, stats, utils, ggplot2, longitudinalData) #library(reshape2)
+#' @rawNamespace import(kml, grDevices, reshape2, Hmisc, stats, utils, ggplot2, longitudinalData)
 #' @export
 
 
@@ -214,7 +214,7 @@ if(method=="linear"){
       f_cal <- matrix(cbind(slp_x, slp_),,2)
       cl <- as.integer(sol_k_integers) #mode(cl)
       #is.integer(cl)
-      vals <- as.numeric(intCriteria(f_cal,cl,"Calinski_Harabasz"))
+      vals <- as.numeric(clusterCrit::intCriteria(f_cal,cl,"Calinski_Harabasz"))
       calinski <- c(calinski, vals)
       #-------------------------------------
 

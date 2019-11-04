@@ -3,11 +3,9 @@
 #' @description This function converts counts or rates to proportions.
 #' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time points.
 #' @param id_field [numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.
-#' @param digits=4 [numeric] Specifying number of digits to approximate the output to. Default: \code{4}.
-#' @usage props(traj, id_field = TRUE)
+#' @param digits [numeric] Specifying number of digits to approximate the output to. Default: \code{4}.
+#' @usage props(traj, id_field = TRUE, digits=4)
 #' @examples
-#' traj <- traj
-#' head(traj) #
 #' traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1,
 #' fill_zeros = FALSE) #filling the missing values
 #' traj <- props(traj, id_field = TRUE, digits=4)
@@ -18,21 +16,21 @@
 
 props <- function(traj, id_field = TRUE, digits=4){
   dat <- traj
-  props <- dat
+  props_ <- dat
   if(id_field==FALSE){
     for(h in 1:ncol(dat)){ #h<-6
       prop <- (as.numeric(as.character(dat[,h]))/sum(as.numeric(as.character(dat[,h]))))
-      props[,h] <- round(prop, digits=digits)
+      props_[,h] <- round(prop, digits=digits)
     }
   }
 
   if(id_field==TRUE){
     for(h in 2:ncol(dat)){ #h<-2
       prop <- (as.numeric(as.character(dat[,h]))/sum(as.numeric(as.character(dat[,h]))))
-      props[,h] <- round(prop, digits = digits)
+      props_[,h] <- round(prop, digits = digits)
     }
   }
-  return(props)
+  return(props_)
 }
 
 
