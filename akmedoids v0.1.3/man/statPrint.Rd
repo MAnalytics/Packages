@@ -40,7 +40,7 @@ print(traj)
 traj <- props(traj, id_field = TRUE)
 clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 clustr <- as.vector(clustr$optimSolution)
-print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="fixed"))
+print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="free"))
 print(statPrint(clustr, traj, id_field=TRUE, reference = 1, N.quant = 8, type="stacked"))
 }
 \references{

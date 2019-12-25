@@ -4,12 +4,14 @@
 \alias{props}
 \title{Conversion of counts (or rates) to 'Proportion'}
 \usage{
-props(traj, id_field = TRUE, digits=4)
+props(traj, id_field = TRUE, scale = 1, digits = 4)
 }
 \arguments{
 \item{traj}{[matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time points.}
 
 \item{id_field}{[numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time step.}
+
+\item{scale}{[numeric] To scale the 'propotion' measures. Default: \code{1}}
 
 \item{digits}{[numeric] Specifying number of digits to approximate the output to. Default: \code{4}.}
 }
@@ -25,6 +27,6 @@ Given a matrix of observations (counts or rates), this function converts each ob
 \examples{
 traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1,
 fill_zeros = FALSE) #filling the missing values
-traj <- props(traj, id_field = TRUE, digits=4)
+traj <- props(traj, id_field = TRUE, scale=1, digits=4)
 print(traj)
 }

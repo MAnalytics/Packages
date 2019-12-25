@@ -11,7 +11,7 @@
 #' traj <- traj
 #' print(traj)
 #' traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
-#' traj <- props(traj, id_field = TRUE, digits=4)
+#' traj <- props(traj, id_field = TRUE, scale = 1, digits=4)
 #' print(traj)
 #' output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3))
 #' print(output)  #type 'as.vector(output$optimSolution)'
@@ -144,8 +144,9 @@ if(method=="linear"){
       simil_ <- matrix(0, 100, length(c_count))
 
       #number of iterations #fixed as 20
-      for(z in 1:30){  #z<-2
-
+      for(z in 1:100){  #z<-30
+      flush.console()
+      print(z)
         #recalculate the cluster centrure and do the affection
         if(z > 1){
 

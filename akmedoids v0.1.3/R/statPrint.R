@@ -16,7 +16,7 @@
 #' traj <- props(traj, id_field = TRUE)
 #' clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
 #' clustr <- as.vector(clustr$optimSolution)
-#' print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="fixed"))
+#' print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="free"))
 #' print(statPrint(clustr, traj, id_field=TRUE, reference = 1, N.quant = 8, type="stacked"))
 #' @details Generates the descriptive and change statistics of the trajectory groupings. Given a vector of group membership (labels) and the corresponding data matrix (or data.frame) indexed in the same order, this function generates all the descriptive and change statistics of all the groups.
 #' The function can generate a line and an area stacked plot drawing from the functionalities of the \code{ggplot2} library. For a more customised visualisation, we recommend that users deploy \code{ggplot2} directly (\code{Wickham H. (2016)}).
