@@ -11,8 +11,7 @@ output: html_document
 
 ### Updates:
 
-1. Adding the parameter 'digits' to the function 'props'. 
-2. Adding the parameter 'scale' to the function 'props'
+1. Adding the paramer 'digits' to the function 'props'. 
 
 Your faithfully.
 Monsuru.
