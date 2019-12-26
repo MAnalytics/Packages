@@ -20,7 +20,7 @@ props <- function(traj, id_field = TRUE, scale = 1, digits=4){
   props_ <- dat
   if(id_field==FALSE){
     for(h in 1:ncol(dat)){ #h<-6
-      prop <- (as.numeric(as.character(dat[,h]))/sum(as.numeric(as.character(dat[,h])))) * scale
+      prop <- (as.numeric(as.character(dat[,h]))/sum(as.numeric(as.character(dat[,h])))) * scale #
       props_[,h] <- round(prop, digits=digits)
     }
   }
