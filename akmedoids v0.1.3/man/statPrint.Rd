@@ -4,8 +4,15 @@
 \alias{statPrint}
 \title{Descriptive (Change) statistics and plots}
 \usage{
-statPrint(clustr, traj, id_field = TRUE, reference = 1, N.quant = 4,
-  type = "lines", y.scaling = "fixed")
+statPrint(
+  clustr,
+  traj,
+  id_field = TRUE,
+  reference = 1,
+  N.quant = 4,
+  type = "lines",
+  y.scaling = "fixed"
+)
 }
 \arguments{
 \item{clustr}{[vector (charater)] A vector of cluster membership (labels). For instance, the result extracted from the \code{\link{akmedoids.clust}} function.}

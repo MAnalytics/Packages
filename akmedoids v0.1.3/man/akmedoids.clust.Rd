@@ -30,7 +30,7 @@ print(traj)
 traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill_zeros = FALSE)
 traj <- props(traj, id_field = TRUE)
 print(traj)
-output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
+output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3))
 print(output)  #type 'as.vector(output$optimSolution)'
 }
 \references{

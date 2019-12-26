@@ -131,6 +131,7 @@ We facilitate the easy use of `akmedoids` through an open-source package using `
 require(knitr)
 library(flextable)
 library(kableExtra)
+library(clusterCrit)
 ```
 
 ```{r, echo=FALSE, include=FALSE}
@@ -142,7 +143,6 @@ col4 <- c("Calculates any missing entries (`NA`, `Inf`, `null`) in a longitudina
 tble <- data.frame(col1, col2, col3, col4)
 tble <- tble
 ```
-
 
 ```{r table1, results='asis', echo=FALSE, tidy.opts=list(width.cutoff=50)}
 knitr::kable(tble, caption = "Table 1. `Data manipulation` functions", col.names = c("SN","Function","Title","Description")) %>%
@@ -345,7 +345,7 @@ Given a longitudinal data, the `props` function converts each data point (i.e. e
 ```{r, eval=TRUE}
 
 #Proportions of crimes per 200 residents
-prop_crime_per200_people <- props(crime_per_200_people, id_field = TRUE)
+prop_crime_per200_people <- props(crime_per_200_people, id_field = TRUE, scale = 1, digits=4)
 
 #view the full output
 prop_crime_per200_people
