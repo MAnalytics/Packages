@@ -1,6 +1,6 @@
 ---
 title: "NEWS.md"
-author: "geoMADE"
+authors: "geoMADE"
 date: "25 December 2019"
 output: html_document
 ---
