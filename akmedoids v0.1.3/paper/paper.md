@@ -1,44 +1,30 @@
 ---
-title: Akmedoids R package for generating directionally-homogeneous clusters of longitudinal
-  data sets
-authors:
-- affiliation: 1
-  name: Monsuru Adepeju
-  orcid: null
-- affiliation: 1
-  name: Sam Langton
-  orcid: null
-- affiliation: 1
-  name: Jon Bannister
-  orcid: null
-date: "3 Jan 2020"
-output:
-  pdf_document: default
-  html_document: default
+title: 'Akmedoids R package for generating directionally-homogeneous clusters of longitudinal data sets'
 tags:
 - Anchored k-medoids
 - k-means
 - crime
-- cluster
-- inequality
+- longitudinal clustering
+- long-term trends
+authors:
+ - affiliation: 1
+   name: Monsuru Adepeju
+   orcid:
+ - affiliation: 1
+   name: Sam Langton
+   orcid: 
+ - affiliation: 1
+   name: Jon Bannister
+   orcid:
 affiliations:
-- bibliography: paper.bib
-  index: 1
-  name: Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH
+ - index: 1
+   name: Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH 
+bibliography: paper.bib
 ---
-
-<!--
-generate citations (in R)
-refs = RefManageR::ReadZotero(group = "418217", .params = list(collection = "JFR868KJ", limit = 100))
-RefManageR::WriteBib(refs, "paper.bib")
-citr::tidy_bib_file(rmd_file = "paper.md", messy_bibliography = "paper.bib")
--->
 
 # Summary
 
 In many social and behavioural sciences, longitudinal clustering is widely used for identifying groups of individual trends that correspond to certain developmental processes over time. Whilst the popular clustering techniques, such as the k-means and group-based trajectory modelling (GBTM), are more suited for identifying spherical clusters [@GenoFali2010; @Curman2015],  their malleability provide the perfect opportunities for identifying other forms of clusters, including those that represent linear growth over time (i.e. the directionally-homogeneous clusters). We introduced the `Anchored k-medoid`, package referred to as the `Ak-medoids`, which implements a medoid-based expectation maximisation (MEM) procedures within a classical k-mean clustering routine.  The package includes functions that allow certain pre-processing of longitudinal data sets, prior to the clustering procedures. The potential application areas of `Ak-medoids` include the criminology, transport, epidemiology and brain imaging.
-
-
 
 [Source Code:](https://github.com/MAnalytics/Packages)
 [Information:](https://cran.r-project.org/web/packages/akmedoids/index.html)
