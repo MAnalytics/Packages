@@ -11,7 +11,8 @@ output: html_document
 
 ### Updates:
 
-1. Addition of parameters 'digits' and 'scale' to the function 'props'. 
+1. Add arguments 'digits' and 'scale' to the 'props' function. 
+2. Add argument 'crit' to the 'akmedoids.clust' function
 
 Your faithfully.
 Monsuru.
