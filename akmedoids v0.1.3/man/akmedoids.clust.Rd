@@ -13,7 +13,9 @@ akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
 
 \item{method}{[character] The parametric initialisation strategy. Currently, the only available method is a \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regression lines and the resulting groups are order in the order on increasing slopes.}
 
-\item{k}{[integer or vector (numeric)] either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}. The best solution is determined using the Calinski-Harabatz criterion \code{(Calinski T. & Harabasz J. 1974)}.}
+\item{k}{[integer or vector (numeric)] either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}.}
+
+\item{crit}{[character] a string specifying the name of the criterion to compute the quality of clusters, when \code{k} is a vector of two values. Default: crit= \code{"Silhouette"}, using the average Silhouette width \code{(Rousseeuw P. J. 1987)}. Another available option is the \code{"Calinski_Harabasz"} criterion \code{(Calinski T. & Harabasz J. 1974)}. In any case where the default setting is non-applicable to a cluster solutions, the function will switch automatically to \code{"Calinski_Harabasz"} criterion.}
 }
 \value{
 The key output is a vector of cluster labels of length equal to the number of trajectories. Each label indicates the group membership of the corresponding trajectory in the \code{traj} object. In addition, a plot of the Calinski-Harabatz scores is shown if a vector of \code{k} is provided.
@@ -34,7 +36,7 @@ output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3))
 print(output)  #type 'as.vector(output$optimSolution)'
 }
 \references{
-\code{1}. Genolini, C. et al. (2015). kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/.
-\code{2}. Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27.
-\code{3}. Genolini, C.et al. (2016) Package ‘longitudinalData’
+\code{1}. Genolini, C. et al. (2015) kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/.
+\code{2}. Rousseeuw P. J. (1987) Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. J. Comput. Appl. Math 20:53–65.
+\code{3}. Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27.
 }
