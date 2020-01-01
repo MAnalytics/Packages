@@ -1,34 +1,28 @@
 ---
-title: 'OpenTripPlanner for R'
+title: 'Akmedoids R package for generating directionally-homogeneous clusters of longitudinal data sets'
 authors:
 - affiliation: 1
-  name: Malcolm Morgan
-  orcid: 0000-0002-9488-9183
-- affiliation: 2
-  name: Marcus Young
-  orcid: 0000-0003-4627-1116
+  name: Monsuru Adepeju
+  orcid:
 - affiliation: 1
-  name: Robin Lovelace
-  orcid: 0000-0001-5679-6536
+  name: Sam Langton
+  orcid: 
 - affiliation: 1
-  name: Layik Hama
-  orcid: 0000-0003-1912-4890
-date: "27 Nov 2019"
+  name: Jon Bannister
+  orcid:
+date: "3 Jan 2020"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 tags:
-- R
-- transport
-- geospatial
-- transit
-- OpenTripPlanner
-- OpenStreetMap
+- Anchored k-medoids
+- k-means
+- crime
+- cluster
+- inequality
 affiliations:
 - index: 1
-  name: Institute for Transport Studies, University of Leeds, UK
-- index: 2
-  name: Transportation Research Group, University of Southampton, UK
+  name: Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH 
 bibliography: paper.bib
 ---
 
@@ -41,62 +35,24 @@ citr::tidy_bib_file(rmd_file = "paper.md", messy_bibliography = "paper.bib")
 
 # Summary
 
-**opentripplanner** provides functions that enable multi-modal routing in R.
-It provides an interface to the OpenTripPlanner (OTP) Java routing service, which allows calculation of routes on large transport networks, locally or via calls to a remote server.
-The package contains three groups of functions for: (1) setting up and managing a local instance of OTP; (2) connecting to OTP locally or remotely; and (3) sending requests to the OTP API and importing the results and converting them into appropriate classes for further analysis.
+In many social and behavioural sciences, longitudinal clustering is widely used for identifying groups of individual trends that correspond to certain developmental processes over time. Whilst the popular clustering techniques, such as the k-means and group-based trajectory modelling (GBTM), are more suited for identifying spherical clusters [@GenoFali2010; @Curman2015],  their malleability provide the perfect opportunities for identifying other forms of clusters, including those that represent linear growth over time (i.e. the directionally-homogeneous clusters). We introduced the `Anchored k-medoid`, package referred to as the `Ak-medoids`, which implements a medoid-based expectation maximisation (MEM) procedures within a classical k-mean clustering routine.  The package includes functions that allow certain pre-processing of longitudinal data sets, prior to the clustering procedures. The potential application areas of `Ak-medoids` include the criminology, transport, epidemiology and brain imaging.
 
-# Motivation
 
-Routing, the process of calculating paths between points in geographic space that follow a transport network, is a fundamental part of transport planning and vital to solving many real-world transport problems.
-The outputs of a routing service, which can calculate many routes over a large area, comprises coordinates and other data representing a movement that is in some way 'optimal', based on a range of criteria (that the user should understand and be able to change).
-Routing services, such as the one provided by Google Maps, are a well-known and increasingly vital component of personal travel planning for many people [@bast_fast_2010].
-Less well-known, but perhaps equally important, is that routing services are also key to understanding aggregate travel patterns and guiding policy and commercial decisions [@giusti_new_2018].
-To meet this need for route planning capabilities, a wide range of both proprietary and open source tools have been created.
+[Source Code:](https://github.com/MAnalytics/Packages)
+[Information:](https://cran.r-project.org/web/packages/akmedoids/index.html)
 
-# Functionality
+# Design and implementation
 
-[OpenTripPlanner](https://www.opentripplanner.org/) (OTP) is written in Java and designed to work with [Open Street Map](https://www.openstreetmap.org) (OSM) data for road-based modes (Car, Bike, Walking) and [General Transit Feed Specification]( https://developers.google.com/transit/gtfs/) (GTFS) data for public transit (Bus, Train, Metro).
-OTP is unusual among open source routing tools in its ability to account for a wide range of modes of travel, e.g. bicycle hire, and support for complex multi-stage multi-modal journeys such as park and ride. 
-However, OTP’s primary purpose is to support public-facing websites such as TriMet; thus its analytical capabilities are limited.
-Conversely, the R language is well suited to statistical and spatial analysis but has no route planning capabilities.
+In longitudinal data clustering (LDA), studies have taken the advantages of the various functional characteristics of data in order to extract clusters of interest from longitudinal data sets. Examples include using the Fourier basis [@Tarpey2003] or the coefficients of the B-spline derivative estimates [@Boor1978; @Schumaker2007] of the datasets in order to anchor the clustering routines. Here, we develop an `Anchored k-medoids` (`Akmdeoids`) clustering package which employs the ordinary least square (OLS) trend lines of subjects in order to capture their long-term linear growths which may corresponds to theoretically meaningful developmental processes of the phenomenon over time. Particularly in criminology, such slowly changing trends may help to unravel certain place-based characteristics that drive crime-related events, such as street and gang violence, across a geographical space [@Griffith2004]. In related research, studies have deployed existing techniques, such as the k-means [@Curman2015; @Andresen2017] and GBTM [@Weisburd2004; @Chavez2009; @Bannister2017] techniques, which are more suited for spherical clusters [@GenoFali2010]. Moreover, the sensitivity of these techniques to short-term fluctuations and outliers in longitudinal datasets makes it more difficult for extracting clusters based on the underlying long-term growth over time. 
 
-The OpenTripPlanner for R package aims to bridge the gap between OTP and R by supplying simple ways for R to connect to OTP either on a local machine or on a remote server, via OTP’s API.
-The package has been designed to ease bulk routing by allowing the input of multiple origins and destinations as two column matrices of longitude-latitude pairs.
-The package also supports multi-core operation to take advantage of OTP’s multicore functionality.
-Results are returned in the widely used [`sf` data frame](https://CRAN.R-project.org/package=sf) format.
-Although performance is dependant on the size of the map being routed over, it typically can achieve more than 10 routes per second per core.
+The main clustering function in the `Akmdeoids` package  implements a medoid-based expectation maximisation (MEM) procedures by integrating certain key modifications into the classical k-means routines. First, it approximates longitudinal trajectories using the ordinary least square regression (OLS) and second, anchors the initialisation process with medoid observations. It then deploys the medoids observations as new anchors for each iteration of the expectation-maximisation procedure [@Celeux1992], until convergence. In similar fashion as the classical k-means, the routine relies on distance-based similarity between vectors of observations and is scale invariant. This implementation ensures that the impacts of short-term fluctuations and outliers in the longitudinal dataset are minimised. The final groupings are projected on the raw trajectories to provide a clearer delineation of the long-term linear trends of trajectories. Given an `l` number of iterations, the computational complexity of the clustering routine is the same as that of a classical k-means algorithm, i.e. `O(lkn)`, where `k` is the specified number of clusters and `n`, the number of individual trajectories. The optimal number of clusters for a given data may be determined using the Calinski and Harabatz criterion [@Calinski1974] or the average silhouette [@Rousseeuw1987]. A full demonstration is provided in the package vignettes of how to deploy `Akmedoids` to examine long-term relative exposure to crime in micro-places. We encourage the use of the package outside of criminology, should it be appropriate.
 
-The package has been developed from a set of R functions that formed part of an intermediate-level [OTP tutorial](https://github.com/marcusyoung/otp-tutorial/raw/master/intro-otp.pdf) as part of research at [Centre for Research into Energy Demand Solutions]( https://www.creds.ac.uk/) and the [Institute of Transport Studies](https://environment.leeds.ac.uk/transport).
+# clustering and representations
 
-# Reproducible demonstration
+The main clustering function of akmedoids is the `akmedoids.clust`. The function generates directionally homogeneous clusters of a longitudinal data sets. For crime inequality studies, the package includes the `props` function for converting the absolute (or rate) measures of individual trajectories into relative measure over time. The `statPrint` function draws from the `ggplot2` library [@ggplot2] in order to visualise resulting clusters in either a line or a areal-stacked graph format, alongside basic cluster statistics.
 
-Example data for the Isle of Wight, UK is provided with the package. The example below uses this data to demonstrate the basic functionality of the package. A full explanation is provided in the [package vignettes](https://docs.ropensci.org/opentripplanner/articles/opentripplanner.html)
+# Acknowledgment
 
-First, download the demo data and OTP.
-
-``` r
-library(opentripplanner)                 # Load Package
-path_data <- file.path(tempdir(), "OTP") # Create folder for data
-dir.create(path_data)
-path_otp <- otp_dl_jar(path_data)        # Download OTP
-otp_dl_demo(path_data)                   # Download demo data
-```
-
-Second, build the OTP graph, start up OTP server and connect to the server
-
-``` r
-log <- otp_build_graph(otp = path_otp,     # Build Graph
-                       dir = path_data)
-otp_setup(otp = path_otp, dir = path_data) # Start OTP
-otpcon <- otp_connect()                    # Connect R to OTP
-```
-
-Finally, find routes
-
-``` r
-route <- otp_plan(otpcon, 
-                 fromPlace = c(-1.17502, 50.64590), 
-                 toPlace = c(-1.15339, 50.72266))
-```
+We gratefully acknowledge the Economic and Social Research Council (ESRC), who funded the Understanding Inequalities project (Grant Reference ES/P009301/1) through which this research was conducted.
 
 # References
