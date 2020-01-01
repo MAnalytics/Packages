@@ -168,8 +168,8 @@ Calculates any missing entries in a data, according to a chosen method. This fun
 ```{r, eval=FALSE}
 
 #installing the `akmedoids` packages
-install.packages("devtools")
-devtools::install_github("manalytics/packages/akmedoids")
+#install.packages("devtools")
+#devtools::install_github("manalytics/packages/akmedoids")
 
 ```
 
@@ -485,7 +485,7 @@ Each trajectory in Figure `r fig$ref("figs5")` represents the proportion of crim
 
 #clustering
 cluster_output <- akmedoids.clust(prop_crime_per200_people, id_field = TRUE, 
-                                  method = "linear", k = c(3,8))
+                                  method = "linear", k = c(3,8), crit = "Silhoutte")
 
 #print cluster solution
 cluster_output
