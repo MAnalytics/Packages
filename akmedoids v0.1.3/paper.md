@@ -1,40 +1,31 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
----
-
----
-title: 'Gala: A Python package for galactic dynamics'
-tags:
-  - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+title: Akmedoids R package for generating directionally-homogeneous clusters of longitudinal
+  data sets
 authors:
-  - name: Adrian M. Price-Whelan
-    orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    affiliation: 2
-affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
-   index: 1
- - name: Institution 2
-   index: 2
-date: 13 August 2017
+- affiliation: 1
+  name: Monsuru Adepeju
+  orcid: 0000-0002-9006-4934
+- affiliation: 1
+  name: Sam Langton
+  orcid: 0000-0002-1322-1553
+- affiliation: 1
+  name: Jon Bannister
+  orcid: null
 bibliography: paper.bib
-
-<!--
-generate citations (in R)
-refs = RefManageR::ReadZotero(group = "418217", .params = list(collection = "JFR868KJ", limit = 100))
-RefManageR::WriteBib(refs, "paper.bib")
-citr::tidy_bib_file(rmd_file = "paper.md", messy_bibliography = "paper.bib")
--->
+tags:
+- Anchored k-medoids
+- k-means
+- crime
+- longitudinal clustering
+- long-term trends
+affiliations:
+- index: 1
+  name: Big Data Centre, Manchester Metropolitan University, Manchester, M15 6BH
+---
 
 # Summary
 
 In many social and behavioural sciences, longitudinal clustering is widely used for identifying groups of individual trends that correspond to certain developmental processes over time. Whilst the popular clustering techniques, such as the k-means and group-based trajectory modelling (GBTM), are more suited for identifying spherical clusters [@GenoFali2010; @Curman2015],  their malleability provide the perfect opportunities for identifying other forms of clusters, including those that represent linear growth over time (i.e. the directionally-homogeneous clusters). We introduced the `Anchored k-medoid`, package referred to as the `Ak-medoids`, which implements a medoid-based expectation maximisation (MEM) procedures within a classical k-mean clustering routine.  The package includes functions that allow certain pre-processing of longitudinal data sets, prior to the clustering procedures. The potential application areas of `Ak-medoids` include the criminology, transport, epidemiology and brain imaging.
-
 
 [Source Code:](https://github.com/MAnalytics/Packages)
 [Information:](https://cran.r-project.org/web/packages/akmedoids/index.html)
