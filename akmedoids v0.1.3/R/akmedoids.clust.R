@@ -210,42 +210,28 @@ if(method=="linear"){
       slp_ <- sl_List$slope #slopes
       slp_x <- rep(0, length(slp_))
 
-      #plot(slp_x, slp_, main = "Main title",
-           #xlab = "X axis title", ylab = "Y axis title",
-           #pch = 19, frame = FALSE, col="red")
-
       f_cal <- matrix(cbind(slp_x, slp_),,2)
-      cl <- as.integer(sol_k_integers) #mode(cl)
-      #is.integer(cl)
+      cl <- as.integer(sol_k_integers)
 
-      #
       vals1 <- as.numeric(clusterCrit::intCriteria(f_cal,cl, "Silhouette"))
       criterValue1 <- c(criterValue1, vals1)
 
-      #
       vals2 <- as.numeric(clusterCrit::intCriteria(f_cal,cl, "Calinski_Harabasz"))
       criterValue2 <- c(criterValue2, vals2)
-      #------------------------------------- #crit = "Silhouette"
+      #-------------------------------------
 
       flush.console()
       print(paste("solution of k =", k_[r_], "determined!"))
 
-    }#end of k loop
+    }#
 
     #return the solution if a single value of k is provided
     if(k[1]==k[2]){
       solution_ <- list()
       solution_[[1]] <- result_[[1]]
-      #final_result <- list(solution=solution_[[1]])   #
 
-      #include the calinski calculation
-      # ld <- longData((dat_slopp)) #convert to longitudinal data
-      # part3 <- partition(part2)
-      # cr1 <- qualityCriterion(ld,part3) #calculate the quality
-      # calinski <- round(cr1$criters[1], digits=4)
       final_result <- list(solution=solution_[[1]])
-      #final_result <- list(solution=solution_[[1]], calinski_Harab = calinski)
-                           #qualitycriterion =  qualiCriterion, optimSolution=optimal_solution, qualityCrit.List=qualit)
+
       return(final_result)
     }
 
@@ -256,7 +242,8 @@ if(method=="linear"){
         criterValue <- criterValue1
       }
 
-      #check if "Silhouette" score is chosen but returned invalid value. Only Silhouette may return nan value, Cali Hara criterion is consistent.
+      #check if "Silhouette" score is chosen but returned invalid value.
+      #Only Silhouette may return nan value, Cali Hara criterion is consistent.
       if(crit=="Silhouette" & length(which(is.nan(criterValue1)))!=0){
         flush.console()
         print("*-----Quality measure switched to 'Calinski_Harabatz'-----*")
@@ -275,6 +262,7 @@ if(method=="linear"){
 
       qualit <- data.frame(k=k[1]:k[2], qualityCrit=criterValue)
       id_opt <- (which(qualit[,2]==max(qualit))[1] +(k[1]-1))
+
       #plot
       plt <- ggplot(qualit, aes(x = k, y = qualityCrit)) +
         geom_line(linetype = "dotdash") + geom_point(shape=0)+
@@ -282,10 +270,9 @@ if(method=="linear"){
         geom_vline(xintercept = (which(qualit[,2]==max(qualit))[1] +(k[1]-1)), linetype="dashed", color = "red", size=0.5)
 
       qualiCriterion= paste("Quality criterion:", crit, sep=" ")
+
       #determine optimal solution
-      optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]] #all_solutions[[4]]
-
-
+      optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]]
 
       flush.console()
       dev.new(width=3, height=3)
