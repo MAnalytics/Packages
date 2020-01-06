@@ -1,12 +1,12 @@
 
 #' @title Anchored k-medoids clustering
-#' @description Given a list of trajectories and a functional method, this function clusters the trajectories into a \code{k} number of groups. If a vector of two numbers is given, the function determines the best solution from those options based on the Calinski-Harabatz criterion.
+#' @description Given a list of trajectories and a functional method, this function clusters the trajectories into a \code{k} number of groups. If a vector of two numbers is given, the function determines the best solution from those options based on the Calinski-Harabasz criterion.
 #' @param traj [matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.
 #' @param id_field [numeric or character] Whether the first column of the \code{traj} is a unique (\code{id}) field. Default: \code{FALSE}. If \code{TRUE} the function recognises the second column as the first time points.
 #' @param method [character] The parametric initialisation strategy. Currently, the only available method is a \code{linear} method, set as \code{"linear"}. This uses the time-dependent linear regression lines and the resulting groups are order in the order on increasing slopes.
 #' @param k [integer or vector (numeric)] either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}.
-#' @param crit [character] a string specifying the name of the criterion to compute the quality of clusters, when \code{k} is a vector of two values. Default: crit= \code{"Silhouette"}, using the average Silhouette width \code{(Rousseeuw P. J. 1987)}. Another available option is the \code{"Calinski_Harabasz"} criterion \code{(Calinski T. & Harabasz J. 1974)}. In any case where the default setting is non-applicable to a cluster solutions, the function will switch automatically to \code{"Calinski_Harabasz"} criterion.
-#' @usage akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
+#' @param crit [character] a string specifying the type of the criterion to use for assessing the quality of the cluster solutions, when \code{k} is a vector of two values (as above). Default:\code{crit="Silhouette"}, use the average Silhouette width (\code{Rousseeuw P. J. 1987}). Using the \code{"Silhouette"} criterion, the optimal value of \code{k} can be determined as the elbow point of the curve. Other valid criterion is the "Calinski_Harabatz" (\code{Calinski T. & Harabatz J. 1974}) in which the maximum score represent the point of optimality. Having determined the optimal \code{k}, the function can then be re-run, using the exact (optimal) value of \code{k}.
+#' @usage akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6), crit="Silhouette")
 #' @details This function works by first approximating the trajectories based on the chosen parametric forms (e.g. linear), and then partitions the original trajectories based on the form groupings, in similar fashion to k-means clustering \code{(Genolini et al. 2015)}. The key distinction of \code{akmedoids} compared with existing longitudinal approaches is that both the initial starting points as well as the subsequent cluster centers (as the iteration progresses) are based the selection of observations (medoids) as oppose to centroids.
 #' @examples
 #' traj <- traj
@@ -15,8 +15,8 @@
 #' traj <- props(traj, id_field = TRUE)
 #' print(traj)
 #' output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3))
-#' print(output)  #type 'as.vector(output$optimSolution)'
-#' @return The key output is a vector of cluster labels of length equal to the number of trajectories. Each label indicates the group membership of the corresponding trajectory in the \code{traj} object. In addition, a plot of the Calinski-Harabatz scores is shown if a vector of \code{k} is provided.
+#' print(output)  #type 'as.vector(output$memberships)'
+#' @return If \code{k} is a vector of two numbers (see param. \code{k} details above), the output is a graphical plot of the quality scores of the cluster solutions. If \code{k} is an exact integer number of clusters, the function returns trajectory labels indicating the group membership of the corresponding trajectory in the \code{traj} object.
 #' @references \code{1}. Genolini, C. et al. (2015) kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/.
 #' \code{2}. Rousseeuw P. J. (1987) Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. J. Comput. Appl. Math 20:53–65.
 #' \code{3}. Calinski T, Harabasz J (1974) A dendrite method for cluster analysis. Commun Stat 3:1-27.
@@ -26,6 +26,7 @@
 
 akmedoids.clust <- function(traj, id_field = FALSE, method = "linear", k = c(3,6), crit = "Silhouette"){ #TRUE #k<-3
 
+  #traj = crime_per_000_people
 
 qualityCrit <- 0
 
@@ -49,7 +50,6 @@ if(method=="linear"){
       flush.console()
       print("Enter a number GREATER than 2 but NOT GREATER 20 or the number of trajectories.")
     }
-
     if(k[1]>k[2]){
       flush.console()
       print("Initial number of clusters can not be less than subsequent number of clusters")
@@ -93,10 +93,9 @@ if(method=="linear"){
       i_counter <- i_counter + 1
       split_slopes <- split(sl_List, cut2(sl_List$slope, g=s_))
 
-      #determine the medoids
+      #collate the medoids
       median_slopes_ <- list()
       for(j in 1:length(split_slopes)){ #j=1
-        #s_dty <- as.data.frame(split_slopes[j][1],,2)[,3]
         m_dty<-median(split_slopes[j][[1]]$slope)
         median_slopes_ <- rbind(median_slopes_, m_dty)
       }
@@ -118,7 +117,7 @@ if(method=="linear"){
       dat_slopp <- rbind(dat_slopp, (0 + (sl_List[n,3]*(1:ncol(dat)))))  #head(dat_slopp)
     }
 
-  #looping through list of k and calculate the Calinski and Harabatz criterion
+  #looping through list of k and calculate the Calinski and Harabasz criterion
   final_result <- list()
 
 
@@ -230,7 +229,7 @@ if(method=="linear"){
       solution_ <- list()
       solution_[[1]] <- result_[[1]]
 
-      final_result <- list(solution=solution_[[1]])
+      final_result <- list(memberships=solution_[[1]])
 
       return(final_result)
     }
@@ -238,30 +237,62 @@ if(method=="linear"){
     #if a range of value is provided
     if(k[1]!=k[2]){
 
+       if(crit=="Silhouette"){
+        criterValues <- criterValue1
+        crit=="Silhouette"
+      }
+
+      #check if "Silhouette" score is chosen, but at least a solution returned a null score.
+      # if((crit==1 | crit=="Silhouette") & length(which(is.nan(criterValue1)))!=0){
+      #   flush.console()
+      #   print("*-----Quality measure switched to 'Calinski_Harabasz', due to non-applicability of 'Silhouette' to one (or more) cluster solution(s)-----*")
+      #   criterValues <- criterValue2
+      #   crit = "Calinski_Harabasz"
+      # }
+
+      #"Calinski_Harabasz" is always applicable!
+      if(crit=="Calinski_Harabasz"){
+        criterValues <- criterValue2
+        crit = "Calinski_Harabasz"
+      }
+
+      #if no valid criterion is specified. terminate!!
+      if(!crit %in% c("Silhouette", "Calinski_Harabasz")){
+        flush.console()
+        stop("*------------*(: Quality criterion specified is NOT RECOGNISED!! Execution terminated!!! :)*------------*")
+      }
+
+      #for 'Silhouette' criterion. Generate quality plot
       if(crit=="Silhouette"){
-        criterValue <- criterValue1
-      }
+        qualit <- data.frame(k=k[1]:k[2], qualityCrit=criterValues)
 
-      #check if "Silhouette" score is chosen but returned invalid value.
-      #Only Silhouette may return nan value, Cali Hara criterion is consistent.
-      if(crit=="Silhouette" & length(which(is.nan(criterValue1)))!=0){
+        #terminate if missing or infinite values exist
+        if(any(is.na(qualit$qualityCrit))){
+          stop("*------------*(: 'Silhouette' criterion is not applicable!. Try 'Calinski_Harabasz':)*------------*")
+        }
+
+        #determine the 'elbow' point, using 'linearity' method
+        elbP <- elbowPoint(qualit$k,qualit$qualityCrit)
+        #abline(v=elbP, col="red", pch=20, cex=3)
+        #plot
+        plt <- ggplot(qualit, aes(x = k, y = qualityCrit)) +
+          geom_line(linetype = "dotdash") + geom_point(shape=0)+
+          ggtitle(paste("Optimal solution based on the", crit, "criterion: k = ", round(elbP$x, digits=0), sep=" ")) +
+          geom_vline(xintercept = elbP$x, linetype="dashed", color = "red", size=0.5)
+
+        qualiCriterion= paste("Quality criterion:", crit, sep=" ")
+        #----------------------------------
         flush.console()
-        print("*-----Quality measure switched to 'Calinski_Harabatz'-----*")
-        criterValue <- criterValue2
-        crit = "Calinski_Harabatz"
+        dev.new(width=3, height=3)
+        print(plt)
+
       }
 
-      if(crit=="Calinski_Harabatz"){
-        criterValue <- criterValue2
-      }
 
-      if(!crit %in% c("Calinski_Harabatz", "Silhouette")){
-        flush.console()
-        stop("(: Quality criterion NOT RECOGNISED, program terminated!!! :)")
-      }
-
-      qualit <- data.frame(k=k[1]:k[2], qualityCrit=criterValue)
-      id_opt <- (which(qualit[,2]==max(qualit))[1] +(k[1]-1))
+      #for 'Calinski_Harabasz' criterion. Generate quality plot
+      if(crit=="Calinski_Harabasz"){
+      qualit <- data.frame(k=k[1]:k[2], qualityCrit=criterValues)
+      id_opt <- (which(qualit[,2]==max(qualit))[1] + (k[1]-1))
 
       #plot
       plt <- ggplot(qualit, aes(x = k, y = qualityCrit)) +
@@ -269,10 +300,12 @@ if(method=="linear"){
         ggtitle(paste("Optimal solution based on the", crit, "criterion: k = ", id_opt, sep=" ")) +
         geom_vline(xintercept = (which(qualit[,2]==max(qualit))[1] +(k[1]-1)), linetype="dashed", color = "red", size=0.5)
 
-      qualiCriterion= paste("Quality criterion:", crit, sep=" ")
+        qualiCriterion= paste("Quality criterion:", crit, sep=" ")
 
-      #determine optimal solution
-      optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]]
+        #determine optimal solution
+        optimal_solution <- result_[[(which(qualit[,2]==max(qualit))[1])]]
+      }
+
 
       flush.console()
       dev.new(width=3, height=3)
@@ -280,7 +313,8 @@ if(method=="linear"){
 
       #combining the results
       final_result <- list(plt,
-                           qualitycriterion =  qualiCriterion, optimSolution=optimal_solution, qualityCrit.List=qualit)
+                           qualitycriterion =  qualiCriterion, membership_optimalSolution=optimal_solution, qualityCrit.List=qualit)
+
 
       return(final_result)
 
