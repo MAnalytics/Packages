@@ -10,13 +10,13 @@ There were no ERRORs, WARNINGs or NOTEs.
 
 ##
 
-'Akmedoids' package updated 19th April 2019 (New version: v0.1.2)
+'Akmedoids' package updated 6th January 2020 (New version: v0.1.3)
 
-### Updates:
+### Three major updates:
 
-I editted the vignette in order to display the title. Currently I have "Put the title of your vignette here" on the website (i.e. https://cran.r-project.org/web/packages/akmedoids/). This is totally my mistake.
-
-I am sorry for any inconvenience.
+1. Add arguments 'digits' and 'scale' to the 'props' function. 
+2. Add argument 'crit' to the 'akmedoids.clust' function
+3. Add new function 'elbowPoint' for determining the elbowpoint on a curve.
 
 Your faithfully.
 Monsuru.
