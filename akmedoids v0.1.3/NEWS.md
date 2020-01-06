@@ -11,9 +11,9 @@ output: html_document
 
 ### Updates:
 
-1. Add arguments 'digits' and 'scale' to the 'props' function. 
-2. Add argument 'crit' to the 'akmedoids.clust' function
-3. Add new function 'elbowPoint'
+1. Added arguments 'digits' and 'scale' to the 'props' function. 
+2. Added argument 'crit' to the 'akmedoids.clust' function
+3. Added new function 'elbowPoint' for determining the elbow point along a curve
 
 Your faithfully.
 Monsuru.
