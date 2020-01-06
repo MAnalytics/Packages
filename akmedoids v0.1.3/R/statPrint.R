@@ -14,8 +14,8 @@
 #' fill_zeros = FALSE)
 #' print(traj)
 #' traj <- props(traj, id_field = TRUE)
-#' clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3,6))
-#' clustr <- as.vector(clustr$optimSolution)
+#' clustr <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = 5)
+#' clustr <- as.vector(clustr$memberships)
 #' print(statPrint(clustr, traj, id_field=TRUE, type="lines", y.scaling="fixed"))
 #' print(statPrint(clustr, traj, id_field=TRUE, reference = 1, N.quant = 8, type="stacked"))
 #' @details Generates the descriptive and change statistics of the trajectory groupings. Given a vector of group membership (labels) and the corresponding data matrix (or data.frame) indexed in the same order, this function generates all the descriptive and change statistics of all the groups.
