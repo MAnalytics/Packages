@@ -33,7 +33,7 @@ traj <- dataImputation(traj, id_field = TRUE, method = 2, replace_with = 1, fill
 traj <- props(traj, id_field = TRUE)
 print(traj)
 output <- akmedoids.clust(traj, id_field = TRUE, method = "linear", k = c(3))
-print(output)  #type 'as.vector(output$optimSolution)'
+print(output)  #type 'as.vector(output$memberships)'
 }
 \references{
 \code{1}. Genolini, C. et al. (2015) kml and kml3d: R Packages to Cluster Longitudinal Data. Journal of Statistical Software, 65(4), 1-34. URL http://www.jstatsoft.org/v65/i04/.
