@@ -4,7 +4,7 @@
 \alias{akmedoids.clust}
 \title{Anchored k-medoids clustering}
 \usage{
-akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
+akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6), crit="Silhouette")
 }
 \arguments{
 \item{traj}{[matrix (numeric)]: longitudinal data. Each row represents an individual trajectory (of observations). The columns show the observations at consecutive time steps.}
@@ -15,13 +15,13 @@ akmedoids.clust(traj, id_field = FALSE, method = "linear", k = c(3,6))
 
 \item{k}{[integer or vector (numeric)] either an exact integer number of clusters, or a vector of length two specifying the minimum and maximum numbers of clusters to be examined from which the best solution will be determined. In either case, the minimum number of clusters is \code{3}. The default is \code{c(3,6)}.}
 
-\item{crit}{[character] a string specifying the name of the criterion to compute the quality of clusters, when \code{k} is a vector of two values. Default: crit= \code{"Silhouette"}, using the average Silhouette width \code{(Rousseeuw P. J. 1987)}. Another available option is the \code{"Calinski_Harabasz"} criterion \code{(Calinski T. & Harabasz J. 1974)}. In any case where the default setting is non-applicable to a cluster solutions, the function will switch automatically to \code{"Calinski_Harabasz"} criterion.}
+\item{crit}{[character] a string specifying the type of the criterion to use for assessing the quality of the cluster solutions, when \code{k} is a vector of two values (as above). Default:\code{crit="Silhouette"}, use the average Silhouette width (\code{Rousseeuw P. J. 1987}). Using the \code{"Silhouette"} criterion, the optimal value of \code{k} can be determined as the elbow point of the curve. Other valid criterion is the "Calinski_Harabatz" (\code{Calinski T. & Harabatz J. 1974}) in which the maximum score represent the point of optimality. Having determined the optimal \code{k}, the function can then be re-run, using the exact (optimal) value of \code{k}.}
 }
 \value{
-The key output is a vector of cluster labels of length equal to the number of trajectories. Each label indicates the group membership of the corresponding trajectory in the \code{traj} object. In addition, a plot of the Calinski-Harabatz scores is shown if a vector of \code{k} is provided.
+If \code{k} is a vector of two numbers (see param. \code{k} details above), the output is a graphical plot of the quality scores of the cluster solutions. If \code{k} is an exact integer number of clusters, the function returns trajectory labels indicating the group membership of the corresponding trajectory in the \code{traj} object.
 }
 \description{
-Given a list of trajectories and a functional method, this function clusters the trajectories into a \code{k} number of groups. If a vector of two numbers is given, the function determines the best solution from those options based on the Calinski-Harabatz criterion.
+Given a list of trajectories and a functional method, this function clusters the trajectories into a \code{k} number of groups. If a vector of two numbers is given, the function determines the best solution from those options based on the Calinski-Harabasz criterion.
 }
 \details{
 This function works by first approximating the trajectories based on the chosen parametric forms (e.g. linear), and then partitions the original trajectories based on the form groupings, in similar fashion to k-means clustering \code{(Genolini et al. 2015)}. The key distinction of \code{akmedoids} compared with existing longitudinal approaches is that both the initial starting points as well as the subsequent cluster centers (as the iteration progresses) are based the selection of observations (medoids) as oppose to centroids.
