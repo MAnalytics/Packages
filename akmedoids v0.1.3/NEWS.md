@@ -1,7 +1,7 @@
 ---
 title: "NEWS.md"
 authors: "geoMADE"
-date: "25 December 2019"
+date: "6 January 2020"
 output: html_document
 ---
 
@@ -13,6 +13,7 @@ output: html_document
 
 1. Add arguments 'digits' and 'scale' to the 'props' function. 
 2. Add argument 'crit' to the 'akmedoids.clust' function
+3. Add new function 'elbowPoint'
 
 Your faithfully.
 Monsuru.
